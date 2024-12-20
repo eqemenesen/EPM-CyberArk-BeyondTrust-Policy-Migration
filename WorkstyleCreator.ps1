@@ -23,6 +23,9 @@ Import-Csv -Path $reportFile -Delimiter "," | ForEach-Object {
     $PolicyType = $_."Policy Type"
     $PolicyName = $_."Policy Name"
     $PolicyDescription = ($_."Policy Description" -replace "`r`n|`n|`r", " - ")
+    $Active = $_."Active" -eq "No" # Policy is activated or not - if No, then the Policy.Disabled is set to true
+    $Action = $_."Action" # Action to be taken to the application
+    $SeecurityToken = $_."Security Token" # Token type to be assigned to the application
 
     # only take Advanced Policy
     if($PolicyType -ne "Advanced Policy") {
@@ -47,15 +50,27 @@ Import-Csv -Path $reportFile -Delimiter "," | ForEach-Object {
     $newPolicy = New-Object Avecto.Defendpoint.Settings.Policy($PGConfig)
     $newPolicy.Name = $PolicyName
     $newPolicy.Description = $PolicyDescription
-    $newPolicy.Disabled = $false # Enable policy by default
+    $newPolicy.Disabled = $Active #take the value of action
 
     # Find matching Application Group object
     $appGroup = $PGConfig.ApplicationGroups | Where-Object { $_.Name -eq $PolicyName }
     if ($appGroup -ne $null) {
         # Create an application assignment
         $appAssignment = New-Object Avecto.Defendpoint.Settings.ApplicationAssignment($PGConfig)
-        $appAssignment.Action = "Allow"
-        $appAssignment.TokenType = "Unmodified"
+        if($Action -eq "Block") {
+            $appAssignment.Action = "Block"
+        } elseif ($Action -eq "Run Normally") {
+            $appAssignment.Action = "Allow"
+            $appAssignment.TokenType = "Unmodified"
+        }else {
+            if($SeecurityToken -eq "Administrator") {
+                $appAssignment.Action = "Allow"
+                $appAssignment.TokenType = "AddAdmin"
+            } else {
+                $appAssignment.Action = "Allow"
+                $appAssignment.TokenType = "Unmodified"
+            }
+        }
         $appAssignment.Audit = "On"
         $appAssignment.PrivilegeMonitoring = "On"
         $appAssignment.ApplicationGroup = $appGroup

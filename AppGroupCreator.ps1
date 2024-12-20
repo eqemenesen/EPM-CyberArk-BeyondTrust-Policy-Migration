@@ -16,6 +16,7 @@ Write-Host $logFilePath , $reportFile
 # Define the CSV file path
 $csvFilePath = "./GarantiMainPolicy.csv"
 
+# This part is only for adding Ticket Numbers as Descriptions
 # Initialize an empty dictionary (hashtable)
 $policyDictionary = @{}
 Import-Csv -Path $csvFilePath | ForEach-Object {

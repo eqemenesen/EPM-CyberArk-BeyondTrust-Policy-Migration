@@ -2,36 +2,140 @@
     <ClipboardResources>
         <Config>
             <ApplicationGroups>
-                <ApplicationGroup ID="3b4377ce-ae5e-49b7-be33-a6b36237d201"
-                                  Name="Application Permission for  Policy for Network Teknolojileri (6)"
-                                  Description="Application Permission for  Policy for Network Teknolojileri (6)"
+                <ApplicationGroup ID="0b93d150-7e17-44e1-a710-66f28fbe92ef"
+                                  Name="Application Policy For GTSiberGuvenlikAltyapi"
+                                  Description="Application Policy For GTSiberGuvenlikAltyapi"
                                   _Parent="ApplicationGroups">
-                    <Application ID="f6c5a9bd-1650-48e7-96bb-d943f2dbf500"
+                    <Application ID="52abdd7b-cf96-4ace-ba69-33d036d3c1b2"
                                  Type="exe"
-                                 Description="10358710"
+                                 Description="78057695  81893690 6204020 6219129"
+                                 OpenDlgDropRights="true"
+                                 CheckFileName="true"
+                                 FileName="Distributer.exe"
+                                 FileStringMatchType="Exact"
+                                 UseSourceFileName="true"
+                                 CheckProductName="true"
+                                 ProductName="Distributer"
+                                 ProductNameStringMatchType="Exact"
+                                 CheckMinProductVersion="true"
+                                 MinProductVersion="1.0.0.0"
+                                 ProductDesc="Distributer"
+                                 DriveType="PG_DRIVE_UNKNOWN" />
+                    <Application ID="a7d9d574-f530-4a8f-9fac-63700e9620a3"
+                                 Type="bat"
+                                 Description="78057695  81893690 6204020 6219129"
+                                 OpenDlgDropRights="true"
+                                 UseSourceFileName="true"
+                                 DriveType="PG_DRIVE_UNKNOWN" />
+                    <Application ID="fd91cbf2-e625-49eb-b53c-09e809f5240a"
+                                 Type="exe"
+                                 Description="78057695  81893690 6204020 6219129"
                                  ChildrenInheritToken="true"
                                  OpenDlgDropRights="true"
                                  CheckFileName="true"
-                                 FileName=".exe"
-                                 FileStringMatchType="EndsWith"
+                                 FileName="setup (4).exe"
+                                 FileStringMatchType="Exact"
                                  UseSourceFileName="true"
+                                 CheckProductName="true"
+                                 ProductName="Picus Agent Wizard"
+                                 ProductNameStringMatchType="Exact"
+                                 CheckMinProductVersion="true"
+                                 MinProductVersion="2.17.2.0"
+                                 ProductDesc="Picus Windows Endpoint Wizard"
                                  CheckCertificate="true"
-                                 Certificate="Schneider Electric"
+                                 Certificate="Picus Security, Inc."
                                  CertificateStringMatchType="Exact"
+                                 DriveType="PG_DRIVE_UNKNOWN" />
+                    <Application ID="7c6d2efd-c0f3-48b1-8587-15189933c80a"
+                                 Type="exe"
+                                 Description="78057695  81893690 6204020 6219129"
+                                 ChildrenInheritToken="true"
+                                 OpenDlgDropRights="true"
+                                 CheckFileName="true"
+                                 FileName="mmc.exe"
+                                 FileStringMatchType="Exact"
+                                 UseSourceFileName="true"
+                                 CheckProductName="true"
+                                 ProductName="Microsoft® Windows® Operating System"
+                                 ProductNameStringMatchType="Exact"
+                                 ProductDesc="Microsoft Management Console"
+                                 DriveType="PG_DRIVE_UNKNOWN" />
+                    <Application ID="8c342832-9af1-4641-b340-dd3f1d958995"
+                                 Type="exe"
+                                 Description="78057695  81893690 6204020 6219129"
+                                 ChildrenInheritToken="true"
+                                 OpenDlgDropRights="true"
+                                 CheckFileName="true"
+                                 FileName="mmc.exe"
+                                 FileStringMatchType="Exact"
+                                 UseSourceFileName="true"
+                                 CheckProductName="true"
+                                 ProductName="Microsoft® Windows® Operating System"
+                                 ProductNameStringMatchType="Exact"
+                                 CheckMinProductVersion="true"
+                                 MinProductVersion="10.0.17763.1697"
+                                 ProductDesc="Microsoft Management Console"
                                  DriveType="PG_DRIVE_UNKNOWN" />
                 </ApplicationGroup>
             </ApplicationGroups>
         </Config>
     </ClipboardResources>
     <ClipboardItems>
-        <TokenAssignment ID="0ee1a0ae-b958-451c-9513-108d4ce909b7"
-                         TokenType="Unmodified"
-                         TokenTypeV2="Unmodified"
-                         TokenTypeV3="Unmodified"
+        <TokenAssignment ID="a6e5f82b-405a-4a88-bdbe-d7c33fcee77e"
+                         TokenType="AddAdmin"
+                         TokenTypeV2="AddAdmin"
+                         TokenTypeV3="AddAdmin"
                          MessageType="Off"
                          Audit="On"
                          PrivilegeMonitoring="On"
                          Action="Allow"
-                         ApplicationGroup="3b4377ce-ae5e-49b7-be33-a6b36237d201" />
+                         ApplicationGroup="0b93d150-7e17-44e1-a710-66f28fbe92ef" />
+    </ClipboardItems>
+</ClipboardText>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ClipboardText>
+    <ClipboardResources>
+        <Config />
+    </ClipboardResources>
+    <ClipboardItems>
+        <Application ID="3b51ef31-5a7a-4904-826c-223f1ff3ffc8"
+                     Type="exe"
+                     Description="Adobe Acrobat "
+                     ChildrenInheritToken="true"
+                     OpenDlgDropRights="true"
+                     CheckFileName="true"
+                     FileName="%ProgramFiles%\Adobe\Acrobat DC\Acrobat\Acrobat.exe"
+                     FileStringMatchType="Exact"
+                     UseSourceFileName="true"
+                     CheckProductName="true"
+                     ProductName="Adobe Acrobat"
+                     ProductNameStringMatchType="Contains"
+                     MinProductVersion="24.5.20320.0"
+                     MaxProductVersion="24.5.20320.0"
+                     CheckProductDesc="true"
+                     ProductDesc="Adobe Acrobat "
+                     ProductDescStringMatchType="Contains"
+                     MinFileVersion="24.5.20320.0"
+                     MaxFileVersion="24.5.20320.0"
+                     CheckFileHash="true"
+                     FileHash="4ABE68D2D0E29FC946EC1B4A6AA4335BC67E5716"
+                     CheckCertificate="true"
+                     Certificate="Adobe Inc."
+                     CertificateStringMatchType="Contains"
+                     CheckFileHashSha256="true"
+                     FileHashSha256="459B0986D716C6F46400C9122367F9308BE236A06DC481CE78625938F85ADCE6" />
     </ClipboardItems>
 </ClipboardText>
