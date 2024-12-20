@@ -17,6 +17,40 @@ $logFilePath = ".\logfile.txt"
 Write-Host $logFilePath , $reportFile
 "" | Out-File -FilePath $logFilePath -Force
 #$csv = Import-Csv -path $path -Header "Original File Name","Checksum"
+<<<<<<< HEAD:PolicyCreator copy.ps1
+=======
+
+
+
+
+
+# Ticket nnumaralarının almak için import
+# Define the CSV file path
+$csvFilePath = "./GarantiMainPolicy.csv"
+
+# This part is only for adding Ticket Numbers as Descriptions
+# Initialize an empty dictionary (hashtable)
+$policyDictionary = @{}
+Import-Csv -Path $csvFilePath | ForEach-Object {
+    # Ensure "Policy Name" and "Policy Description" exist and add them to the dictionary
+    $policyName = $_."Policy Name"
+    $policyDescription = $_."Policy Description"
+    
+    if ($policyName) {
+        # Replace newlines in Policy Description with " - "
+        $cleanedDescription = $policyDescription -replace "`r`n|`n|`r", " - "
+        
+        # Add to the dictionary only if description is non-empty
+        if ($cleanedDescription) {
+            $policyDictionary[$policyName] = $cleanedDescription
+        }
+    }
+}
+
+
+
+
+>>>>>>> e2a6e63 (add admin, block, run normally added. policies are diabled according to $Active status in csv):AppGroupCreator.ps1
 # Get settings
 $PGConfig = Get-DefendpointSettings -LocalFile -FileLocation ".\blank_policy.xml"
 
