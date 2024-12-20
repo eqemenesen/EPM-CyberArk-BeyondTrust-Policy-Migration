@@ -1,6 +1,0 @@
-logları arttır
-
-
-filtre
-
-white list - custom/predefined app group 
