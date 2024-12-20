@@ -1,19 +1,53 @@
 ﻿Import-Module 'C:\Program Files\Avecto\Privilege Guard Management Consoles\PowerShell\Avecto.Defendpoint.Cmdlets\Avecto.Defendpoint.Cmdlets.dll'
 Import-Module 'C:\Program Files\Avecto\Privilege Guard Management Consoles\PowerShell\Avecto.Defendpoint.Cmdlets\Avecto.Defendpoint.Settings.dll'
-$baseFolder = ".\"
+$baseFolder = "."
 $reportFile = "$baseFolder\PolicySummary_Garanti.csv"
-$logFilePath = "$baseFolder\logfile.txt"
+$logFilePath = "$baseFolder\logfile_AppGroup.txt"
+
 Write-Host $logFilePath , $reportFile
 "" | Out-File -FilePath $logFilePath -Force
 #$csv = Import-Csv -path $path -Header "Original File Name","Checksum"
+
+
+
+
+
+# Ticket nnumaralarının almak için import
+# Define the CSV file path
+$csvFilePath = "./GarantiMainPolicy.csv"
+
+# Initialize an empty dictionary (hashtable)
+$policyDictionary = @{}
+Import-Csv -Path $csvFilePath | ForEach-Object {
+    # Ensure "Policy Name" and "Policy Description" exist and add them to the dictionary
+    $policyName = $_."Policy Name"
+    $policyDescription = $_."Policy Description"
+    
+    if ($policyName) {
+        # Replace newlines in Policy Description with " - "
+        $cleanedDescription = $policyDescription -replace "`r`n|`n|`r", " - "
+        
+        # Add to the dictionary only if description is non-empty
+        if ($cleanedDescription) {
+            $policyDictionary[$policyName] = $cleanedDescription
+        }
+    }
+}
+
+
+
+
 # Get settings
 $PGConfig = Get-DefendpointSettings -LocalFile -FileLocation "$baseFolder\blank_policy.xml"
+
+$adminTasks = Import-Csv -Path $adminTasksFile -Delimiter ","
+
 # Find target Application Group
-$line = 1
+$line = 0
 $TargetAppGroupPre = "xxxxx"
 $TargetAppGroup = ''
 Import-Csv -path $reportFile -Delimiter "," | Foreach-Object {
-        $line++
+        
         # Get all columns from policy report
 
         $Policy_Name = $_."Policy Name"
@@ -69,11 +103,11 @@ Import-Csv -path $reportFile -Delimiter "," | Foreach-Object {
         $RemoveAdminrightsfromFileOpen = $_."Remove Admin rights from File Open/Save common dialogs"
         $ApplicationDescription = $_."Application Description"
 
-        if ($Policy_Name.Length -gt 0){
-			$PGApp = new-object Avecto.Defendpoint.Settings.Application $PGConfig
-		}else{
-			return
-		}
+        if ($Policy_Name.Length -gt 0 -and -not ($Policy_Name -match "macOS" -or $Policy_Name -match "Default MAC Policy")) {
+            $PGApp = New-Object Avecto.Defendpoint.Settings.Application $PGConfig
+        } else {
+            return
+        }        
         
         Write-Host $line, $Policy_Name
         
@@ -98,8 +132,51 @@ Import-Csv -path $reportFile -Delimiter "," | Foreach-Object {
             $TargetAppGroupPre = $Policy_NameControl
         }elseif ( $ApplicationType -eq "Admin Tasks" )
         {
-            $logEntry = "line: $line, Policy Name : $Policy_Name, $ApplicationType not supported." | Add-Content -Path $logFilePath
-            return
+            $AdminApplicationName = $WindowsAdminTask
+
+            $adminTask = $adminTasks | Where-Object { $_.AdminApplicationName -eq $AdminApplicationName }
+
+            if ($null -eq $adminTask) {
+                $logEntry = "line: $line, Admin Task $AdminApplicationName not supported." | Add-Content -Path $logFilePath
+                return
+            }
+
+            # Add the admin task to the group
+            if ($adminTask.AdminType -eq "Executable") {
+                $PGApp.Type = [Avecto.Defendpoint.Settings.ApplicationType]::Executable
+                $PGApp.AppxPackageNameMatchCase = "Contains"
+                $PGApp.FileName = $adminTask.AdminPath
+                $PGApp.ProductName = $adminTask.AdminApplicationName
+                $PGApp.DisplayName = $adminTask.AdminApplicationName
+                if ($adminTask.AdminCommandLine -ne $null){
+                    $PGApp.CmdLine = $adminTask.AdminCommandLine
+                    $PGApp.CmdLineMatchCase = "false"
+                    $PGApp.CmdLineStringMatchType = "Contains"
+                }
+                
+            } elseif ($adminTask.AdminType -eq "COMClass") {
+                $PGApp.Type = [Avecto.Defendpoint.Settings.ApplicationType]::COMClass
+                $PGApp.DisplayName = $adminTask.AdminApplicationName
+                $PGApp.CheckAppID = "true"
+                $PGApp.CheckCLSID = "true"
+                $PGApp.AppID = $adminTask.AdminCLSID
+                $PGApp.CLSID = $adminTask.AdminCLSID
+
+            } elseif ($adminTask.AdminType -eq "ManagementConsoleSnapin") {
+                $PGApp.Type = [Avecto.Defendpoint.Settings.ApplicationType]::ManagementConsoleSnapin
+                $PGApp.DisplayName = $adminTask.AdminApplicationName
+                $PGApp.AppxPackageNameMatchCase = "Contains"
+                $PGApp.FileName = $adminTask.AdminPath
+
+                
+            } elseif ($adminTask.AdminType -eq "ControlPanelApplet") {
+                $PGApp.Type = [Avecto.Defendpoint.Settings.ApplicationType]::ControlPanelApplet
+                $PGApp.CheckAppID = "true"
+                $PGApp.CheckCLSID = "true"
+                $PGApp.AppID = $adminTask.AdminCLSID
+                $PGApp.CLSID = $adminTask.AdminCLSID
+            }
+            
         }elseif ( $ApplicationType -eq "Application Group" )
         {
             $logEntry = "line: $line, Policy Name : $Policy_Name, $ApplicationType not supported." | Add-Content -Path $logFilePath
@@ -267,8 +344,14 @@ Import-Csv -path $reportFile -Delimiter "," | Foreach-Object {
                 $PGApp.OpenDlgDropRights=1
             }
         
+        # THIS PART IS ONLY FOR ADDING DESSCRIPTIONS
+        if ($policyDictionary.ContainsKey($Policy_Name)) {
+            $PGApp.Description = $policyDictionary[$Policy_Name]
+        }
+
         $TargetAppGroup.Applications.Add($PGApp)
+        $line++
         
         
 }
-Set-DefendpointSettings -SettingsObject $PGConfig -LocalFile -FileLocation "$baseFolder\generated_policy.xml"
+Set-DefendpointSettings -SettingsObject $PGConfig -LocalFile -FileLocation "$baseFolder\generated_appGroup.xml"

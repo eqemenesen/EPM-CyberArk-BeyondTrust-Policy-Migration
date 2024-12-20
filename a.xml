@@ -1,0 +1,37 @@
+<ClipboardText>
+    <ClipboardResources>
+        <Config>
+            <ApplicationGroups>
+                <ApplicationGroup ID="3b4377ce-ae5e-49b7-be33-a6b36237d201"
+                                  Name="Application Permission for  Policy for Network Teknolojileri (6)"
+                                  Description="Application Permission for  Policy for Network Teknolojileri (6)"
+                                  _Parent="ApplicationGroups">
+                    <Application ID="f6c5a9bd-1650-48e7-96bb-d943f2dbf500"
+                                 Type="exe"
+                                 Description="10358710"
+                                 ChildrenInheritToken="true"
+                                 OpenDlgDropRights="true"
+                                 CheckFileName="true"
+                                 FileName=".exe"
+                                 FileStringMatchType="EndsWith"
+                                 UseSourceFileName="true"
+                                 CheckCertificate="true"
+                                 Certificate="Schneider Electric"
+                                 CertificateStringMatchType="Exact"
+                                 DriveType="PG_DRIVE_UNKNOWN" />
+                </ApplicationGroup>
+            </ApplicationGroups>
+        </Config>
+    </ClipboardResources>
+    <ClipboardItems>
+        <TokenAssignment ID="0ee1a0ae-b958-451c-9513-108d4ce909b7"
+                         TokenType="Unmodified"
+                         TokenTypeV2="Unmodified"
+                         TokenTypeV3="Unmodified"
+                         MessageType="Off"
+                         Audit="On"
+                         PrivilegeMonitoring="On"
+                         Action="Allow"
+                         ApplicationGroup="3b4377ce-ae5e-49b7-be33-a6b36237d201" />
+    </ClipboardItems>
+</ClipboardText>
