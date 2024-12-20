@@ -1,0 +1,778 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20241205120212
+Username: AzureAD\EgemenEsen
+RunAs User: AzureAD\EgemenEsen
+Configuration Name: 
+Machine: EGEMENQUASYS (Microsoft Windows NT 10.0.22631.0)
+Host Application: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -Command Import-Module 'c:\Users\EgemenEsen\.vscode\extensions\ms-vscode.powershell-2024.4.0\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2024.4.0' -BundledModulesPath 'c:\Users\EgemenEsen\.vscode\extensions\ms-vscode.powershell-2024.4.0\modules' -EnableConsoleRepl -StartupBanner "PowerShell Extension v2024.4.0
+Copyright (c) Microsoft Corporation.
+
+https://aka.ms/vscode-powershell
+Type 'help' to get help.
+" -LogLevel 'Normal' -LogPath 'c:\Users\EgemenEsen\AppData\Roaming\Code\User\globalStorage\ms-vscode.powershell\logs\1733388142-e9120e01-7445-4a22-a5a6-c8c7e1e34b031733388139010' -SessionDetailsPath 'c:\Users\EgemenEsen\AppData\Roaming\Code\User\globalStorage\ms-vscode.powershell\sessions\PSES-VSCode-20396-941942.json' -FeatureFlags @() 
+Process ID: 10420
+PSVersion: 5.1.22621.4391
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.22621.4391
+BuildVersion: 10.0.22621.4391
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+Transcript started, output file is .\console_output.txt
+.\KKTC_*.csv
+.\logfile.txt .\KKTC_*.csv
+2 New_ISM - POLICY taskmgr.exe
+Cannot find an overload for "Add" and the argument count: "1".
+At D:\Projects\Turkcell\kktcMigration\PolicyCreator2.ps1:102 char:13
++             $PGConfig.ApplicationGroups.Add($TargetAppGroup)
++             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [], MethodException
+    + FullyQualifiedErrorId : MethodCountCouldNotFindBest
+Cannot find an overload for "Add" and the argument count: "1".
+At D:\Projects\Turkcell\kktcMigration\PolicyCreator2.ps1:102 char:13
++             $PGConfig.ApplicationGroups.Add($TargetAppGroup)
++             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [], MethodException
+    + FullyQualifiedErrorId : MethodCountCouldNotFindBest
+
+3 New_ISM - POLICY mmc.exe
+4 New_ISM - POLICY
+5 New_ISM - POLICY
+6 New_ISM - POLICY
+7 New_ISM - POLICY
+8 New_ISM - POLICY
+9 New_ISM - POLICY
+10 New_ISM - POLICY
+The property 'FileStringMatchTypeEx' cannot be found on this object. Verify that the property exists and can be set.
+At D:\Projects\Turkcell\kktcMigration\PolicyCreator2.ps1:162 char:17
++                 $PGApp.FileStringMatchTypeEx = "Contains"
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : PropertyAssignmentException
+The property 'FileStringMatchTypeEx' cannot be found on this object. Verify that the property exists and can be set.
+At D:\Projects\Turkcell\kktcMigration\PolicyCreator2.ps1:162 char:17
++                 $PGApp.FileStringMatchTypeEx = "Contains"
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : PropertyAssignmentException
+
+11 New_ISM - POLICY
+12 New_ISM - POLICY
+13 New_ISM - POLICY
+14 New_ISM - POLICY
+15 New_ISM - POLICY
+16 New_ISM - POLICY
+17 New_ISM - POLICY
+18 New_ISM - POLICY
+19 New_ISM - POLICY
+The property 'FileStringMatchTypeEx' cannot be found on this object. Verify that the property exists and can be set.
+At D:\Projects\Turkcell\kktcMigration\PolicyCreator2.ps1:162 char:17
++                 $PGApp.FileStringMatchTypeEx = "Contains"
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : PropertyAssignmentException
+The property 'FileStringMatchTypeEx' cannot be found on this object. Verify that the property exists and can be set.
+At D:\Projects\Turkcell\kktcMigration\PolicyCreator2.ps1:162 char:17
++                 $PGApp.FileStringMatchTypeEx = "Contains"
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : PropertyAssignmentException
+
+20 New_ISM - POLICY
+21 New_ISM - POLICY
+The property 'FileStringMatchTypeEx' cannot be found on this object. Verify that the property exists and can be set.
+At D:\Projects\Turkcell\kktcMigration\PolicyCreator2.ps1:162 char:17
++                 $PGApp.FileStringMatchTypeEx = "Contains"
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : PropertyAssignmentException
+The property 'FileStringMatchTypeEx' cannot be found on this object. Verify that the property exists and can be set.
+At D:\Projects\Turkcell\kktcMigration\PolicyCreator2.ps1:162 char:17
++                 $PGApp.FileStringMatchTypeEx = "Contains"
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : PropertyAssignmentException
+
+22 New_ISM - POLICY
+23 New_ISM - POLICY
+24 New_ISM - POLICY
+The property 'FileStringMatchTypeEx' cannot be found on this object. Verify that the property exists and can be set.
+At D:\Projects\Turkcell\kktcMigration\PolicyCreator2.ps1:162 char:17
++                 $PGApp.FileStringMatchTypeEx = "Contains"
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : PropertyAssignmentException
+The property 'FileStringMatchTypeEx' cannot be found on this object. Verify that the property exists and can be set.
+At D:\Projects\Turkcell\kktcMigration\PolicyCreator2.ps1:162 char:17
++                 $PGApp.FileStringMatchTypeEx = "Contains"
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : PropertyAssignmentException
+
+25 New_ISM - POLICY
+26 New_ISM - POLICY
+27 New_ISM - POLICY
+28 New_ISM - POLICY
+29 New_ISM - POLICY
+30 New_ISM - POLICY
+The property 'FileStringMatchTypeEx' cannot be found on this object. Verify that the property exists and can be set.
+At D:\Projects\Turkcell\kktcMigration\PolicyCreator2.ps1:162 char:17
++                 $PGApp.FileStringMatchTypeEx = "Contains"
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : PropertyAssignmentException
+The property 'FileStringMatchTypeEx' cannot be found on this object. Verify that the property exists and can be set.
+At D:\Projects\Turkcell\kktcMigration\PolicyCreator2.ps1:162 char:17
++                 $PGApp.FileStringMatchTypeEx = "Contains"
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : PropertyAssignmentException
+
+31 New_ISM - POLICY
+32 New_ISM - POLICY
+33 New_ISM - POLICY
+34 New_ISM - POLICY
+35 New_ISM - POLICY
+36 New_ISM - POLICY
+37 New_ISM - POLICY
+38 New_ISM - POLICY
+39 New_ISM - POLICY
+40 New_ISM - POLICY
+The property 'FileStringMatchTypeEx' cannot be found on this object. Verify that the property exists and can be set.
+At D:\Projects\Turkcell\kktcMigration\PolicyCreator2.ps1:162 char:17
++                 $PGApp.FileStringMatchTypeEx = "Contains"
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : PropertyAssignmentException
+The property 'FileStringMatchTypeEx' cannot be found on this object. Verify that the property exists and can be set.
+At D:\Projects\Turkcell\kktcMigration\PolicyCreator2.ps1:162 char:17
++                 $PGApp.FileStringMatchTypeEx = "Contains"
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : PropertyAssignmentException
+
+41 New_ISM - POLICY
+42 New_ISM - POLICY
+43 New_ISM - POLICY
+The property 'FileStringMatchTypeEx' cannot be found on this object. Verify that the property exists and can be set.
+At D:\Projects\Turkcell\kktcMigration\PolicyCreator2.ps1:162 char:17
++                 $PGApp.FileStringMatchTypeEx = "Contains"
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : PropertyAssignmentException
+The property 'FileStringMatchTypeEx' cannot be found on this object. Verify that the property exists and can be set.
+At D:\Projects\Turkcell\kktcMigration\PolicyCreator2.ps1:162 char:17
++                 $PGApp.FileStringMatchTypeEx = "Contains"
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : PropertyAssignmentException
+
+44 New_ISM - POLICY
+45 New_ISM - POLICY
+46 New_ISM - POLICY
+47 New_ISM - POLICY
+48 New_ISM - POLICY
+49 New_ISM - POLICY
+50 New_ISM - POLICY
+51 New_ISM - POLICY
+52 New_ISM - POLICY
+53 New_ISM - POLICY
+54 New_ISM - POLICY
+55 New_ISM - POLICY
+56 New_ISM - POLICY
+57 New_ISM - POLICY
+58 New_ISM - POLICY webexplugin.msi
+59 New_ISM - POLICY OfficeSetup.exe
+60 New_ISM - POLICY WebClient.exe
+61 New_ISM - POLICY XenCenter.msi
+62 New_ISM - POLICY *.bat
+63 New_ISM - POLICY sadptool.exe
+64 New_ISM - POLICY
+65 New_ISM - POLICY Whatsapp.exe
+66 New_ISM - POLICY xerox_workcentre_3025_windows_print_drivers_utilities_v1.10.exe
+67 New_ISM - POLICY VMware-workstation-full-17.5.0-22583795.exe
+68 New_ISM - POLICY VMware-workstation-full-17.5.0-22583795.exe
+69 New_ISM - POLICY
+70 New_ISM - POLICY
+71 New_GENEL UYGULAMA Policy PulseSecureAppLauncher.msi
+72 New_GENEL UYGULAMA Policy pulsecompmgrinstaller.exe
+73 New_GENEL UYGULAMA Policy pulsesetupclientocx64.exe
+74 New_GENEL UYGULAMA Policy
+Exception setting "Type": "Cannot convert null to type "Avecto.Defendpoint.Settings.ApplicationType" due to enumeration 
+values that are not valid. Specify one of the following enumeration values and try again. The possible enumeration 
+values are "Executable,ControlPanelApplet,ManagementConsoleSnapin,InstallerPackage,Uninstaller,WindowsScript,PowerShellS
+cript,BatchFile,RegistrySettings,ActiveXControl,COMClass,WindowsStoreApplication,Service,RemotePowerShellScript,RemotePo
+werShellCommand,Content,Dll,UninstallerExtended"."
+At D:\Projects\Turkcell\kktcMigration\PolicyCreator2.ps1:118 char:13
++             $PGApp.Type = [Avecto.Defendpoint.Settings.ApplicationTyp ...
++             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [], SetValueInvocationException
+    + FullyQualifiedErrorId : ExceptionWhenSetting
+Exception setting "Type": "Cannot convert null to type "Avecto.Defendpoint.Settings.ApplicationType" due to enumeration values that are not valid. Specify one of the following enumeration values and try
+again. The possible enumeration values are "Executable,ControlPanelApplet,ManagementConsoleSnapin,InstallerPackage,Uninstaller,WindowsScript,PowerShellScript,BatchFile,RegistrySettings,ActiveXControl,COMClass
+,WindowsStoreApplication,Service,RemotePowerShellScript,RemotePowerShellCommand,Content,Dll,UninstallerExtended"."
+At D:\Projects\Turkcell\kktcMigration\PolicyCreator2.ps1:118 char:13
++             $PGApp.Type = [Avecto.Defendpoint.Settings.ApplicationTyp ...
++             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [], SetValueInvocationException
+    + FullyQualifiedErrorId : ExceptionWhenSetting
+
+75 New_GENEL UYGULAMA Policy
+76 New_GENEL UYGULAMA Policy *.msi
+77 New_GENEL UYGULAMA Policy
+78 New_GENEL UYGULAMA Policy
+79 New_GENEL UYGULAMA Policy msdt.exe
+80 New_GENEL UYGULAMA Policy NCInst64.exe
+81 New_GENEL UYGULAMA Policy
+82 New_GENEL UYGULAMA Policy cleanmgr.exe
+83 New_GENEL UYGULAMA Policy GlobalProtect64.msi
+84 New_GENEL UYGULAMA Policy
+85 New_GENEL UYGULAMA Policy
+86 New_GENEL UYGULAMA Policy
+87 New_GENEL UYGULAMA Policy
+88 New_GENEL UYGULAMA Policy
+Exception setting "Type": "Cannot convert null to type "Avecto.Defendpoint.Settings.ApplicationType" due to enumeration 
+values that are not valid. Specify one of the following enumeration values and try again. The possible enumeration 
+values are "Executable,ControlPanelApplet,ManagementConsoleSnapin,InstallerPackage,Uninstaller,WindowsScript,PowerShellS
+cript,BatchFile,RegistrySettings,ActiveXControl,COMClass,WindowsStoreApplication,Service,RemotePowerShellScript,RemotePo
+werShellCommand,Content,Dll,UninstallerExtended"."
+At D:\Projects\Turkcell\kktcMigration\PolicyCreator2.ps1:118 char:13
++             $PGApp.Type = [Avecto.Defendpoint.Settings.ApplicationTyp ...
++             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [], SetValueInvocationException
+    + FullyQualifiedErrorId : ExceptionWhenSetting
+Exception setting "Type": "Cannot convert null to type "Avecto.Defendpoint.Settings.ApplicationType" due to enumeration values that are not valid. Specify one of the following enumeration values and try
+again. The possible enumeration values are "Executable,ControlPanelApplet,ManagementConsoleSnapin,InstallerPackage,Uninstaller,WindowsScript,PowerShellScript,BatchFile,RegistrySettings,ActiveXControl,COMClass
+,WindowsStoreApplication,Service,RemotePowerShellScript,RemotePowerShellCommand,Content,Dll,UninstallerExtended"."
+At D:\Projects\Turkcell\kktcMigration\PolicyCreator2.ps1:118 char:13
++             $PGApp.Type = [Avecto.Defendpoint.Settings.ApplicationTyp ...
++             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [], SetValueInvocationException
+    + FullyQualifiedErrorId : ExceptionWhenSetting
+
+89 New_GENEL UYGULAMA Policy Update.exe
+90 New_GENEL UYGULAMA Policy *.msi
+91 New_GENEL UYGULAMA Policy helpalive.exe
+92 New_GENEL UYGULAMA Policy helpalive.exe
+93 New_GENEL UYGULAMA Policy dlsetup.exe
+94 New_GENEL UYGULAMA Policy
+95 New_GENEL UYGULAMA Policy
+96 New_GENEL UYGULAMA Policy
+97 New_GENEL UYGULAMA Policy setup.exe
+98 New_GENEL UYGULAMA Policy MOlOhiya.exe
+99 New_GENEL UYGULAMA Policy
+100 New_GENEL UYGULAMA Policy DJ2640_188.exe
+101 New_GENEL UYGULAMA Policy FORCEPOINT-ONE-ENDPOINT-x64.exe
+102 New_GENEL UYGULAMA Policy
+103 New_GENEL UYGULAMA Policy setup.exe
+104 New_GENEL UYGULAMA Policy AutoRun.exe
+105 New_GENEL UYGULAMA Policy AutoRun.exe
+106 New_GENEL UYGULAMA Policy
+107 New_GENEL UYGULAMA Policy ps-pulse-win-9.1r7.0-b2525-64bitinstaller.exe
+108 New_GENEL UYGULAMA Policy
+109 New_GENEL UYGULAMA Policy mysql-connector-odbc-8.0.21-win32.msi
+110 New_GENEL UYGULAMA Policy mysql-connector-odbc-8.0.21-winx64.msi
+111 New_GENEL UYGULAMA Policy
+112 New_GENEL UYGULAMA Policy VC_redist.x86.exe
+113 New_GENEL UYGULAMA Policy VC_redist.x64.exe
+114 New_GENEL UYGULAMA Policy LSBSetup.exe
+115 New_GENEL UYGULAMA Policy
+116 New_GENEL UYGULAMA Policy GoogleEarthProSetup.exe
+117 New_GENEL UYGULAMA Policy CDC-PhishingSetup.msi
+118 New_GENEL UYGULAMA Policy adobearmhelper.exe
+119 New_GENEL UYGULAMA Policy
+120 New_GENEL UYGULAMA Policy GUP.exe
+121 New_GENEL UYGULAMA Policy
+122 New_GENEL UYGULAMA Policy
+123 New_GENEL UYGULAMA Policy raserver.exe
+124 New_GENEL UYGULAMA Policy *.exe
+125 New_GENEL UYGULAMA Policy *.msi
+126 New_GENEL UYGULAMA Policy *.msi
+127 New_GENEL UYGULAMA Policy
+128 New_GENEL UYGULAMA Policy systemsettingsadminflows.exe
+129 New_GENEL UYGULAMA Policy notepad++.exe
+130 New_GENEL UYGULAMA Policy Fortify_SCA_and_Apps_20.2.1_windows_x64.exe
+131 New_GENEL UYGULAMA Policy dlsetup.exe
+132 New_GENEL UYGULAMA Policy caspol.exe
+133 New_GENEL UYGULAMA Policy Creative_Cloud_Set-Up.exe
+134 New_GENEL UYGULAMA Policy cscui.dll
+135 New_GENEL UYGULAMA Policy plsqldev1405x64.msi
+136 New_GENEL UYGULAMA Policy repview.exe
+137 New_GENEL UYGULAMA Policy Acrobat_DC_Set-Up.exe
+138 New_GENEL UYGULAMA Policy microstrategyoffice64.msi
+139 New_GENEL UYGULAMA Policy
+140 New_GENEL UYGULAMA Policy *.exe
+141 New_GENEL UYGULAMA Policy
+142 New_GENEL UYGULAMA Policy MSTeamsSetup_c_w_.exe
+143 New_GENEL UYGULAMA Policy
+Exception setting "Type": "Cannot convert null to type "Avecto.Defendpoint.Settings.ApplicationType" due to enumeration 
+values that are not valid. Specify one of the following enumeration values and try again. The possible enumeration 
+values are "Executable,ControlPanelApplet,ManagementConsoleSnapin,InstallerPackage,Uninstaller,WindowsScript,PowerShellS
+cript,BatchFile,RegistrySettings,ActiveXControl,COMClass,WindowsStoreApplication,Service,RemotePowerShellScript,RemotePo
+werShellCommand,Content,Dll,UninstallerExtended"."
+At D:\Projects\Turkcell\kktcMigration\PolicyCreator2.ps1:118 char:13
++             $PGApp.Type = [Avecto.Defendpoint.Settings.ApplicationTyp ...
++             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [], SetValueInvocationException
+    + FullyQualifiedErrorId : ExceptionWhenSetting
+Exception setting "Type": "Cannot convert null to type "Avecto.Defendpoint.Settings.ApplicationType" due to enumeration values that are not valid. Specify one of the following enumeration values and try
+again. The possible enumeration values are "Executable,ControlPanelApplet,ManagementConsoleSnapin,InstallerPackage,Uninstaller,WindowsScript,PowerShellScript,BatchFile,RegistrySettings,ActiveXControl,COMClass
+,WindowsStoreApplication,Service,RemotePowerShellScript,RemotePowerShellCommand,Content,Dll,UninstallerExtended"."
+At D:\Projects\Turkcell\kktcMigration\PolicyCreator2.ps1:118 char:13
++             $PGApp.Type = [Avecto.Defendpoint.Settings.ApplicationTyp ...
++             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [], SetValueInvocationException
+    + FullyQualifiedErrorId : ExceptionWhenSetting
+
+144 New_GENEL UYGULAMA Policy *.exe
+145 New_GENEL UYGULAMA Policy
+146 New_GENEL UYGULAMA Policy
+147 New_GENEL UYGULAMA Policy KSSCFG.exe
+148 New_GENEL UYGULAMA Policy
+149 New_GENEL UYGULAMA Policy
+150 New_GENEL UYGULAMA Policy
+151 New_GENEL UYGULAMA Policy _media_51886_aladdin_64.msi
+152 New_GENEL UYGULAMA Policy FileZilla_3.60.2_win64-setup.exe
+153 New_GENEL UYGULAMA Policy
+154 New_GENEL UYGULAMA Policy
+155 New_GENEL UYGULAMA Policy
+156 New_GENEL UYGULAMA Policy
+157 New_GENEL UYGULAMA Policy *.exe
+158 New_GENEL UYGULAMA Policy
+159 New_GENEL UYGULAMA Policy Setup.exe
+160 New_GENEL UYGULAMA Policy BrLauncher.exe
+161 New_GENEL UYGULAMA Policy setup.exe
+162 New_GENEL UYGULAMA Policy 2. set_up.exe
+163 New_GENEL UYGULAMA Policy 3. ST_i900_1.8.81.857.180417.exe
+164 New_GENEL UYGULAMA Policy KSSCFG.exe
+165 New_GENEL UYGULAMA Policy KSSCFG.exe
+166 New_GENEL UYGULAMA Policy msdt.exe
+167 New_GENEL UYGULAMA Policy
+168 New_GENEL UYGULAMA Policy
+169 New_GENEL UYGULAMA Policy ver-11128-ApexOne.exe
+170 New_GENEL UYGULAMA Policy OfficeSetupX64-turkce.exe
+171 New_GENEL UYGULAMA Policy *.bat
+172 New_GENEL UYGULAMA Policy
+173 New_GENEL UYGULAMA Policy net.exe
+174 New_GENEL UYGULAMA Policy sc.exe
+175 New_GENEL UYGULAMA Policy sc.exe
+176 New_GENEL UYGULAMA Policy
+177 New_GENEL UYGULAMA Policy net.exe
+178 New_GENEL UYGULAMA Policy *.bat
+179 New_GENEL UYGULAMA Policy
+180 New_GENEL UYGULAMA Policy
+181 New_GENEL UYGULAMA Policy DamewareAgent
+182 New_GENEL UYGULAMA Policy *.exe
+183 New_GENEL UYGULAMA Policy RemoteHelpInstaller.exe
+184 New_GENEL UYGULAMA Policy Studio.exe
+185 New_WIRESHARK POLICY
+186 New_WIRESHARK POLICY
+187 New_WIRESHARK POLICY
+188 New_WIRESHARK POLICY
+189 New_BLACK LIST
+190 New_BLACK LIST
+191 New_BLACK LIST brave.exe
+192 New_BLACK LIST
+193 New_BLACK LIST
+194 New_BLACK LIST revounin.exe
+195 New_BLACK LIST
+196 New_BLACK LIST Dropbox.exe
+197 New_BLACK LIST Toad_10.1.exe
+198 New_BLACK LIST Toad_961.exe
+199 New_BLACK LIST ToadOracleInstall86.exe
+200 New_BLACK LIST *.msi
+201 New_BLACK LIST *.msi
+202 New_BLACK LIST *.msi
+203 New_BLACK LIST *.msi
+204 New_BLACK LIST
+205 New_BLACK LIST
+206 New_BLACK LIST
+207 New_BLACK LIST
+208 New_BLACK LIST
+209 New_BLACK LIST
+210 New_BLACK LIST
+211 New_BLACK LIST
+212 New_BLACK LIST
+213 New_BLACK LIST fsquirt.exe
+214 New_BLACK LIST pwsafe.exe
+215 New_BLACK LIST pwsafe.exe
+216 New_BLACK LIST Whatsapp.exe
+217 New_BLACK LIST
+218 New_BLACK LIST
+219 New_EGITIM PROGRAMLARI *.msi
+220 New_EGITIM PROGRAMLARI *.msi
+221 New_EGITIM PROGRAMLARI DB.Browser.for.SQLite-3.12.0-win32.msi
+222 New_EGITIM PROGRAMLARI TableauDesktop-64bit-2020-3-1.exe
+223 New_NT UYGULAMA Policy SETUP_WFT_RESTRICTED_7_4_11_17.exe
+224 New_NT UYGULAMA Policy
+225 New_NT UYGULAMA Policy G6FTPSrv.exe
+226 New_NT UYGULAMA Policy *.msi
+227 New_NT UYGULAMA Policy
+228 New_NT UYGULAMA Policy DataLoad.exe
+229 New_NT UYGULAMA Policy
+230 New_NT UYGULAMA Policy
+231 New_NT UYGULAMA Policy PowerLineUtility.exe
+232 New_NT UYGULAMA Policy powerlineutility.exe
+233 New_NT UYGULAMA Policy java.exe
+234 New_NT UYGULAMA Policy ligowave_reset_tool-win.exe
+235 New_NT UYGULAMA Policy
+236 New_NT UYGULAMA Policy Node Manager.exe
+237 New_NT UYGULAMA Policy nm_install.exe
+238 New_NT UYGULAMA Policy Powerline Scan.exe
+239 New_NT UYGULAMA Policy InvestigationLauncher.exe
+240 New_NT UYGULAMA Policy *.bat
+241 New_NT UYGULAMA Policy fcsv4 freecooling viewer v4.6 install (kur).msi
+242 New_NT UYGULAMA Policy HedExLite.exe
+243 New_NT UYGULAMA Policy *.reg
+244 New_NT UYGULAMA Policy *.bat
+245 New_NT UYGULAMA Policy
+246 New_NT UYGULAMA Policy mediator.msi
+247 New_NT UYGULAMA Policy temsinvestigation18.1.4.exe
+248 New_NT UYGULAMA Policy *.bat
+249 New_NT UYGULAMA Policy java.exe
+250 New_NT UYGULAMA Policy *.msi
+251 New_NT UYGULAMA Policy winfiol.exe
+252 New_NT UYGULAMA Policy Netility.exe
+253 New_NT UYGULAMA Policy rasgcw.dll
+254 New_NT UYGULAMA Policy
+255 New_NT UYGULAMA Policy
+256 New_NT UYGULAMA Policy Node Manager.exe
+257 New_NT UYGULAMA Policy BT100_SR2_2863_UL_TEC.exe
+258 New_NT UYGULAMA Policy XperiaCompanion_sonyericsson.exe
+259 New_NT UYGULAMA Policy
+260 New_NT UYGULAMA Policy *.msi
+261 New_NT UYGULAMA Policy sftpserver.exe
+262 New_NT UYGULAMA Policy *.exe
+263 New_NT UYGULAMA Policy OMU_Installation_Tool_eng.exe
+264 New_NT UYGULAMA Policy mysql-workbench-community-8.0.27-winx64.msi
+265 New_NT UYGULAMA Policy WebComponents.exe
+266 New_NT UYGULAMA Policy *.exe
+267 New_NT UYGULAMA Policy LigoWave_Reset_Tool-WIN.exe
+268 New_NT UYGULAMA Policy *.exe
+269 New_NT UYGULAMA Policy dude-install-6.48.6.exe
+270 New_NT UYGULAMA Policy
+271 New_NT UYGULAMA Policy ODMUpdate.exe
+272 New_NT UYGULAMA Policy *.exe
+273 New_NT UYGULAMA Policy *.exe
+274 New_NT UYGULAMA Policy *.exe
+275 New_NT UYGULAMA Policy *.exe
+276 New_NT UYGULAMA Policy PL2303_Prolific_DriverInstaller_v1.12.0.exe
+277 New_NT UYGULAMA Policy
+278 New_NT UYGULAMA Policy *.exe
+279 New_NT UYGULAMA Policy lmt_client.exe
+280 New_NT UYGULAMA Policy
+281 New_NT UYGULAMA Policy
+282 New_NT UYGULAMA Policy *.bat
+283 New_NT UYGULAMA Policy *.vbs
+284 New_NT UYGULAMA Policy
+285 New_NT UYGULAMA Policy
+286 New_NT UYGULAMA Policy *.exe
+287 New_NT UYGULAMA Policy
+288 New_NT UYGULAMA Policy
+289 New_NT UYGULAMA Policy mysql-workbench-community-8.0.33-winx64.msi
+290 New_NT UYGULAMA Policy *.exe
+291 New_NT UYGULAMA Policy q-text-as-data-3.1.6.msi
+292 New_NT UYGULAMA Policy tecdrvin.exe
+293 New_CALL CENTER POLICY DAgentN.exe
+294 New_CALL CENTER POLICY DAgentN.exe
+295 New_CALL CENTER POLICY mysql-connector-odbc-3.51.30-winx64.msi
+296 New_CALL CENTER POLICY Dagent_Win7_64BIT.REG
+297 New_CALL CENTER POLICY *.bat
+298 New_CALL CENTER POLICY *.bat
+299 New_CALL CENTER POLICY DAgentN.exe
+300 New_BAYI UYGULAMA POLICY Att.exe
+301 New_BAYI UYGULAMA POLICY
+302 New_BAYI UYGULAMA POLICY
+303 New_BAYI UYGULAMA POLICY DAgentN.exe
+304 New_BAYI UYGULAMA POLICY DAgentN.exe
+305 New_BAYI UYGULAMA POLICY *.bat
+306 New_BAYI UYGULAMA POLICY POS.exe
+307 New_ARSIV kktcell.exe
+308 New_FLASPLAYER YETKISI flashplayer32_0r0_371_win.exe
+309 New_FLASPLAYER YETKISI flashplayer32_0r0_371_win_sa.exe
+310 New_FLASPLAYER YETKISI flashplayer32_0r0_371_winax.exe
+311 New_FLASPLAYER YETKISI flashplayer32_0r0_371_winpep.exe
+312 New_FLASPLAYER YETKISI uninstall_flashplayer32_0r0_371_win.exe
+313 New_FLASPLAYER YETKISI flashplayer32_0r0_371_win.msi
+314 New_FLASPLAYER YETKISI flashplayer32_0r0_371_winax.msi
+315 New_FLASPLAYER YETKISI flashplayer32_0r0_371_winpep.msi
+316 New_FLASPLAYER YETKISI flashplayer32_0r0_371_win_debug.exe
+317 New_FLASPLAYER YETKISI flashplayer32_0r0_371_win_sa_debug.exe
+318 New_FLASPLAYER YETKISI flashplayer32_0r0_371_winax_debug.exe
+319 New_FLASPLAYER YETKISI flashplayer32_0r0_371_winpep_debug.exe
+320 New_FLASPLAYER YETKISI uninstall_flash_player.exe
+321 New_DUDE MONITORING PROGRAMI *.exe
+322 New_XEROX PRINTER ntprint.exe
+323 New_GECICI POLICY shpafact.dll
+324 New_GECICI POLICY filezilla_server_1.8.2_win64-setup.exe
+325 New_SCRIPT Policy *.reg
+326 New_SCRIPT Policy *.reg
+327 New_SCRIPT Policy *.BAT
+328 New_SCRIPT Policy *.reg
+329 New_SCRIPT Policy *.reg
+330 New_SCRIPT Policy *.bat
+331 New_SCRIPT Policy *.vbs
+332 New_SCRIPT Policy *.reg
+333 New_SCRIPT Policy *.bat
+334 New_SCRIPT Policy *.bat
+335 New_SCRIPT Policy *.bat
+336 New_SCRIPT Policy *.bat
+337 New_SCRIPT Policy *.reg
+338 New_SCRIPT Policy *.bat
+339 New_SCRIPT Policy *.bat
+340 New_SCRIPT Policy *.ps1
+341 New_SCRIPT Policy *.bat
+342 New_SCRIPT Policy *.reg
+343 New_SCCM Policy
+344 New_SCCM Policy
+345 New_SCCM Policy
+346 New_ICT UYGULAMA Policy
+347 New_ICT UYGULAMA Policy
+348 New_ICT UYGULAMA Policy c1studioaspnet_2011v3.msi
+349 New_ICT UYGULAMA Policy
+350 New_ICT UYGULAMA Policy
+351 New_ICT UYGULAMA Policy
+352 New_ICT UYGULAMA Policy ReportViewer.exe
+353 New_ICT UYGULAMA Policy ODTforVS2017_122011.exe
+354 New_ICT UYGULAMA Policy
+355 New_ICT UYGULAMA Policy plsqldev1400x32.msi
+356 New_ICT UYGULAMA Policy lmt_client.exe
+357 New_ICT UYGULAMA Policy Setup.RemoteDesktopManagerFree.2020.1.10.0.exe
+358 New_ICT UYGULAMA Policy MySQLWorkbench.exe
+359 New_ICT UYGULAMA Policy
+360 New_ICT UYGULAMA Policy studio64.exe
+361 New_ICT UYGULAMA Policy tfpt.msi
+362 New_ICT UYGULAMA Policy
+363 New_ICT UYGULAMA Policy tfs_shellExtension.exe
+364 New_ICT UYGULAMA Policy devenv.exe
+365 New_ICT UYGULAMA Policy setup.exe
+366 New_ICT UYGULAMA Policy vs_community__187113180.1606229288.exe
+367 New_ICT UYGULAMA Policy pbidesktopsetup_x64.exe
+368 New_ICT UYGULAMA Policy
+369 New_ICT UYGULAMA Policy odbcad32.exe
+370 New_ICT UYGULAMA Policy odbcad32.exe
+371 New_ICT UYGULAMA Policy plsqldev1405x64.msi
+372 New_ICT UYGULAMA Policy gitextensions-3.4.3.9999-d4b0f48bb.msi
+373 New_ICT UYGULAMA Policy setup.exe
+374 New_ICT UYGULAMA Policy storepid.exe
+375 New_ICT UYGULAMA Policy *.exe
+376 New_ICT UYGULAMA Policy *.exe
+377 New_ICT UYGULAMA Policy vcredist_x86.exe
+378 New_ICT UYGULAMA Policy *.exe
+379 New_ICT UYGULAMA Policy c1studioaspnet_2011v3.msi
+380 New_ICT UYGULAMA Policy *.exe
+381 New_ICT UYGULAMA Policy ndp48-devpack-enu.exe
+382 New_ICT UYGULAMA Policy DriverWizard.exe
+383 New_ICT UYGULAMA Policy postgresql-10.18-2-windows-x64.exe
+384 New_ICT UYGULAMA Policy *.exe
+385 New_ICT UYGULAMA Policy go1.17.3.windows-amd64.msi
+386 New_ICT UYGULAMA Policy SQLEXPRADV_x64_ENU.exe
+387 New_ICT UYGULAMA Policy SSMS-Setup-ENU.exe
+388 New_ICT UYGULAMA Policy
+389 New_ICT UYGULAMA Policy mysql-workbench-community-8.0.27-winx64.msi
+390 New_ICT UYGULAMA Policy go1.18.windows-amd64.msi
+391 New_ICT UYGULAMA Policy *.exe
+392 New_ICT UYGULAMA Policy setup.exe
+393 New_ICT UYGULAMA Policy
+394 New_ICT UYGULAMA Policy
+395 New_ICT UYGULAMA Policy go1.19.1.windows-amd64.msi
+396 New_ICT UYGULAMA Policy vs_installer.exe
+397 New_ICT UYGULAMA Policy vsixinstaller.exe
+398 New_ICT UYGULAMA Policy
+399 New_ICT UYGULAMA Policy code.exe
+400 New_ICT UYGULAMA Policy
+401 New_ICT UYGULAMA Policy net.exe
+402 New_ICT UYGULAMA Policy SSMS-Setup-ENU.exe
+403 New_ICT UYGULAMA Policy
+404 New_ICT UYGULAMA Policy *.exe
+405 New_ICT UYGULAMA Policy
+406 New_ICT UYGULAMA Policy *.exe
+407 New_ICT UYGULAMA Policy node-v16.17.0-x64.msi
+408 New_ICT UYGULAMA Policy
+409 New_ICT UYGULAMA Policy *.exe
+410 New_ICT UYGULAMA Policy uipath.studio.exe
+411 New_ICT UYGULAMA Policy xampp-control.exe
+412 New_DEPO ORTAK ALAN - LOCATION YETKISI
+413 New_DEPO ORTAK ALAN - LOCATION YETKISI
+414 New_DEPO ORTAK ALAN - LOCATION YETKISI
+415 New_DEPO ORTAK ALAN - LOCATION YETKISI
+416 New_DEPO ORTAK ALAN - LOCATION YETKISI
+417 New_DEPO ORTAK ALAN - LOCATION YETKISI
+418 New_BAYI SERVICE POLICY
+419 New_BAYI SERVICE POLICY
+420 New_AKIL_FULL_CLIENT BAZLI HOST YETKISI
+421 New_AKIL_FULL_CLIENT BAZLI HOST YETKISI
+422 New_ICT PATH Policy
+423 New_ICT PATH Policy
+424 New_ICT PATH Policy
+425 New_ICT PATH Policy
+426 New_ICT PATH Policy
+427 New_ICT PATH Policy
+428 New_ICT PATH Policy
+429 New_ICT PATH Policy
+430 New_ICT PATH Policy
+431 New_ICT PATH Policy
+432 New_ICT PATH Policy
+433 New_ICT PATH Policy
+434 New_ICT PATH Policy
+435 New_ICT PATH Policy
+436 New_ICT PATH Policy
+437 New_ICT PATH Policy
+438 New_ICT PATH Policy
+439 New_ICT PATH Policy
+440 New_ICT PATH Policy
+441 New_ICT PATH Policy
+442 New_ICT PATH Policy
+443 New_ICT SERVICE Policy
+444 New_ICT SERVICE Policy
+445 New_ICT SERVICE Policy
+446 New_NT PATH Policy
+447 New_NT PATH Policy
+448 New_NT PATH Policy
+449 New_NT PATH Policy
+450 New_NT PATH Policy
+451 New_NT PATH Policy
+452 New_NT PATH Policy
+453 New_NT PATH Policy
+454 New_NT PATH Policy
+455 New_NT PATH Policy
+456 New_GENEL PATH POLICY
+457 New_GENEL PATH POLICY
+458 New_GENEL PATH POLICY
+459 New_GENEL PATH POLICY
+460 New_GENEL PATH POLICY
+461 New_GENEL PATH POLICY
+462 New_GENEL PATH POLICY
+463 New_GENEL PATH POLICY
+464 New_GENEL PATH POLICY
+465 New_GENEL PATH POLICY
+466 New_GENEL PATH POLICY
+467 New_GENEL PATH POLICY
+468 New_GENEL PATH POLICY
+469 New_GENEL PATH POLICY
+470 New_GENEL PATH POLICY
+471 New_GENEL SERVICE POLICY
+472 New_GENEL SERVICE POLICY
+473 New_GENEL SERVICE POLICY
+474 New_GENEL SERVICE POLICY
+475 New_GENEL SERVICE POLICY
+476 New_GENEL SERVICE POLICY
+477 New_GENEL SERVICE POLICY
+478 New_GENEL SERVICE POLICY
+479 New_CLIENT BAZLI HOST YETKISI
+480 New_Block
+481 New_Block
+482 New_Block
+483 New_Block
+484 New_Block
+485 New_Block NiceHashMiner.exe
+486 New_Block
+487 New_Block
+488 New_Block
+489 New_Block
+490 New_Block
+491 New_Block
+492 New_Block
+493 New_Run Normally iexplore.exe
+494 New_Run Normally Edge
+495 New_Run Normally acrobat.exe
+496 New_Run Normally acrord32.exe
+497 New_Run Normally adobearm.exe
+498 New_Run Normally flashplayerupdateservice.exe
+499 New_Run Normally rdrcef.exe
+500 New_Run Normally google*.exe
+501 New_Run Normally google*.exe
+502 New_Run Normally *.exe
+503 New_Run Normally officebackgroundtaskhandler.exe
+504 New_Run Normally outlook.exe
+505 New_Run Normally scnotification.exe
+506 New_Run Normally sctoastnotification.exe
+507 New_Run Normally updatetrustedsites.exe
+508 New_Run Normally onedrive*.exe
+509 New_Run Normally ngentask.exe
+510 New_Run Normally policyHost.exe
+511 New_Run Normally git*.exe
+512 New_Run Normally apoint.exe
+513 New_Run Normally igfxem.exe
+514 New_Run Normally ravbg64.exe
+515 New_Run Normally syntpenh.exe
+516 New_Run Normally tpnumlk*.exe
+517 New_Run Normally PanGpHip*.exe
+518 New_Run Normally *.exe
+519 New_Run Normally *.exe
+520 New_Run Normally selfservice.exe
+521 New_Run Normally wfica32.exe
+522 New_Run Normally wfcrun32.exe
+523 New_Run Normally splunk*.exe
+524 New_Run Normally btool.exe
+525 New_Run Normally chrome.exe
+526 New_Run Normally chrome.exe
+527 New_Run Elevated
+528 New_Run Elevated
+529 New_Run Elevated
+530 New_Run Elevated
+531 New_Run Elevated
+532 New_Run Elevated
+533 New_Run Elevated
+534 New_Run Elevated microstrategyoffice64.msi
+535 New_Run Elevated procmon64.exe
+536 New_Run Elevated
+537 New_Run Elevated
+538 New_Run Elevated gxsplash.exe
+539 New_Run Elevated setup.exe
+540 New_Run Elevated AnyDesk.exe
+541 New_Run Elevated
+542 New_Run Elevated
+543 New_Run Elevated
+544 New_Run Elevated
+545 New_Run Elevated
+The property 'FileStringMatchTypeEx' cannot be found on this object. Verify that the property exists and can be set.
+At D:\Projects\Turkcell\kktcMigration\PolicyCreator2.ps1:162 char:17
++                 $PGApp.FileStringMatchTypeEx = "Contains"
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : PropertyAssignmentException
+The property 'FileStringMatchTypeEx' cannot be found on this object. Verify that the property exists and can be set.
+At D:\Projects\Turkcell\kktcMigration\PolicyCreator2.ps1:162 char:17
++                 $PGApp.FileStringMatchTypeEx = "Contains"
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : PropertyAssignmentException
+
+546 New_Run Elevated
+547 New_Run Elevated
+548 New_Run Elevated
+549 New_Run Elevated
+550 New_Run Elevated pythonw.exe
+551 New_Run Elevated windows.storage.dll
+552 New_Run Elevated
+553 New_Run Elevated
+554 New_Developer Applications node.exe
+555 New_Developer Applications devenv.exe
+556 New_Developer Applications MSBuild.exe
+557 New_Developer Applications git*.exe
+558 New_Developer Applications VisBuild*.exe
+559 New_Developer Applications eclipse.exe
+560 New_SCCM Software Distribution CcmExec.exe
+561 New_SCCM Software Distribution Ccm32BitLauncher.exe
+562 New_Monitor Windows Files cmd.exe
+563 New_Monitor Windows Files wscript.exe
+564 New_Monitor Windows Files cscript.exe
+565 New_Monitor Windows Files mshta.exe
+566 New_Monitor Windows Files powershell.exe
+567 New_Monitor Windows Files powershell_ise.exe
+568 New_Monitor Windows Files dllhost.exe
+569 New_Monitor Windows Files msbuild.exe
+570 New_Monitor Windows Files rundll32.exe
+571 New_Monitor Windows Files regsvr32.exe
+572 New_Trusted Vendors
+573 New_Trusted Vendors
+574 New_Trusted Vendors
+575 New_Trusted Vendors
+**********************
+Windows PowerShell transcript end
+End time: 20241205120216
+**********************
