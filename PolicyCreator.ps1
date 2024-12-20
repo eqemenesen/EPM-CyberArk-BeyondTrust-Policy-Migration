@@ -1,13 +1,28 @@
-﻿Import-Module 'C:\Program Files\Avecto\Privilege Guard Management Consoles\PowerShell\Avecto.Defendpoint.Cmdlets\Avecto.Defendpoint.Cmdlets.dll'
+﻿# Define the transcript file path
+$transcriptFile = ".\console_output.txt"
+
+# Delete the transcript file if it exists
+if (Test-Path $transcriptFile) {
+    Remove-Item -Path $transcriptFile -Force
+}
+
+# Start logging console output to a fresh transcript file
+Start-Transcript -Path $transcriptFile
+
+Import-Module 'C:\Program Files\Avecto\Privilege Guard Management Consoles\PowerShell\Avecto.Defendpoint.Cmdlets\Avecto.Defendpoint.Cmdlets.dll'
 Import-Module 'C:\Program Files\Avecto\Privilege Guard Management Consoles\PowerShell\Avecto.Defendpoint.Cmdlets\Avecto.Defendpoint.Settings.dll'
-$baseFolder = ".\"
-$reportFile = "$baseFolder\PolicySummary_Garanti.csv"
-$logFilePath = "$baseFolder\logfile.txt"
+
+$reportFile = ".\PolicySummary_KKTC.csv"
+$logFilePath = ".\logfile.txt"
 Write-Host $logFilePath , $reportFile
 "" | Out-File -FilePath $logFilePath -Force
 #$csv = Import-Csv -path $path -Header "Original File Name","Checksum"
 # Get settings
-$PGConfig = Get-DefendpointSettings -LocalFile -FileLocation "$baseFolder\blank_policy.xml"
+$PGConfig = Get-DefendpointSettings -LocalFile -FileLocation ".\blank_policy.xml"
+
+$adminTasksFile = ".\adminTasks.csv"
+$adminTasks = Import-Csv -Path $adminTasksFile -Delimiter ","
+
 # Find target Application Group
 $line = 1
 $TargetAppGroupPre = "xxxxx"
@@ -98,8 +113,60 @@ Import-Csv -path $reportFile -Delimiter "," | Foreach-Object {
             $TargetAppGroupPre = $Policy_NameControl
         }elseif ( $ApplicationType -eq "Admin Tasks" )
         {
-            $logEntry = "line: $line, Policy Name : $Policy_Name, $ApplicationType not supported." | Add-Content -Path $logFilePath
+            $CheckName = $WindowsAdminTask
+
+            $adminTask = $adminTasks | Where-Object { $_.AdminApplicationName -eq $CheckName }
+
+            if ($adminTask.AdminType -eq "") {
+                $logEntry = "line: $line, Admin Task $AdminApplicationName not supported." | Add-Content -Path $logFilePath
+                return
+            }
+
+            # Add the admin task to the group
+            if ($adminTask.AdminType -eq "Executable") {
+                $PGApp.Type = [Avecto.Defendpoint.Settings.ApplicationType]::Executable
+                $PGApp.Description = $adminTask.AdminApplicationName
+                $PGApp.AppxPackageNameMatchCase = "Contains"
+                $PGApp.FileName = $adminTask.AdminPath
+                $PGApp.ProductName = $adminTask.AdminApplicationName
+                $PGApp.DisplayName = $adminTask.AdminApplicationName
+                $PGApp.CheckFileName = "true"
+                if ($adminTask.AdminCommandLine -ne ""){
+                    $PGApp.CmdLine = $adminTask.AdminCommandLine
+                    $PGApp.CmdLineMatchCase = "false"
+                    $PGApp.CmdLineStringMatchType = "Contains"
+                    $PGApp.CheckCmdLine = "true"
+                }
+                
+            } elseif ($adminTask.AdminType -eq "COMClass") {
+                $PGApp.Type = [Avecto.Defendpoint.Settings.ApplicationType]::COMClass
+                $PGApp.Description = $adminTask.AdminApplicationName
+                $PGApp.FileName = $adminTask.AdminApplicationName
+                $PGApp.CheckAppID = "true"
+                $PGApp.CheckCLSID = "true"
+                $PGApp.AppID = $adminTask.AdminCLSID
+                $PGApp.CLSID = $adminTask.AdminCLSID
+
+            } elseif ($adminTask.AdminType -eq "ManagementConsoleSnapin") {
+                $PGApp.Type = [Avecto.Defendpoint.Settings.ApplicationType]::ManagementConsoleSnapin
+                $PGApp.FileName = $adminTask.AdminApplicationName
+                $PGApp.FileNameStringMatchType = "Contains"
+                $PGApp.FileName = $adminTask.AdminPath
+                $PGApp.FileStringMatchTypeEx = "Contains"
+                $PGApp.CheckFileName="true" 
+
+                
+            } elseif ($adminTask.AdminType -eq "ControlPanelApplet") {
+                $PGApp.Type = [Avecto.Defendpoint.Settings.ApplicationType]::ControlPanelApplet
+                $PGApp.name
+                $PGApp.CheckAppID = "true"
+                $PGApp.CheckCLSID = "true"
+                $PGApp.AppID = $adminTask.AdminCLSID
+                $PGApp.CLSID = $adminTask.AdminCLSID
+            }
+            $TargetAppGroup.Applications.Add($PGApp)
             return
+             
         }elseif ( $ApplicationType -eq "Application Group" )
         {
             $logEntry = "line: $line, Policy Name : $Policy_Name, $ApplicationType not supported." | Add-Content -Path $logFilePath
@@ -205,7 +272,6 @@ Import-Csv -path $reportFile -Delimiter "," | Foreach-Object {
             }
 
         }
-
         
         # Product Description
         if ($FileDescription.Length -gt 0){
@@ -225,7 +291,6 @@ Import-Csv -path $reportFile -Delimiter "," | Foreach-Object {
             }
 
         }
-
 
         # Product Version From
         if ($ProductVersionFrom.Length -gt 0){
@@ -271,4 +336,6 @@ Import-Csv -path $reportFile -Delimiter "," | Foreach-Object {
         
         
 }
-Set-DefendpointSettings -SettingsObject $PGConfig -LocalFile -FileLocation "$baseFolder\generated_policy.xml"
+Set-DefendpointSettings -SettingsObject $PGConfig -LocalFile -FileLocation ".\generated_policy.xml"
+# Stop logging console output
+Stop-Transcript
