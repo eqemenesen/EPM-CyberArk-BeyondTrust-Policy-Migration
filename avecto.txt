@@ -1,0 +1,10 @@
+
+ $asmPath = "C:\Program Files\Avecto\Privilege Guard Management Consoles\PowerShell\Avecto.Defendpoint.Cmdlets\Avecto.Defendpoint.Settings.dll"
+[System.Reflection.Assembly]::LoadFrom($asmPath) | Out-Null
+
+ # Now try to create an instance
+ $filters = New-Object Avecto.Defendpoint.Settings.Filters
+ 
+ # See what members it actually has
+ $filters | Get-Member -Force
+ 
