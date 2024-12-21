@@ -25,7 +25,7 @@ Import-Csv -Path $reportFile -Delimiter "," | ForEach-Object {
     $PolicyDescription = ($_."Policy Description" -replace "`r`n|`n|`r", " - ")
     $Active = $_."Active" -eq "No" # Policy is activated or not - if No, then the Policy.Disabled is set to true
     $Action = $_."Action" # Action to be taken to the application
-    $SeecurityToken = $_."Security Token" # Token type to be assigned to the application
+    $SecurityToken = $_."Security Token" # Token type to be assigned to the application
 
     # only take Advanced Policy
     if($PolicyType -ne "Advanced Policy") {
@@ -63,7 +63,7 @@ Import-Csv -Path $reportFile -Delimiter "," | ForEach-Object {
             $appAssignment.Action = "Allow"
             $appAssignment.TokenType = "Unmodified"
         }else {
-            if($SeecurityToken -eq "Administrator") {
+            if($SecurityToken -eq "Administrator") {
                 $appAssignment.Action = "Allow"
                 $appAssignment.TokenType = "AddAdmin"
             } else {
@@ -80,6 +80,75 @@ Import-Csv -Path $reportFile -Delimiter "," | ForEach-Object {
     } else {
         Add-Content -Path $logFilePath -Value "Line $line : No matching application group found for policy '$PolicyName'."
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    # Initialize the Filters object
+    $newFilters = New-Object Avecto.Defendpoint.Settings.Filters
+    $newFilters.FiltersLogic = "and"
+    
+    # Create a normal DeviceFilter
+    $normalDeviceFilter = New-Object Avecto.Defendpoint.Settings.DeviceFilter
+    $normalDeviceFilter.Devices = New-Object Avecto.Defendpoint.Settings.Devices
+
+    # Add a normal HostName
+    $normalHostName = New-Object Avecto.Defendpoint.Settings.DeviceHostName
+    $normalHostName.HostName = "normalhostname"
+    $normalDeviceFilter.Devices.DeviceHostNames.Add($normalHostName)
+
+    # Add a normal IP
+    $normalIP = New-Object Avecto.Defendpoint.Settings.DeviceIP4
+    $normalIP.Address = "192.168.1.1"
+    $normalDeviceFilter.Devices.DeviceIPV4s.Add($normalIP)
+
+    # Add the normal DeviceFilter to Filters
+    $newFilters.DeviceFilter = $normalDeviceFilter
+    
+    # Create an inverse DeviceFilter
+    $inverseDeviceFilter = New-Object Avecto.Defendpoint.Settings.DeviceFilter
+    $inverseDeviceFilter.Devices = New-Object Avecto.Defendpoint.Settings.Devices
+    $inverseDeviceFilter.InverseFilter = $true
+
+    # Add an inverse HostName
+    $inverseHostName = New-Object Avecto.Defendpoint.Settings.DeviceHostName
+    $inverseHostName.HostName = "inversehostname"
+    $inverseDeviceFilter.Devices.DeviceHostNames.Add($inverseHostName)
+
+    # Add an inverse IP
+    $inverseIP = New-Object Avecto.Defendpoint.Settings.DeviceIP4
+    $inverseIP.Address = "10.10.10.10"
+    $inverseDeviceFilter.Devices.DeviceIPV4s.Add($inverseIP)
+
+    # Add the inverse DeviceFilter to Filters
+    $newFilters.DeviceFilter = $inverseDeviceFilter
+
+    # Assign Filters to the policy
+    $newPolicy.Filters = $newFilters
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     # Add the new policy to the configuration
     $PGConfig.Policies.Add($newPolicy)
