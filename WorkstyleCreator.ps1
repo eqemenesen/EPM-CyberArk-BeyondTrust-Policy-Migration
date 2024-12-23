@@ -34,7 +34,6 @@ $baseFolder      = "."
 $reportFile      = "$baseFolder\GarantiMainPolicy.csv"  # Your CSV file
 $logFilePath     = "$baseFolder\logfile_Workstyle.txt"
 $outputFile      = "$baseFolder\generated_policy_with_assignments.xml"
-$AppCsvFilePath  = "./PolicySummary_Garanti.csv"  # If needed
 
 Write-Host "Log file: $logFilePath"
 Write-Host "Report file: $reportFile"
@@ -153,8 +152,8 @@ if ($TotalWhiteListApps -gt 0) {
     $successRate  = [math]::Round(($successCount / $TotalWhiteListApps) * 100, 2)
     Write-Log "WhiteList Apps Success Rate: $successRate%" "INFO"
 }
-
-Start-Sleep -Seconds 30 # Optional pause
+ Write-Log "------------------------------------" "INFO"
+Start-Sleep -Seconds 2 # Optional pause
 
 # ------------------------------------
 # Process "Advanced Policy" Rows from CSV
@@ -176,6 +175,7 @@ try {
         $SecurityToken      = $_."Security Token"
         $AllComputers       = $_."All Computers" -eq "Yes"
         $SelectedComputers  = $_."Selected Computers/Groups"
+        $Users              = $_."Users"
 
         # Only process "Advanced Policy"
         if ($PolicyType -ne "Advanced Policy") {
@@ -220,7 +220,7 @@ try {
                 switch ($Action) {
                     "Block" {
                         $appAssignment.Action    = "Block"
-                        $appAssignment.TokenType = "None"
+                        $appAssignment.TokenType = "Unmodified"
                     }
                     "Run Normally" {
                         $appAssignment.Action    = "Allow"
@@ -256,12 +256,15 @@ try {
             $newFilters = New-Object Avecto.Defendpoint.Settings.Filters
             $newFilters.FiltersLogic = "and"
 
-            $DeviceFilter = New-Object Avecto.Defendpoint.Settings.DeviceFilter
-            $DeviceFilter.Devices    = New-Object Avecto.Defendpoint.Settings.Devices
-            $DeviceFilter.InverseFilter = $false
+            
 
             if (-not $AllComputers) {
                 if ($SelectedComputers -and $SelectedComputers -ne "") {
+
+                    $DeviceFilter = New-Object Avecto.Defendpoint.Settings.DeviceFilter
+                    $DeviceFilter.Devices    = New-Object Avecto.Defendpoint.Settings.Devices
+                    $DeviceFilter.InverseFilter = $false
+
                     # Split and add each host
                     $selectedComputersList = $SelectedComputers -split ","
                     foreach ($computer in $selectedComputersList) {
@@ -289,6 +292,73 @@ try {
 
             # Assign to the new policy (if any filter logic is applicable)
             $newFilters.DeviceFilter = $DeviceFilter
+
+            # Add AccountsFilter to Filters
+            if ($Users -ne "") {
+                try {
+                    # Initialize AccountsFilter
+                    $accountsFilter = New-Object Avecto.Defendpoint.Settings.AccountsFilter
+                    $accountsFilter.InverseFilter = $false
+                    $accountsFilter.Accounts = New-Object Avecto.Defendpoint.Settings.AccountList
+                    $accountsFilter.Accounts.WindowsAccounts = New-Object System.Collections.Generic.List[Avecto.Defendpoint.Settings.Account]
+                    
+                    # Populate AccountsFilter
+                    $UsersList = $Users -split ","
+                    foreach ($User in $UsersList) {
+                        $User = $User.Trim()
+                        if ($User) {
+                            $UserAccount = New-Object Avecto.Defendpoint.Settings.Account
+                            if ($User -like 'User*"' -or $User -like 'Group*"') {
+                                $UserName = ($User -replace '^(User|Group)\s*"', '') -replace '"$', ''
+                                $UserAccount.Name = $UserName
+                                $UserAccount.Group = $User -like 'Group*'
+                            } else {
+                                $UserAccount.Name = $User
+                                $UserAccount.Group = $false
+                            }
+                            $accountsFilter.Accounts.WindowsAccounts.Add($UserAccount)
+                        }
+                    }
+
+                    # Debug accounts
+                    Write-Log "DEBUG: Total Accounts in WindowsAccounts: $($accountsFilter.Accounts.WindowsAccounts.Count)" "DEBUG"
+
+                    # Assign AccountsFilter to policy
+                    if (-not $newPolicy.Filters) {
+                        $newPolicy.Filters = New-Object Avecto.Defendpoint.Settings.Filters
+                    }
+                    $newPolicy.Filters.AccountsFilter = $accountsFilter
+
+                    # Debug Filters
+                    Write-Log "DEBUG: Final Filters for policy '$($newPolicy.Name)': $($newPolicy.Filters | ConvertTo-Json -Depth 10)" "DEBUG"
+
+                    Write-Log "SUCCESS: AccountsFilter added to policy '$($newPolicy.Name)' with accounts: $($accountsFilter.Accounts.WindowsAccounts.Count)" "INFO"
+                }
+                catch {
+                    Write-Log "ERROR: Failed to add AccountsFilter to policy. Exception: $_" "ERROR"
+                }
+            }
+
+            
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            # Assign the Filters to the new Policy
             $newPolicy.Filters = $newFilters
 
             # Add the new policy to the configuration
