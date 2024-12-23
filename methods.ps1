@@ -1,5 +1,5 @@
 # Change this to the path where you want to save the output
-$outputFilePath = 'C:\Temp\Avecto_Defendpoint_TypesAndMembers.txt'
+$outputFilePath = '.\Avecto_Defendpoint_TypesAndMembers.txt'
 
 # Wrap your script in a script block and pipe it to Out-File
 & {
