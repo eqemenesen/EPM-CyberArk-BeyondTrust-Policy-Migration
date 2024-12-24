@@ -1,13 +1,1 @@
-<ClipboardText>
-    <ClipboardResources>
-        <Config />
-    </ClipboardResources>
-    <ClipboardItems>
-        <AccountsFilter>
-            <Accounts>
-                <Account Name="Administrator" />
-                <Account Name="Generated" />
-            </Accounts>
-        </AccountsFilter>
-    </ClipboardItems>
-</ClipboardText>
+<ClipboardText><ClipboardResources><Config/></ClipboardResources><ClipboardItems/></ClipboardText>

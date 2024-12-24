@@ -1,4 +1,16 @@
 # ------------------------------------
+# Load Modules
+# ------------------------------------
+try {
+    Import-Module 'C:\Program Files\Avecto\Privilege Guard Management Consoles\PowerShell\Avecto.Defendpoint.Cmdlets\Avecto.Defendpoint.Cmdlets.dll' -Force -ErrorAction Stop
+    Import-Module 'C:\Program Files\Avecto\Privilege Guard Management Consoles\PowerShell\Avecto.Defendpoint.Cmdlets\Avecto.Defendpoint.Settings.dll' -Force -ErrorAction Stop
+    Write-Log "Successfully imported Avecto modules." "INFO"
+} catch {
+    Write-Log "ERROR: Failed to import Avecto modules. $_" "ERROR"
+    exit 1
+}
+
+# ------------------------------------
 # Define Helper Functions
 # ------------------------------------
 function Write-Log {
@@ -15,25 +27,14 @@ function Write-Log {
 }
 
 # ------------------------------------
-# Load Modules
-# ------------------------------------
-try {
-    Import-Module 'C:\Program Files\Avecto\Privilege Guard Management Consoles\PowerShell\Avecto.Defendpoint.Cmdlets\Avecto.Defendpoint.Cmdlets.dll' -Force -ErrorAction Stop
-    Import-Module 'C:\Program Files\Avecto\Privilege Guard Management Consoles\PowerShell\Avecto.Defendpoint.Cmdlets\Avecto.Defendpoint.Settings.dll' -Force -ErrorAction Stop
-    Write-Log "Successfully imported Avecto modules." "INFO"
-}
-catch {
-    Write-Log "ERROR: Failed to import Avecto modules. $_" "ERROR"
-    exit 1
-}
-
-# ------------------------------------
 # Define Paths
 # ------------------------------------
-$baseFolder      = "."
-$reportFile      = "$baseFolder\GarantiMainPolicy.csv"  # Your CSV file
-$logFilePath     = "$baseFolder\logfile_Workstyle.txt"
-$outputFile      = "$baseFolder\generated_policy_with_assignments.xml"
+
+#$reportFile      = ".\GarantiMainPolicy.csv"  # Your CSV file
+$reportFile      = ".\test.csv"
+
+$logFilePath     = ".\logfile_Workstyle.txt"
+$outputFile      = ".\generated_policy_with_assignments.xml"
 
 Write-Host "Log file: $logFilePath"
 Write-Host "Report file: $reportFile"
@@ -47,10 +48,9 @@ Write-Log "Log file initialized." "INFO"
 # ------------------------------------
 Write-Log "Loading blank policy configuration..." "INFO"
 try {
-    $PGConfig = Get-DefendpointSettings -LocalFile -FileLocation "$baseFolder\generated_appGroup.xml" -ErrorAction Stop
+    $PGConfig = Get-DefendpointSettings -LocalFile -FileLocation ".\generated_appGroup.xml" -ErrorAction Stop
     Write-Log "Successfully loaded blank policy configuration." "INFO"
-}
-catch {
+} catch {
     Write-Log "ERROR: Failed to load policy configuration. $_" "ERROR"
     throw
 }
@@ -75,8 +75,7 @@ try {
         }
     }
     Write-Log "Completed gathering WhiteList Apps from CSV." "INFO"
-}
-catch {
+} catch {
     Write-Log "ERROR: Failed to parse CSV for WhiteList apps. $_" "ERROR"
     throw
 }
@@ -95,8 +94,7 @@ if (-not $whiteListPolicy) {
         $whiteListPolicy.Disabled    = $false
         $PGConfig.Policies.Add($whiteListPolicy)
         Write-Log "Created and added 'White List' policy." "INFO"
-    }
-    catch {
+    } catch {
         Write-Log "ERROR: Failed to create 'White List' policy. $_" "ERROR"
         throw
     }
@@ -134,8 +132,7 @@ foreach ($appName in $WhiteListApps) {
             # Detailed Logging for Missing Application Group
             Write-Log "DETAILS: Application Group '$appName' not found in PGConfig.ApplicationGroups." "DEBUG"
         }
-    }
-    catch {
+    } catch {
         $FailedWhiteListApps++
         Write-Log "EXCEPTION: Failed to add '$appName'. $_" "ERROR"
 
@@ -153,7 +150,7 @@ if ($TotalWhiteListApps -gt 0) {
     Write-Log "WhiteList Apps Success Rate: $successRate%" "INFO"
 }
  Write-Log "------------------------------------" "INFO"
-Start-Sleep -Seconds 2 # Optional pause
+#Start-Sleep -Seconds 2 # Optional pause
 
 # ------------------------------------
 # Process "Advanced Policy" Rows from CSV
@@ -286,14 +283,14 @@ try {
                 } else {
                     Write-Log "Line $line : $PolicyName - No SelectedComputers provided, no filters added." "WARN"
                 }
+
+                # Assign to the new policy (if any filter logic is applicable)
+                $newFilters.DeviceFilter = $DeviceFilter
             } else {
                 Write-Log "Line $line : $PolicyName - AllComputers is true, no filters required." "INFO"
             }
 
-            # Assign to the new policy (if any filter logic is applicable)
-            $newFilters.DeviceFilter = $DeviceFilter
-
-            # Add AccountsFilter to Filters
+            # Add AccountsFilter if Users are provided
             if ($Users -ne "") {
                 try {
                     # Initialize AccountsFilter
@@ -301,11 +298,13 @@ try {
                     $accountsFilter.InverseFilter = $false
                     $accountsFilter.Accounts = New-Object Avecto.Defendpoint.Settings.AccountList
                     $accountsFilter.Accounts.WindowsAccounts = New-Object System.Collections.Generic.List[Avecto.Defendpoint.Settings.Account]
-                    
-                    # Populate AccountsFilter
+
+                    # Parse and add users to AccountsFilter
                     $UsersList = $Users -split ","
+
                     foreach ($User in $UsersList) {
                         $User = $User.Trim()
+                        Write-Log "User will be added: $User" "INFO"
                         if ($User) {
                             $UserAccount = New-Object Avecto.Defendpoint.Settings.Account
                             if ($User -like 'User*"' -or $User -like 'Group*"') {
@@ -320,43 +319,17 @@ try {
                         }
                     }
 
-                    # Debug accounts
-                    Write-Log "DEBUG: Total Accounts in WindowsAccounts: $($accountsFilter.Accounts.WindowsAccounts.Count)" "DEBUG"
-
-                    # Assign AccountsFilter to policy
-                    if (-not $newPolicy.Filters) {
-                        $newPolicy.Filters = New-Object Avecto.Defendpoint.Settings.Filters
+                    if ($accountsFilter.Accounts.WindowsAccounts.Count -gt 0) {
+                        #$newPolicy.Filters.AccountsFilter = $accountsFilter
+                        $newFilters.AccountsFilter = $accountsFilter
+                        Write-Log "AccountsFilter added to policy '$($newPolicy.Name)' with accounts: $($accountsFilter.Accounts.WindowsAccounts.Count)." "INFO"
+                    } else {
+                        Write-Log "AccountsFilter is empty, no filters added for users." "WARN"
                     }
-                    $newPolicy.Filters.AccountsFilter = $accountsFilter
-
-                    # Debug Filters
-                    Write-Log "DEBUG: Final Filters for policy '$($newPolicy.Name)': $($newPolicy.Filters | ConvertTo-Json -Depth 10)" "DEBUG"
-
-                    Write-Log "SUCCESS: AccountsFilter added to policy '$($newPolicy.Name)' with accounts: $($accountsFilter.Accounts.WindowsAccounts.Count)" "INFO"
-                }
-                catch {
-                    Write-Log "ERROR: Failed to add AccountsFilter to policy. Exception: $_" "ERROR"
+                } catch {
+                    Write-Log "Failed to add AccountsFilter to policy. Exception: $_" "ERROR"
                 }
             }
-
-            
-                
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             # Assign the Filters to the new Policy
             $newPolicy.Filters = $newFilters
@@ -367,8 +340,7 @@ try {
 
             # Add the policy name to the tracking list
             $existingPolicies += $PolicyName
-        }
-        catch {
+        } catch {
             Write-Log "EXCEPTION: Failed to process policy '$PolicyName'. $_" "ERROR"
 
             # Detailed Logging with Properties
@@ -379,8 +351,7 @@ try {
         # Increment line counter
         $line++
     }
-}
-catch {
+} catch {
     Write-Log "EXCEPTION: Failed while reading CSV lines. $_" "ERROR"
     throw
 }
@@ -403,8 +374,7 @@ Write-Log "Saving updated configuration to XML..." "INFO"
 try {
     Set-DefendpointSettings -SettingsObject $PGConfig -LocalFile -FileLocation $outputFile -ErrorAction Stop
     Write-Log "SUCCESS: Policies with application assignments saved to $outputFile." "INFO"
-}
-catch {
+} catch {
     Write-Log "ERROR: Failed to save updated configuration. $_" "ERROR"
     throw
 }
