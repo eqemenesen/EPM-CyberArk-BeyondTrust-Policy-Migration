@@ -1,1 +1,321 @@
-<ClipboardText><ClipboardResources><Config/></ClipboardResources><ClipboardItems/></ClipboardText>
+<ClipboardText>
+    <ClipboardResources>
+        <Config>
+            <ApplicationGroups>
+                <ApplicationGroup ID="494D07F7-DAE2-4053-A93B-35C13ACDAFE3"
+                                  Name="Application Permission For Servis Kontrol Center"
+                                  Description="Application Permission For Servis Kontrol Center"
+                                  _Parent="ApplicationGroups" />
+            </ApplicationGroups>
+            <GlobalOptionsSets>
+                <GlobalOptionsSet ID="93604fd7-e158-43da-8c63-24c9cdd40c50"
+                                  _Parent="GlobalOptionsSets">
+                    <TrustedAccounts>
+                        <Account Name="NT AUTHORITY\SYSTEM"
+                                 SID="S-1-5-18"
+                                 Group="true" />
+                        <Account Name="BUILTIN\Administrators"
+                                 SID="S-1-5-32-544"
+                                 Group="true" />
+                        <Account Name="NT SERVICE\TrustedInstaller"
+                                 SID="S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464"
+                                 Group="true" />
+                    </TrustedAccounts>
+                    <ConfigurationOptions Security="PlainText" />
+                    <ActiveXInstallationStrings DefaultLanguage="en">
+                        <Language LangID="en"
+                                  Title="Privilege Management ActiveX Installation"
+                                  DownloadMessage="Downloading ActiveX control ..."
+                                  InstallMessage="Installing ActiveX control ..."
+                                  CancelButtonText="Cancel" />
+                    </ActiveXInstallationStrings>
+                    <ChallengeResponseOptions />
+                    <AgentProtectionOptions />
+                    <TrustedApplicationProtection>
+                        <Configuration Version="5.0.10.0"
+                                       ConfigRevision="500">
+                            <ApplicationGroups>
+                                <ApplicationGroup ID="a8e66553-062d-48ef-b849-46af9d6a721e"
+                                                  Name="Browsers"
+                                                  _Parent="ApplicationGroups">
+                                    <Application Type="exe"
+                                                 Description="Firefox"
+                                                 OpenDlgDropRights="true"
+                                                 CheckFileName="true"
+                                                 FileName="Firefox.exe"
+                                                 FileStringMatchingType="Contains"
+                                                 UseSourceFileName="true"
+                                                 CheckProductName="true"
+                                                 ProductName="Firefox"
+                                                 ProductNameStringMatchType="Contains"
+                                                 TrustedOwnerRequired="true" />
+                                    <Application Type="exe"
+                                                 Description="Google Chrome"
+                                                 OpenDlgDropRights="true"
+                                                 UseSourceFileName="true"
+                                                 CheckProductName="true"
+                                                 ProductName="Google Chrome"
+                                                 ProductNameStringMatchType="Exact"
+                                                 TrustedOwnerRequired="true" />
+                                    <Application Type="exe"
+                                                 Description="Internet Explorer 10 or Lower"
+                                                 OpenDlgDropRights="true"
+                                                 UseSourceFileName="true"
+                                                 CheckProductName="true"
+                                                 ProductName="WindowsÂ® Internet Explorer"
+                                                 ProductNameStringMatchType="Exact"
+                                                 TrustedOwnerRequired="true" />
+                                    <Application Type="exe"
+                                                 Description="Internet Explorer 11"
+                                                 OpenDlgDropRights="true"
+                                                 UseSourceFileName="true"
+                                                 CheckProductName="true"
+                                                 ProductName="Internet Explorer"
+                                                 ProductNameStringMatchType="Exact"
+                                                 TrustedOwnerRequired="true" />
+                                    <Application Type="exe"
+                                                 Description="Microsoft Edge"
+                                                 OpenDlgDropRights="true"
+                                                 UseSourceFileName="true"
+                                                 CheckProductName="true"
+                                                 ProductName="Microsoft Edge"
+                                                 ProductNameStringMatchType="Exact"
+                                                 TrustedOwnerRequired="true" />
+                                    <Application Type="exe"
+                                                 Description="Microsoft Edge Browser Broker"
+                                                 OpenDlgDropRights="true"
+                                                 UseSourceFileName="true"
+                                                 CheckProductDesc="true"
+                                                 ProductDesc="Browser_Broker"
+                                                 ProductDescStringMatchType="Contains"
+                                                 TrustedOwnerRequired="true" />
+                                </ApplicationGroup>
+                                <ApplicationGroup ID="f562aa66-e326-4eb2-97a3-5cc92190d0bf"
+                                                  Name="Browser Untrusted"
+                                                  _Parent="ApplicationGroups">
+                                    <Application Type="dll"
+                                                 Description="Drop through for trusted and signed DLLs"
+                                                 OpenDlgDropRights="true"
+                                                 UseSourceFileName="true"
+                                                 CheckCertificate="true"
+                                                 CertificateNegateMatch="true"
+                                                 Certificate="?*"
+                                                 CertificatePatternMatching="true"
+                                                 CertificateStringMatchType="Contains"
+                                                 TrustedOwnerRequired="true"
+                                                 TrustedOwnerNegateMatch="true"
+                                                 CheckParentGroup="true"
+                                                 ParentApplicationGroup="a8e66553-062d-48ef-b849-46af9d6a721e" />
+                                </ApplicationGroup>
+                                <ApplicationGroup ID="2aafdb4d-f046-4935-a3ec-e654eff0abac"
+                                                  Name="Content Handlers"
+                                                  _Parent="ApplicationGroups">
+                                    <Application Type="exe"
+                                                 Description="Adobe Acrobat Reader DC"
+                                                 OpenDlgDropRights="true"
+                                                 UseSourceFileName="true"
+                                                 CheckProductName="true"
+                                                 ProductName="Adobe Acrobat Reader DC"
+                                                 ProductNameStringMatchType="Exact"
+                                                 TrustedOwnerRequired="true" />
+                                    <Application Type="exe"
+                                                 Description="Adobe Reader 11 or Lower"
+                                                 OpenDlgDropRights="true"
+                                                 UseSourceFileName="true"
+                                                 CheckProductName="true"
+                                                 ProductName="Adobe Reader"
+                                                 ProductNameStringMatchType="Contains"
+                                                 TrustedOwnerRequired="true" />
+                                    <Application Type="exe"
+                                                 Description="Microsoft Excel"
+                                                 OpenDlgDropRights="true"
+                                                 UseSourceFileName="true"
+                                                 CheckProductDesc="true"
+                                                 ProductDesc="Microsoft Excel"
+                                                 ProductDescStringMatchType="Contains"
+                                                 TrustedOwnerRequired="true" />
+                                    <Application Type="exe"
+                                                 Description="Microsoft Outlook"
+                                                 OpenDlgDropRights="true"
+                                                 UseSourceFileName="true"
+                                                 CheckProductDesc="true"
+                                                 ProductDesc="Microsoft Outlook"
+                                                 ProductDescStringMatchType="Contains"
+                                                 TrustedOwnerRequired="true" />
+                                    <Application Type="exe"
+                                                 Description="Microsoft PowerPoint"
+                                                 OpenDlgDropRights="true"
+                                                 UseSourceFileName="true"
+                                                 CheckProductDesc="true"
+                                                 ProductDesc="Microsoft PowerPoint"
+                                                 ProductDescStringMatchType="Contains"
+                                                 TrustedOwnerRequired="true" />
+                                    <Application Type="exe"
+                                                 Description="Microsoft Publisher"
+                                                 OpenDlgDropRights="true"
+                                                 UseSourceFileName="true"
+                                                 CheckProductDesc="true"
+                                                 ProductDesc="Microsoft Publisher"
+                                                 ProductDescStringMatchType="Contains"
+                                                 TrustedOwnerRequired="true" />
+                                    <Application Type="exe"
+                                                 Description="Microsoft Word"
+                                                 OpenDlgDropRights="true"
+                                                 UseSourceFileName="true"
+                                                 CheckProductDesc="true"
+                                                 ProductDesc="Microsoft Word"
+                                                 ProductDescStringMatchType="Contains"
+                                                 TrustedOwnerRequired="true" />
+                                    <Application Type="exe"
+                                                 Description="Microsoft Excel 2007"
+                                                 OpenDlgDropRights="true"
+                                                 UseSourceFileName="true"
+                                                 CheckProductDesc="true"
+                                                 ProductDesc="Microsoft Office Excel"
+                                                 ProductDescStringMatchType="Contains"
+                                                 TrustedOwnerRequired="true" />
+                                    <Application Type="exe"
+                                                 Description="Microsoft Outlook 2007"
+                                                 OpenDlgDropRights="true"
+                                                 UseSourceFileName="true"
+                                                 CheckProductDesc="true"
+                                                 ProductDesc="Microsoft Office Outlook"
+                                                 ProductDescStringMatchType="Contains"
+                                                 TrustedOwnerRequired="true" />
+                                    <Application Type="exe"
+                                                 Description="Microsoft PowerPoint 2007"
+                                                 OpenDlgDropRights="true"
+                                                 UseSourceFileName="true"
+                                                 CheckProductDesc="true"
+                                                 ProductDesc="Microsoft Office PowerPoint"
+                                                 ProductDescStringMatchType="Contains"
+                                                 TrustedOwnerRequired="true" />
+                                    <Application Type="exe"
+                                                 Description="Microsoft Publisher 2007"
+                                                 OpenDlgDropRights="true"
+                                                 UseSourceFileName="true"
+                                                 CheckProductDesc="true"
+                                                 ProductDesc="Microsoft Office Publisher"
+                                                 ProductDescStringMatchType="Contains"
+                                                 TrustedOwnerRequired="true" />
+                                    <Application Type="exe"
+                                                 Description="Microsoft Word 2007"
+                                                 OpenDlgDropRights="true"
+                                                 UseSourceFileName="true"
+                                                 CheckProductDesc="true"
+                                                 ProductDesc="Microsoft Office Word"
+                                                 ProductDescStringMatchType="Contains"
+                                                 TrustedOwnerRequired="true" />
+                                </ApplicationGroup>
+                                <ApplicationGroup ID="d1648907-cfdf-4556-9966-5b4bd16878fc"
+                                                  Name="Content Handler Untrusted"
+                                                  _Parent="ApplicationGroups">
+                                    <Application Type="dll"
+                                                 Description="Drop through for trusted and signed DLLs"
+                                                 OpenDlgDropRights="true"
+                                                 UseSourceFileName="true"
+                                                 CheckCertificate="true"
+                                                 CertificateNegateMatch="true"
+                                                 Certificate="?*"
+                                                 CertificatePatternMatching="true"
+                                                 CertificateStringMatchType="Contains"
+                                                 TrustedOwnerRequired="true"
+                                                 TrustedOwnerNegateMatch="true"
+                                                 CheckParentGroup="true"
+                                                 ParentApplicationGroup="2aafdb4d-f046-4935-a3ec-e654eff0abac" />
+                                </ApplicationGroup>
+                            </ApplicationGroups>
+                            <Policies>
+                                <Policy Name="Trusted Application DLL Protection"
+                                        Description="Default set of rules that apply to all users"
+                                        _Parent="Policies"
+                                        FeatureVisibility="63">
+                                    <ApplicationAssignments>
+                                        <ApplicationAssignment TokenType="Unmodified"
+                                                               MessageType="Off"
+                                                               Audit="On"
+                                                               PrivilegeMonitoring="Off"
+                                                               BlockExecution="true"
+                                                               ApplicationGroup="f562aa66-e326-4eb2-97a3-5cc92190d0bf" />
+                                        <ApplicationAssignment TokenType="Unmodified"
+                                                               MessageType="Off"
+                                                               Audit="On"
+                                                               PrivilegeMonitoring="Off"
+                                                               BlockExecution="true"
+                                                               ApplicationGroup="d1648907-cfdf-4556-9966-5b4bd16878fc" />
+                                    </ApplicationAssignments>
+                                </Policy>
+                            </Policies>
+                        </Configuration>
+                    </TrustedApplicationProtection>
+                    <EventFormatOptions />
+                </GlobalOptionsSet>
+            </GlobalOptionsSets>
+        </Config>
+    </ClipboardResources>
+    <ClipboardItems>
+        <Policy ID="577435E8-52B2-42DE-8C8A-928036B5EF45"
+                Name="Application Permission For Servis Kontrol Center"
+                Description="10568619-11462393-11502473-"
+                _Parent="Policies"
+                FeatureVisibility="9"
+                GlobalOptionsSet="93604fd7-e158-43da-8c63-24c9cdd40c50">
+            <Filters FiltersLogic="and">
+                <DeviceFilter>
+                    <Devices>
+                        <DeviceHostName HostName="PGMKGTPWEB06" />
+                        <DeviceHostName HostName="PGMKGTPWEB05" />
+                        <DeviceHostName HostName="PGMKGTPWEB07" />
+                        <DeviceHostName HostName="PGMKGTPWEB08" />
+                        <DeviceHostName HostName="PGMKGTPWEB10" />
+                        <DeviceHostName HostName="PGMKGTPWEB09" />
+                        <DeviceHostName HostName="PGMKGTPWEB01" />
+                        <DeviceHostName HostName="PGMKGTPWEB02" />
+                        <DeviceHostName HostName="PGMKGTPWEB03" />
+                        <DeviceHostName HostName="PGMKGTPWEB04" />
+                    </Devices>
+                </DeviceFilter>
+                <AccountsFilter>
+                    <Accounts>
+                        <Account Name="GTEKNOLOJIDMZ\USR_SRV_GTEKDMZ_GTUOServiceControlCenter" />
+                    </Accounts>
+                </AccountsFilter>
+            </Filters>
+            <ShellExtension DefaultLanguage="en"
+                            Menu="Run with Privilege Management">
+                <MenuStrings>
+                    <MenuString LangID="en"
+                                Text="Run with Privilege Management" />
+                </MenuStrings>
+                <ApplicationAssignments />
+            </ShellExtension>
+            <PrivilegeMonitoring ActivityLevel="Activity"
+                                 MaxRecords="100"
+                                 KeepLogs="14" />
+            <ApplicationAssignments>
+                <ApplicationAssignment ID="3E4D5846-7103-4CFB-8D11-0D39313349F0"
+                                       TokenType="AddAdmin"
+                                       TokenTypeV2="AddAdmin"
+                                       TokenTypeV3="AddAdmin"
+                                       MessageType="Off"
+                                       Audit="On"
+                                       PrivilegeMonitoring="On"
+                                       Action="Allow"
+                                       ApplicationGroup="494D07F7-DAE2-4053-A93B-35C13ACDAFE3" />
+            </ApplicationAssignments>
+            <ContentAssignments />
+            <GeneralRules>
+                <CaptureUserInfoRule Configured="Not Configured" />
+                <CaptureHostInfoRule Configured="Not Configured" />
+                <ProhibitAccountMgmtRule Configured="Not Configured" />
+                <RemoteManagementConnectionRule Configured="Not Configured" />
+            </GeneralRules>
+            <TrustedApplicationProtection Configured="Not Configured"
+                                          Audit="On" />
+            <MicrosoftBlockRules Configured="Not Configured"
+                                 BlockUntrustedDlls="true"
+                                 Audit="On" />
+            <JITAdmin />
+        </Policy>
+    </ClipboardItems>
+</ClipboardText>

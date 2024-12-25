@@ -30,8 +30,8 @@ function Write-Log {
 # Define Paths
 # ------------------------------------
 
-#$reportFile      = ".\GarantiMainPolicy.csv"  # Your CSV file
-$reportFile      = ".\test.csv"
+$reportFile      = ".\GarantiMainPolicy.csv"  # Your CSV file
+#$reportFile      = ".\test.csv"
 
 $logFilePath     = ".\logfile_Workstyle.txt"
 $outputFile      = ".\generated_policy_with_assignments.xml"
@@ -109,10 +109,22 @@ Write-Log "Processing WhiteList Apps..." "INFO"
 $TotalWhiteListApps   = 0
 $FailedWhiteListApps  = 0
 
+# ------------------------------------
+#Get Message IDs
+# ------------------------------------
+$allowMessage = $PGConfig.Messages | Where-Object { $_.Name -like "Allow Message (Elevate)" }
+$blockMessage = $PGConfig.Messages | Where-Object { $_.Name -eq "Block Message" }
+$allowBaloon = $PGConfig.Messages | Where-Object { $_.Name -eq "Application Notification (Elevate)" }
+
+$allowMessageId = $allowMessage.ID
+$blockMessageId = $blockMessage.ID
+$allowBaloonId = $allowBaloon.ID
+
 foreach ($appName in $WhiteListApps) {
     $TotalWhiteListApps++
     try {
         $appGroup = $PGConfig.ApplicationGroups | Where-Object { $_.Name -eq $appName }
+        
         if ($appGroup) {
             # Create an application assignment
             $appAssignment = New-Object Avecto.Defendpoint.Settings.ApplicationAssignment($PGConfig)
@@ -173,9 +185,16 @@ try {
         $AllComputers       = $_."All Computers" -eq "Yes"
         $SelectedComputers  = $_."Selected Computers/Groups"
         $Users              = $_."Users"
+        $EndUserUI          = $_."End-User UI"
 
         # Only process "Advanced Policy"
         if ($PolicyType -ne "Advanced Policy") {
+            return
+        }
+        # Only Process Active in CSV "Advanced Policy"
+        # true if Active is "No" in CSV
+        if ($Active) {
+            Write-Log "Line $line : Policy '$PolicyName' is disabled. Skipping." "INFO"
             return
         }
 
@@ -206,7 +225,7 @@ try {
             $newPolicy = New-Object Avecto.Defendpoint.Settings.Policy($PGConfig)
             $newPolicy.Name        = $PolicyName
             $newPolicy.Description = $PolicyDescription
-            $newPolicy.Disabled    = $Active  # if "No" => Disabled = $true
+            $newPolicy.Disabled    = $false  # if "No" => Disabled = $true
 
             # Find matching Application Group object
             $appGroup = $PGConfig.ApplicationGroups | Where-Object { $_.Name -eq $PolicyName }
@@ -238,6 +257,20 @@ try {
                 $appAssignment.PrivilegeMonitoring = "On"
                 $appAssignment.ApplicationGroup    = $appGroup
 
+                if ($EndUserUI -match "Elevate"){
+                    $appAssignment.MessageIdAsText = $allowBaloonId
+                    $appAssignment.ShowMessage = $true
+                    Write-Log "Elevate Notification Baloon added to '$PolicyName'." "INFO"
+                } elseif ($EndUserUI -match "Block"){
+                    $appAssignment.MessageIdAsText = $blockMessageId
+                    $appAssignment.ShowMessage = $true
+                    Write-Log "Block message added to '$PolicyName'." "INFO"
+                } elseif ($EndUserUI -match "Launch wi"){
+                    $appAssignment.MessageIdAsText = $allowMessageId
+                    $appAssignment.ShowMessage = $true
+                    Write-Log "Elevate Message added to '$PolicyName'." "INFO"
+                }
+    
                 # Add the application assignment to the policy
                 $newPolicy.ApplicationAssignments.Add($appAssignment)
                 Write-Log "SUCCESS: Application Assignment added to '$PolicyName'." "INFO"
@@ -252,8 +285,6 @@ try {
             # Handle Filters (AllComputers vs SelectedComputers)
             $newFilters = New-Object Avecto.Defendpoint.Settings.Filters
             $newFilters.FiltersLogic = "and"
-
-            
 
             if (-not $AllComputers) {
                 if ($SelectedComputers -and $SelectedComputers -ne "") {
@@ -275,7 +306,7 @@ try {
 
                     if ($DeviceFilter.Devices.DeviceHostNames.Count -gt 0) {
                         $newFilters.DeviceFilter = $DeviceFilter
-                        $newPolicy.Filters = $newFilters
+                        #$newPolicy.Filters = $newFilters
                         Write-Log "INFO: Device filters added to policy '$PolicyName'." "INFO"
                     } else {
                         Write-Log "Line $line : $PolicyName - SelectedComputers is empty, no filters added." "WARN"
@@ -285,7 +316,7 @@ try {
                 }
 
                 # Assign to the new policy (if any filter logic is applicable)
-                $newFilters.DeviceFilter = $DeviceFilter
+                #$newFilters.DeviceFilter = $DeviceFilter
             } else {
                 Write-Log "Line $line : $PolicyName - AllComputers is true, no filters required." "INFO"
             }

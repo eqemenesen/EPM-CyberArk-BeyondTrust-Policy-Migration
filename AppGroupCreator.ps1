@@ -188,7 +188,7 @@ try {
                 $Policy_Name -match "Default MAC Policy" -or 
                 $Policy_Name -clike 'Usage of "JIT*') {
                 
-                Write-Log "Line $lineCount - Skipped Policy '$Policy_Name' (unsupported or excluded pattern)." "WARN"
+                Write-Log "Line $lineCount - Skipped Policy '$Policy_Name' (excluded pattern)." "WARN"
                 $skippedCount++
                 return
             }
@@ -231,9 +231,9 @@ try {
                     $AdminApplicationName = $WindowsAdminTask
                     $adminTask = $adminTasks | Where-Object { $_.AdminApplicationName -eq $AdminApplicationName }
 
-                    if ($null -eq $adminTask) {
+                    if ("" -eq $adminTask) {
                         Write-Log "Line $lineCount - Admin Task '$AdminApplicationName' not found in adminTasksFile." "WARN"
-                        $skippedCount++
+                        $failedCount++
                         return
                     }
 
@@ -273,15 +273,10 @@ try {
                         }
                         default {
                             Write-Log "Line $lineCount - Policy '$Policy_Name', AdminType '$($adminTask.AdminType)' is not supported." "WARN"
-                            $skippedCount++
+                            $failedCount++
                             return
                         }
                     }
-                }
-                "Application Group" {
-                    Write-Log "Line $lineCount - Policy '$Policy_Name', 'Application Group' not supported." "WARN"
-                    $skippedCount++
-                    return
                 }
                 "Executable" {
                     $PGApp.Type = [Avecto.Defendpoint.Settings.ApplicationType]::Executable
@@ -297,19 +292,16 @@ try {
                 }
                 "Dynamic-Link Library" {
                     $PGApp.Type = [Avecto.Defendpoint.Settings.ApplicationType]::Dll
+                    Write-Log "Line $lineCount - Policy '$Policy_Name', 'Dynamic-Link Library' not supported." "WARN"
+                    $skippedCount++
+                    return
+
                 }
                 "Service" {
                     $PGApp.Type = [Avecto.Defendpoint.Settings.ApplicationType]::Service
                 }
                 "Registry Key" {
                     $PGApp.Type = [Avecto.Defendpoint.Settings.ApplicationType]::RegistrySettings
-                }
-
-                # -- Unsupported Types (treated as Errors) --
-                "Application Group" {
-                    Write-Log "Line $lineCount - Policy '$Policy_Name', '$ApplicationType' is NOT supported (error)." "ERROR"
-                    $failedCount++
-                    return
                 }
                 "File or Directory System Entry" {
                     Write-Log "Line $lineCount - Policy '$Policy_Name', '$ApplicationType' is NOT supported (error)." "ERROR"
@@ -331,11 +323,11 @@ try {
                     $failedCount++
                     return
                 }
-                Default {
-                    Write-Log "Line $lineCount - Policy '$Policy_Name', '$ApplicationType' is UNRECOGNIZED (error)." "ERROR"
-                    $failedCount++
-                    return
-                }
+                #Default {
+                #    Write-Log "Line $lineCount - Policy '$Policy_Name', '$ApplicationType' is UNRECOGNIZED (error)." "ERROR"
+                #    $failedCount++
+                #    return
+                #}
             }
 
             # File Name
