@@ -225,7 +225,7 @@ try {
             $newPolicy = New-Object Avecto.Defendpoint.Settings.Policy($PGConfig)
             $newPolicy.Name        = $PolicyName
             $newPolicy.Description = $PolicyDescription
-            $newPolicy.Disabled    = $false  # if "No" => Disabled = $true
+            $newPolicy.Disabled    = $false  
 
             # Find matching Application Group object
             $appGroup = $PGConfig.ApplicationGroups | Where-Object { $_.Name -eq $PolicyName }
@@ -335,19 +335,35 @@ try {
 
                     foreach ($User in $UsersList) {
                         $User = $User.Trim()
-                        Write-Log "User will be added: $User" "INFO"
-                        if ($User) {
-                            $UserAccount = New-Object Avecto.Defendpoint.Settings.Account
-                            if ($User -like 'User*"' -or $User -like 'Group*"') {
-                                $UserName = ($User -replace '^(User|Group)\s*"', '') -replace '"$', ''
-                                $UserAccount.Name = $UserName
-                                $UserAccount.Group = $User -like 'Group*'
-                            } else {
-                                $UserAccount.Name = $User
-                                $UserAccount.Group = $false
+                        if($User -notmatch "1" ){
+                            if ($User) {
+                                $UserAccount = New-Object Avecto.Defendpoint.Settings.Account
+                                if ($User -like 'User *"' -or $User -like 'Group *"') {
+                                    $UserName = ($User -replace '^(User|Group)\s*"', '') -replace '"$', ''
+                                    if($UserName -notmatch " "){
+                                        $UserAccount.Name = $UserName
+                                        $UserAccount.Group = $User -like 'Group*'
+                                        $trueFalse = $User -like 'Group*'
+                                        $accountsFilter.Accounts.WindowsAccounts.Add($UserAccount)
+                                        Write-Log "DETAILS: User added as Group '$trueFalse': $UserName to policy $newPolicy" "INFO"
+                                    }
+                                    Write-Log "DETAILS: User Skipped: $User for $newPolicy" "INFO"
+                                } elseif ($User -match "USR_SRV") {
+                                    $UserAccount.Name = $User
+                                    $UserAccount.Group = $true
+                                    $accountsFilter.Accounts.WindowsAccounts.Add($UserAccount)
+                                    Write-Log "DETAILS: User added as GROUP: $User to policy $newPolicy" "INFO"
+                                } else {
+                                    $UserAccount.Name = $User
+                                    $UserAccount.Group = $true
+                                    $accountsFilter.Accounts.WindowsAccounts.Add($UserAccount)
+                                    Write-Log "DETAILS: User added: $User to policy $newPolicy" "INFO"
+                                }
                             }
-                            $accountsFilter.Accounts.WindowsAccounts.Add($UserAccount)
+                        } else {
+                            Write-Log "DETAILS: User skipped: $User for $newPolicy" "INFO" 
                         }
+                        
                     }
 
                     if ($accountsFilter.Accounts.WindowsAccounts.Count -gt 0) {

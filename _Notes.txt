@@ -1,34 +1,30 @@
-
-Computer Groups
-
-	ou / filan varsa discard et
-	
-	
 BI Event - on
 Reporting Event - on
 ---- bişeyler on
 
 
 
+Computer Groups
 
+    ou / filan varsa discard et
+	
 
-
-
-
-DONE -------------------------- Active No ise Taşıma
-
-    Users
-        USR_SRV - group
-
-        içinde boşlık varsa alma
-
-        içinde 1 geçenleri alma
-
-        User "" dışında herşey group
 
 DONE
-    notifi
-        elevate - baloon
-        lounch with - pop up
-        block message
++   Active No ise Taşıma
++
++   Users
++        USR_SRV - group
++
++        içinde boşlık varsa alma
++
++        içinde 1 geçenleri alma
++
++        User "" dışında herşey group
++
++
++    notifi
++        elevate - baloon
++        lounch with - pop up
++        block message
         
