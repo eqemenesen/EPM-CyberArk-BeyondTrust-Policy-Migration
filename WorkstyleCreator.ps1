@@ -33,7 +33,7 @@ function Write-Log {
 $reportFile      = ".\GarantiMainPolicy.csv"  # Your CSV file
 #$reportFile      = ".\test.csv"
 
-$logFilePath     = ".\logfile_Workstyle.txt"
+$logFilePath     = ".\logs\logfile_Workstyle.txt"
 $outputFile      = ".\generated_policy_with_assignments.xml"
 
 Write-Host "Log file: $logFilePath"
@@ -192,7 +192,6 @@ try {
             return
         }
         # Only Process Active in CSV "Advanced Policy"
-        # true if Active is "No" in CSV
         if ($Active) {
             Write-Log "Line $line : Policy '$PolicyName' is disabled. Skipping." "INFO"
             return
@@ -203,8 +202,8 @@ try {
 
         # Validate the policy name
         if (-not $PolicyName -or
-           ($PolicyName -match "macOS" -or $PolicyName -match "Default MAC Policy" -or $PolicyName -match "MAC OS") -or
-           $PolicyName -clike "*JIT*")
+            ($PolicyName -match "macOS" -or $PolicyName -match "Default MAC Policy" -or $PolicyName -match "MAC OS") -or
+            $PolicyName -clike "*JIT*")
         {
             Write-Log "Line $line : Policy Name '$PolicyName' is invalid (e.g. 'macOS'). Skipping." "WARN"
             return
@@ -220,17 +219,16 @@ try {
         Write-Host "Processing line $line : $PolicyName"
         Write-Log "INFO: Processing line $line for policy '$PolicyName'." "INFO"
 
-        # Create a new policy in a try/catch
         try {
+            # Create a new policy
             $newPolicy = New-Object Avecto.Defendpoint.Settings.Policy($PGConfig)
             $newPolicy.Name        = $PolicyName
             $newPolicy.Description = $PolicyDescription
             $newPolicy.Disabled    = $false  
 
-            # Find matching Application Group object
+            # Attempt to locate a matching Application Group
             $appGroup = $PGConfig.ApplicationGroups | Where-Object { $_.Name -eq $PolicyName }
             if ($appGroup -ne $null) {
-                # Create an application assignment
                 $appAssignment = New-Object Avecto.Defendpoint.Settings.ApplicationAssignment($PGConfig)
 
                 switch ($Action) {
@@ -257,6 +255,7 @@ try {
                 $appAssignment.PrivilegeMonitoring = "On"
                 $appAssignment.ApplicationGroup    = $appGroup
 
+                # Handle End-User UI
                 if ($EndUserUI -match "Elevate"){
                     $appAssignment.MessageIdAsText = $allowBaloonId
                     $appAssignment.ShowMessage = $true
@@ -270,116 +269,139 @@ try {
                     $appAssignment.ShowMessage = $true
                     Write-Log "Elevate Message added to '$PolicyName'." "INFO"
                 }
-    
+
                 # Add the application assignment to the policy
                 $newPolicy.ApplicationAssignments.Add($appAssignment)
                 Write-Log "SUCCESS: Application Assignment added to '$PolicyName'." "INFO"
-            } else {
+            }
+            else {
                 $FailedAdvancedPolicies++
                 Write-Log "FAIL: No matching application group found for policy '$PolicyName'." "ERROR"
-
-                # Detailed Logging for Missing Application Group
                 Write-Log "DETAILS: Application Group '$PolicyName' not found in PGConfig.ApplicationGroups." "DEBUG"
             }
 
-            # Handle Filters (AllComputers vs SelectedComputers)
+            # ----------------------------
+            # Filters
+            # ----------------------------
             $newFilters = New-Object Avecto.Defendpoint.Settings.Filters
             $newFilters.FiltersLogic = "and"
 
+            #----------------------------
+            # DeviceFilter (SelectedComputers) logic
+            #----------------------------
             if (-not $AllComputers) {
                 if ($SelectedComputers -and $SelectedComputers -ne "") {
+                    $deviceFilter = New-Object Avecto.Defendpoint.Settings.DeviceFilter
+                    $deviceFilter.Devices       = New-Object Avecto.Defendpoint.Settings.Devices
+                    $deviceFilter.InverseFilter = $false
 
-                    $DeviceFilter = New-Object Avecto.Defendpoint.Settings.DeviceFilter
-                    $DeviceFilter.Devices    = New-Object Avecto.Defendpoint.Settings.Devices
-                    $DeviceFilter.InverseFilter = $false
-
-                    # Split and add each host
                     $selectedComputersList = $SelectedComputers -split ","
                     foreach ($computer in $selectedComputersList) {
                         $computer = $computer.Trim()
-                        if ($computer) {
+                        # Simple heuristic to skip invalid entries
+                        if ($computer -match "^OU=" -or $computer -match "\\") {
+                            Write-Log "Line $line : $PolicyName - Invalid SelectedComputers: $computer. Skipping." "WARN"
+                        }
+                        else {
+                            # Build a valid host filter
                             $deviceHostName = New-Object Avecto.Defendpoint.Settings.DeviceHostName
                             $deviceHostName.HostName = $computer
-                            $DeviceFilter.Devices.DeviceHostNames.Add($deviceHostName)
+                            $deviceFilter.Devices.DeviceHostNames.Add($deviceHostName)
                         }
                     }
 
-                    if ($DeviceFilter.Devices.DeviceHostNames.Count -gt 0) {
-                        $newFilters.DeviceFilter = $DeviceFilter
-                        #$newPolicy.Filters = $newFilters
+                    # Only add the DeviceFilter if we have valid hostnames
+                    if ($deviceFilter.Devices.DeviceHostNames.Count -gt 0) {
+                        $newFilters.DeviceFilter = $deviceFilter
                         Write-Log "INFO: Device filters added to policy '$PolicyName'." "INFO"
-                    } else {
-                        Write-Log "Line $line : $PolicyName - SelectedComputers is empty, no filters added." "WARN"
                     }
-                } else {
-                    Write-Log "Line $line : $PolicyName - No SelectedComputers provided, no filters added." "WARN"
+                    else {
+                        Write-Log "Line $line : $PolicyName - No valid hostnames found, skipping DeviceFilter." "WARN"
+                    }
                 }
-
-                # Assign to the new policy (if any filter logic is applicable)
-                #$newFilters.DeviceFilter = $DeviceFilter
-            } else {
-                Write-Log "Line $line : $PolicyName - AllComputers is true, no filters required." "INFO"
+                else {
+                    Write-Log "Line $line : $PolicyName - No SelectedComputers provided, skipping DeviceFilter." "WARN"
+                }
+            }
+            else {
+                Write-Log "Line $line : $PolicyName - AllComputers is true, no DeviceFilter required." "INFO"
             }
 
-            # Add AccountsFilter if Users are provided
-            if ($Users -ne "") {
+            # ------------------------------
+            # AccountsFilter (Users) logic
+            # ------------------------------
+            if ($Users -and $Users -ne "") {
                 try {
-                    # Initialize AccountsFilter
                     $accountsFilter = New-Object Avecto.Defendpoint.Settings.AccountsFilter
                     $accountsFilter.InverseFilter = $false
                     $accountsFilter.Accounts = New-Object Avecto.Defendpoint.Settings.AccountList
                     $accountsFilter.Accounts.WindowsAccounts = New-Object System.Collections.Generic.List[Avecto.Defendpoint.Settings.Account]
 
-                    # Parse and add users to AccountsFilter
                     $UsersList = $Users -split ","
-
                     foreach ($User in $UsersList) {
                         $User = $User.Trim()
-                        if($User -notmatch "1" ){
-                            if ($User) {
-                                $UserAccount = New-Object Avecto.Defendpoint.Settings.Account
-                                if ($User -like 'User *"' -or $User -like 'Group *"') {
-                                    $UserName = ($User -replace '^(User|Group)\s*"', '') -replace '"$', ''
-                                    if($UserName -notmatch " "){
-                                        $UserAccount.Name = $UserName
-                                        $UserAccount.Group = $User -like 'Group*'
-                                        $trueFalse = $User -like 'Group*'
-                                        $accountsFilter.Accounts.WindowsAccounts.Add($UserAccount)
-                                        Write-Log "DETAILS: User added as Group '$trueFalse': $UserName to policy $newPolicy" "INFO"
-                                    }
-                                    Write-Log "DETAILS: User Skipped: $User for $newPolicy" "INFO"
-                                } elseif ($User -match "USR_SRV") {
-                                    $UserAccount.Name = $User
-                                    $UserAccount.Group = $true
-                                    $accountsFilter.Accounts.WindowsAccounts.Add($UserAccount)
-                                    Write-Log "DETAILS: User added as GROUP: $User to policy $newPolicy" "INFO"
-                                } else {
-                                    $UserAccount.Name = $User
-                                    $UserAccount.Group = $true
-                                    $accountsFilter.Accounts.WindowsAccounts.Add($UserAccount)
-                                    Write-Log "DETAILS: User added: $User to policy $newPolicy" "INFO"
-                                }
-                            }
-                        } else {
-                            Write-Log "DETAILS: User skipped: $User for $newPolicy" "INFO" 
+
+                        # Example skip logic
+                        if ($User -match "1") {
+                            Write-Log "DETAILS: User skipped (contains '1'): $User for $PolicyName" "INFO"
+                            continue
                         }
-                        
+                        if (-not $User) {
+                            continue
+                        }
+
+                        $UserAccount = New-Object Avecto.Defendpoint.Settings.Account
+                        if ($User -like 'User *"' -or $User -like 'Group *"') {
+                            $UserName = ($User -replace '^(User|Group)\s*"', '') -replace '"$', ''
+                            if ($UserName -notmatch " ") {
+                                $UserAccount.Name  = $UserName
+                                $UserAccount.Group = ($User -like 'Group *"')
+                                $accountsFilter.Accounts.WindowsAccounts.Add($UserAccount)
+                                Write-Log "DETAILS: User added as Group '$($UserAccount.Group)': $UserName to policy '$PolicyName'" "INFO"
+                            }
+                            else {
+                                Write-Log "DETAILS: User Skipped (contains space or is invalid): $User for '$PolicyName'" "INFO"
+                            }
+                        }
+                        elseif ($User -match "USR_SRV") {
+                            $UserAccount.Name = $User
+                            $UserAccount.Group = $true
+                            $accountsFilter.Accounts.WindowsAccounts.Add($UserAccount)
+                            Write-Log "DETAILS: User added as GROUP: $User to policy '$PolicyName'" "INFO"
+                        }
+                        else {
+                            # Default assumption: treat it as a group
+                            $UserAccount.Name  = $User
+                            $UserAccount.Group = $true
+                            $accountsFilter.Accounts.WindowsAccounts.Add($UserAccount)
+                            Write-Log "DETAILS: User/Group added: $User to policy '$PolicyName'" "INFO"
+                        }
                     }
 
+                    # Only add the AccountsFilter if valid accounts exist
                     if ($accountsFilter.Accounts.WindowsAccounts.Count -gt 0) {
-                        #$newPolicy.Filters.AccountsFilter = $accountsFilter
                         $newFilters.AccountsFilter = $accountsFilter
-                        Write-Log "AccountsFilter added to policy '$($newPolicy.Name)' with accounts: $($accountsFilter.Accounts.WindowsAccounts.Count)." "INFO"
-                    } else {
-                        Write-Log "AccountsFilter is empty, no filters added for users." "WARN"
+                        Write-Log "AccountsFilter added to policy '$PolicyName' with accounts: $($accountsFilter.Accounts.WindowsAccounts.Count)." "INFO"
                     }
-                } catch {
-                    Write-Log "Failed to add AccountsFilter to policy. Exception: $_" "ERROR"
+                    else {
+                        Write-Log "AccountsFilter is empty for '$PolicyName', skipping." "WARN"
+                    }
+                }
+                catch {
+                    Write-Log "Failed to build AccountsFilter for policy '$PolicyName'. Exception: $_" "ERROR"
                 }
             }
 
-            # Assign the Filters to the new Policy
-            $newPolicy.Filters = $newFilters
+            #
+            # Finally, only set $newPolicy.Filters if at least one filter is non-null
+            #
+            if ($null -ne $newFilters.DeviceFilter -or $null -ne $newFilters.AccountsFilter) {
+                $newPolicy.Filters = $newFilters
+                Write-Log "INFO: Filter(s) have been assigned to policy '$PolicyName'." "INFO"
+            }
+            else {
+                Write-Log "INFO: No valid filters found for policy '$PolicyName', so none assigned." "INFO"
+            }
 
             # Add the new policy to the configuration
             $PGConfig.Policies.Add($newPolicy)
@@ -387,10 +409,9 @@ try {
 
             # Add the policy name to the tracking list
             $existingPolicies += $PolicyName
-        } catch {
+        }
+        catch {
             Write-Log "EXCEPTION: Failed to process policy '$PolicyName'. $_" "ERROR"
-
-            # Detailed Logging with Properties
             Write-Log "DETAILS: Policy '$PolicyName' failed with error: $($_.Exception.Message)" "DEBUG"
             $FailedAdvancedPolicies++
         }
@@ -398,13 +419,14 @@ try {
         # Increment line counter
         $line++
     }
-} catch {
+}
+catch {
     Write-Log "EXCEPTION: Failed while reading CSV lines. $_" "ERROR"
     throw
 }
 
 
-Write-Log "---------------------------------------" "INFO"
+Write-Log "----- SUMMARY REPORT -----" "INFO"
 Write-Log "Completed processing Advanced Policies." "INFO"
 Write-Log "Total Advanced Policies: $TotalAdvancedPolicies" "INFO"
 Write-Log "Failed Advanced Policies: $FailedAdvancedPolicies" "INFO"

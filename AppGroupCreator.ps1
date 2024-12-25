@@ -35,11 +35,10 @@ catch {
 ### VARIABLES & INITIALIZATION
 ### ---------------------------
 
-$baseFolder = "."
-$reportFile = "$baseFolder\PolicySummary_Garanti.csv"
-$logFilePath = "$baseFolder\logfile_AppGroup.txt"
-$csvFilePath = "./GarantiMainPolicy.csv"
-$adminTasksFile = "./AdminTasks.csv"  # example path for your admin tasks file
+$reportFile = ".\PolicySummary_Garanti.csv"
+$logFilePath = ".\logs\logfile_AppGroup.txt"
+$csvFilePath = ".\GarantiMainPolicy.csv"
+$adminTasksFile = ".\AdminTasks.csv"  # example path for your admin tasks file
 
 Write-Host "Log: $logFilePath, Report: $reportFile"
 
