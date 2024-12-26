@@ -282,6 +282,11 @@ try {
 
                 # Add the application assignment to the policy
                 $newPolicy.ApplicationAssignments.Add($appAssignment)
+
+                # Add the on demand application assignment
+                $newPolicy.ShellExtension.EnabledRunAs = $true
+                $newPolicy.ShellExtension.ApplicationAssignments.Add($appAssignment)
+                
                 Write-Log "SUCCESS: Application Assignment added to '$PolicyName'." "INFO"
             }
             else {
