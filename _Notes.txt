@@ -4,14 +4,13 @@ Reporting Event - on
 
 
 
-Computer Groups
-
-    ou / filan varsa discard et
-	
-
 
 DONE
 +   Active No ise Taşıma
++
++
++
++
 +
 +   Users
 +        USR_SRV - group
@@ -23,8 +22,18 @@ DONE
 +        User "" dışında herşey group
 +
 +
++
++
 +    notifi
 +        elevate - baloon
 +        lounch with - pop up
 +        block message
-        
++
++
++
++
++
++
++    Computer Groups
++
++        ou / filan varsa discard et

@@ -224,7 +224,15 @@ try {
             $newPolicy = New-Object Avecto.Defendpoint.Settings.Policy($PGConfig)
             $newPolicy.Name        = $PolicyName
             $newPolicy.Description = $PolicyDescription
-            $newPolicy.Disabled    = $false  
+            $newPolicy.Disabled    = $false
+            $newPolicy.GeneralRules = New-Object Avecto.Defendpoint.Settings.GeneralRules
+
+            #$generalRules = New-Object Avecto.Defendpoint.Settings.GeneralRules
+            $newPolicy.GeneralRules.CaptureHostInfoRule.Configured = "Enabled"
+            $newPolicy.GeneralRules.CaptureUserInfoRule.Configured = "Enabled"
+            $newPolicy.GeneralRules.ProhibitAccountMgmtRule.Configured = "Enabled"
+            #$newPolicy.GeneralRules = $generalRules
+
 
             # Attempt to locate a matching Application Group
             $appGroup = $PGConfig.ApplicationGroups | Where-Object { $_.Name -eq $PolicyName }
@@ -269,6 +277,8 @@ try {
                     $appAssignment.ShowMessage = $true
                     Write-Log "Elevate Message added to '$PolicyName'." "INFO"
                 }
+                $appAssignment.ForwardBeyondInsight = $true
+                $appAssignment.ForwardBeyondInsightReports = $true
 
                 # Add the application assignment to the policy
                 $newPolicy.ApplicationAssignments.Add($appAssignment)

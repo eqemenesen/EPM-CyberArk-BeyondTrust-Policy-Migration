@@ -1,321 +1,486 @@
-<ClipboardText>
-    <ClipboardResources>
-        <Config>
-            <ApplicationGroups>
-                <ApplicationGroup ID="494D07F7-DAE2-4053-A93B-35C13ACDAFE3"
-                                  Name="Application Permission For Servis Kontrol Center"
-                                  Description="Application Permission For Servis Kontrol Center"
-                                  _Parent="ApplicationGroups" />
-            </ApplicationGroups>
-            <GlobalOptionsSets>
-                <GlobalOptionsSet ID="93604fd7-e158-43da-8c63-24c9cdd40c50"
-                                  _Parent="GlobalOptionsSets">
-                    <TrustedAccounts>
-                        <Account Name="NT AUTHORITY\SYSTEM"
-                                 SID="S-1-5-18"
-                                 Group="true" />
-                        <Account Name="BUILTIN\Administrators"
-                                 SID="S-1-5-32-544"
-                                 Group="true" />
-                        <Account Name="NT SERVICE\TrustedInstaller"
-                                 SID="S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464"
-                                 Group="true" />
-                    </TrustedAccounts>
-                    <ConfigurationOptions Security="PlainText" />
-                    <ActiveXInstallationStrings DefaultLanguage="en">
-                        <Language LangID="en"
-                                  Title="Privilege Management ActiveX Installation"
-                                  DownloadMessage="Downloading ActiveX control ..."
-                                  InstallMessage="Installing ActiveX control ..."
-                                  CancelButtonText="Cancel" />
-                    </ActiveXInstallationStrings>
-                    <ChallengeResponseOptions />
-                    <AgentProtectionOptions />
-                    <TrustedApplicationProtection>
-                        <Configuration Version="5.0.10.0"
-                                       ConfigRevision="500">
-                            <ApplicationGroups>
-                                <ApplicationGroup ID="a8e66553-062d-48ef-b849-46af9d6a721e"
-                                                  Name="Browsers"
-                                                  _Parent="ApplicationGroups">
-                                    <Application Type="exe"
-                                                 Description="Firefox"
-                                                 OpenDlgDropRights="true"
-                                                 CheckFileName="true"
-                                                 FileName="Firefox.exe"
-                                                 FileStringMatchingType="Contains"
-                                                 UseSourceFileName="true"
-                                                 CheckProductName="true"
-                                                 ProductName="Firefox"
-                                                 ProductNameStringMatchType="Contains"
-                                                 TrustedOwnerRequired="true" />
-                                    <Application Type="exe"
-                                                 Description="Google Chrome"
-                                                 OpenDlgDropRights="true"
-                                                 UseSourceFileName="true"
-                                                 CheckProductName="true"
-                                                 ProductName="Google Chrome"
-                                                 ProductNameStringMatchType="Exact"
-                                                 TrustedOwnerRequired="true" />
-                                    <Application Type="exe"
-                                                 Description="Internet Explorer 10 or Lower"
-                                                 OpenDlgDropRights="true"
-                                                 UseSourceFileName="true"
-                                                 CheckProductName="true"
-                                                 ProductName="WindowsÂ® Internet Explorer"
-                                                 ProductNameStringMatchType="Exact"
-                                                 TrustedOwnerRequired="true" />
-                                    <Application Type="exe"
-                                                 Description="Internet Explorer 11"
-                                                 OpenDlgDropRights="true"
-                                                 UseSourceFileName="true"
-                                                 CheckProductName="true"
-                                                 ProductName="Internet Explorer"
-                                                 ProductNameStringMatchType="Exact"
-                                                 TrustedOwnerRequired="true" />
-                                    <Application Type="exe"
-                                                 Description="Microsoft Edge"
-                                                 OpenDlgDropRights="true"
-                                                 UseSourceFileName="true"
-                                                 CheckProductName="true"
-                                                 ProductName="Microsoft Edge"
-                                                 ProductNameStringMatchType="Exact"
-                                                 TrustedOwnerRequired="true" />
-                                    <Application Type="exe"
-                                                 Description="Microsoft Edge Browser Broker"
-                                                 OpenDlgDropRights="true"
-                                                 UseSourceFileName="true"
-                                                 CheckProductDesc="true"
-                                                 ProductDesc="Browser_Broker"
-                                                 ProductDescStringMatchType="Contains"
-                                                 TrustedOwnerRequired="true" />
-                                </ApplicationGroup>
-                                <ApplicationGroup ID="f562aa66-e326-4eb2-97a3-5cc92190d0bf"
-                                                  Name="Browser Untrusted"
-                                                  _Parent="ApplicationGroups">
-                                    <Application Type="dll"
-                                                 Description="Drop through for trusted and signed DLLs"
-                                                 OpenDlgDropRights="true"
-                                                 UseSourceFileName="true"
-                                                 CheckCertificate="true"
-                                                 CertificateNegateMatch="true"
-                                                 Certificate="?*"
-                                                 CertificatePatternMatching="true"
-                                                 CertificateStringMatchType="Contains"
-                                                 TrustedOwnerRequired="true"
-                                                 TrustedOwnerNegateMatch="true"
-                                                 CheckParentGroup="true"
-                                                 ParentApplicationGroup="a8e66553-062d-48ef-b849-46af9d6a721e" />
-                                </ApplicationGroup>
-                                <ApplicationGroup ID="2aafdb4d-f046-4935-a3ec-e654eff0abac"
-                                                  Name="Content Handlers"
-                                                  _Parent="ApplicationGroups">
-                                    <Application Type="exe"
-                                                 Description="Adobe Acrobat Reader DC"
-                                                 OpenDlgDropRights="true"
-                                                 UseSourceFileName="true"
-                                                 CheckProductName="true"
-                                                 ProductName="Adobe Acrobat Reader DC"
-                                                 ProductNameStringMatchType="Exact"
-                                                 TrustedOwnerRequired="true" />
-                                    <Application Type="exe"
-                                                 Description="Adobe Reader 11 or Lower"
-                                                 OpenDlgDropRights="true"
-                                                 UseSourceFileName="true"
-                                                 CheckProductName="true"
-                                                 ProductName="Adobe Reader"
-                                                 ProductNameStringMatchType="Contains"
-                                                 TrustedOwnerRequired="true" />
-                                    <Application Type="exe"
-                                                 Description="Microsoft Excel"
-                                                 OpenDlgDropRights="true"
-                                                 UseSourceFileName="true"
-                                                 CheckProductDesc="true"
-                                                 ProductDesc="Microsoft Excel"
-                                                 ProductDescStringMatchType="Contains"
-                                                 TrustedOwnerRequired="true" />
-                                    <Application Type="exe"
-                                                 Description="Microsoft Outlook"
-                                                 OpenDlgDropRights="true"
-                                                 UseSourceFileName="true"
-                                                 CheckProductDesc="true"
-                                                 ProductDesc="Microsoft Outlook"
-                                                 ProductDescStringMatchType="Contains"
-                                                 TrustedOwnerRequired="true" />
-                                    <Application Type="exe"
-                                                 Description="Microsoft PowerPoint"
-                                                 OpenDlgDropRights="true"
-                                                 UseSourceFileName="true"
-                                                 CheckProductDesc="true"
-                                                 ProductDesc="Microsoft PowerPoint"
-                                                 ProductDescStringMatchType="Contains"
-                                                 TrustedOwnerRequired="true" />
-                                    <Application Type="exe"
-                                                 Description="Microsoft Publisher"
-                                                 OpenDlgDropRights="true"
-                                                 UseSourceFileName="true"
-                                                 CheckProductDesc="true"
-                                                 ProductDesc="Microsoft Publisher"
-                                                 ProductDescStringMatchType="Contains"
-                                                 TrustedOwnerRequired="true" />
-                                    <Application Type="exe"
-                                                 Description="Microsoft Word"
-                                                 OpenDlgDropRights="true"
-                                                 UseSourceFileName="true"
-                                                 CheckProductDesc="true"
-                                                 ProductDesc="Microsoft Word"
-                                                 ProductDescStringMatchType="Contains"
-                                                 TrustedOwnerRequired="true" />
-                                    <Application Type="exe"
-                                                 Description="Microsoft Excel 2007"
-                                                 OpenDlgDropRights="true"
-                                                 UseSourceFileName="true"
-                                                 CheckProductDesc="true"
-                                                 ProductDesc="Microsoft Office Excel"
-                                                 ProductDescStringMatchType="Contains"
-                                                 TrustedOwnerRequired="true" />
-                                    <Application Type="exe"
-                                                 Description="Microsoft Outlook 2007"
-                                                 OpenDlgDropRights="true"
-                                                 UseSourceFileName="true"
-                                                 CheckProductDesc="true"
-                                                 ProductDesc="Microsoft Office Outlook"
-                                                 ProductDescStringMatchType="Contains"
-                                                 TrustedOwnerRequired="true" />
-                                    <Application Type="exe"
-                                                 Description="Microsoft PowerPoint 2007"
-                                                 OpenDlgDropRights="true"
-                                                 UseSourceFileName="true"
-                                                 CheckProductDesc="true"
-                                                 ProductDesc="Microsoft Office PowerPoint"
-                                                 ProductDescStringMatchType="Contains"
-                                                 TrustedOwnerRequired="true" />
-                                    <Application Type="exe"
-                                                 Description="Microsoft Publisher 2007"
-                                                 OpenDlgDropRights="true"
-                                                 UseSourceFileName="true"
-                                                 CheckProductDesc="true"
-                                                 ProductDesc="Microsoft Office Publisher"
-                                                 ProductDescStringMatchType="Contains"
-                                                 TrustedOwnerRequired="true" />
-                                    <Application Type="exe"
-                                                 Description="Microsoft Word 2007"
-                                                 OpenDlgDropRights="true"
-                                                 UseSourceFileName="true"
-                                                 CheckProductDesc="true"
-                                                 ProductDesc="Microsoft Office Word"
-                                                 ProductDescStringMatchType="Contains"
-                                                 TrustedOwnerRequired="true" />
-                                </ApplicationGroup>
-                                <ApplicationGroup ID="d1648907-cfdf-4556-9966-5b4bd16878fc"
-                                                  Name="Content Handler Untrusted"
-                                                  _Parent="ApplicationGroups">
-                                    <Application Type="dll"
-                                                 Description="Drop through for trusted and signed DLLs"
-                                                 OpenDlgDropRights="true"
-                                                 UseSourceFileName="true"
-                                                 CheckCertificate="true"
-                                                 CertificateNegateMatch="true"
-                                                 Certificate="?*"
-                                                 CertificatePatternMatching="true"
-                                                 CertificateStringMatchType="Contains"
-                                                 TrustedOwnerRequired="true"
-                                                 TrustedOwnerNegateMatch="true"
-                                                 CheckParentGroup="true"
-                                                 ParentApplicationGroup="2aafdb4d-f046-4935-a3ec-e654eff0abac" />
-                                </ApplicationGroup>
-                            </ApplicationGroups>
-                            <Policies>
-                                <Policy Name="Trusted Application DLL Protection"
-                                        Description="Default set of rules that apply to all users"
-                                        _Parent="Policies"
-                                        FeatureVisibility="63">
-                                    <ApplicationAssignments>
-                                        <ApplicationAssignment TokenType="Unmodified"
-                                                               MessageType="Off"
-                                                               Audit="On"
-                                                               PrivilegeMonitoring="Off"
-                                                               BlockExecution="true"
-                                                               ApplicationGroup="f562aa66-e326-4eb2-97a3-5cc92190d0bf" />
-                                        <ApplicationAssignment TokenType="Unmodified"
-                                                               MessageType="Off"
-                                                               Audit="On"
-                                                               PrivilegeMonitoring="Off"
-                                                               BlockExecution="true"
-                                                               ApplicationGroup="d1648907-cfdf-4556-9966-5b4bd16878fc" />
-                                    </ApplicationAssignments>
-                                </Policy>
-                            </Policies>
-                        </Configuration>
-                    </TrustedApplicationProtection>
-                    <EventFormatOptions />
-                </GlobalOptionsSet>
-            </GlobalOptionsSets>
-        </Config>
-    </ClipboardResources>
-    <ClipboardItems>
-        <Policy ID="577435E8-52B2-42DE-8C8A-928036B5EF45"
-                Name="Application Permission For Servis Kontrol Center"
-                Description="10568619-11462393-11502473-"
-                _Parent="Policies"
-                FeatureVisibility="9"
-                GlobalOptionsSet="93604fd7-e158-43da-8c63-24c9cdd40c50">
+<Configuration PolicyName="Garanti_Deneme.xml"
+               RevisionNumber="0"
+               Version="23.9.205"
+               ID="016a2de0-aa9b-4960-b20c-afbc1dbd1ee0"
+               ConfigRevision="2340">
+    <RegistryValues />
+    <ApplicationGroups>
+        <ApplicationGroup Name="IIS"
+                          Description=""
+                          ID="c21f788e-9dd1-4924-91e4-6ea9d9311e23">
+            <Application AppxPackageNameStringMatchType="Contains"
+                         FileName="%SystemRoot%\System32\services.msc"
+                         Type="msc"
+                         FileStringMatchTypeEx="Contains"
+                         ProductNameStringMatchType="Contains"
+                         ID="b9c90ff5-a095-408b-bfe3-ab6f81b951de"
+                         CertificateStringMatchType="Contains"
+                         FileStringMatchingType="Contains"
+                         UseSourceFileName="true"
+                         CertificateMatchCase="false"
+                         ProductDescStringMatchType="Contains"
+                         ServiceNameStringMatchType="Contains"
+                         ChildrenInheritToken="true"
+                         CheckFileName="true"
+                         AppxPackagePublisherStringMatchType="Contains"
+                         CmdStringMatchType="Contains"
+                         CodebaseStringMatchType="Contains"
+                         ServiceDisplayNameStringMatchType="Contains"
+                         Certificate="Microsoft Windows"
+                         Description="Services"
+                         FileStringMatchType="Contains"
+                         DisplayNameStringMatchType="Contains"
+                         URLStringMatchType="Contains"
+                         OpenDlgDropRights="true" />
+        </ApplicationGroup>
+        <ApplicationGroup Name="Splunk"
+                          Description=""
+                          ID="6eaadbeb-feb7-4b87-a2e7-72699e808079">
+            <Application AppxPackageNameStringMatchType="Contains"
+                         FileName="%SystemRoot%\System32\compmgmt.msc"
+                         Type="msc"
+                         FileStringMatchTypeEx="Contains"
+                         ProductNameStringMatchType="Contains"
+                         ID="d13e178c-5656-4c41-8eaa-52611ff23fe3"
+                         CertificateStringMatchType="Contains"
+                         FileStringMatchingType="Contains"
+                         UseSourceFileName="true"
+                         CertificateMatchCase="false"
+                         ProductDescStringMatchType="Contains"
+                         ServiceNameStringMatchType="Contains"
+                         ChildrenInheritToken="true"
+                         CheckFileName="true"
+                         AppxPackagePublisherStringMatchType="Contains"
+                         CmdStringMatchType="Contains"
+                         CodebaseStringMatchType="Contains"
+                         ServiceDisplayNameStringMatchType="Contains"
+                         Certificate="Microsoft Windows"
+                         Description="Computer Management (Console)"
+                         FileStringMatchType="Contains"
+                         DisplayNameStringMatchType="Contains"
+                         URLStringMatchType="Contains"
+                         OpenDlgDropRights="true" />
+        </ApplicationGroup>
+    </ApplicationGroups>
+    <MessagePoliciesOSX />
+    <Policies>
+        <Policy Description=""
+                FeatureVisibility="63"
+                Name="IIS"
+                GlobalOptionsSet="af04cd52-32a1-4023-a937-08e10f058450"
+                ID="087160ce-ff89-4fee-9993-4239ffd83dfa">
+            <GeneralRules>
+                <RemoteManagementConnectionRule Configured="Not Configured" />
+                <EmailAttachmentsRule Configured="Not Configured" />
+                <ProhibitAccountMgmtRule Configured="Not Configured" />
+                <AllowClassifyContentRule Configured="Not Configured" />
+                <AutomaticallyClassifyDocumentsRule Configured="Not Configured" />
+                <CaptureUserInfoRule Configured="Not Configured" />
+                <CaptureHostInfoRule Configured="Not Configured" />
+            </GeneralRules>
+            <ContentAssignments />
             <Filters FiltersLogic="and">
                 <DeviceFilter>
                     <Devices>
-                        <DeviceHostName HostName="PGMKGTPWEB06" />
-                        <DeviceHostName HostName="PGMKGTPWEB05" />
-                        <DeviceHostName HostName="PGMKGTPWEB07" />
-                        <DeviceHostName HostName="PGMKGTPWEB08" />
-                        <DeviceHostName HostName="PGMKGTPWEB10" />
-                        <DeviceHostName HostName="PGMKGTPWEB09" />
-                        <DeviceHostName HostName="PGMKGTPWEB01" />
-                        <DeviceHostName HostName="PGMKGTPWEB02" />
-                        <DeviceHostName HostName="PGMKGTPWEB03" />
-                        <DeviceHostName HostName="PGMKGTPWEB04" />
+                        <DeviceHostName HostName="EC2AMAZ-072D9VV" />
                     </Devices>
                 </DeviceFilter>
-                <AccountsFilter>
-                    <Accounts>
-                        <Account Name="GTEKNOLOJIDMZ\USR_SRV_GTEKDMZ_GTUOServiceControlCenter" />
-                    </Accounts>
-                </AccountsFilter>
             </Filters>
+            <PrivilegeMonitoring MaxRecords="100"
+                                 ActivityLevel="Activity"
+                                 KeepLogs="14"
+                                 LogEvent="true" />
+            <MicrosoftBlockRules Configured="Not Configured"
+                                 Audit="On"
+                                 BlockUntrustedDlls="true">
+                <MicrosoftBlockRulesExclusion Value="020bfea4-ced4-4710-802f-fd289cf4fdf5" />
+                <MicrosoftBlockRulesExclusion Value="b03f3e0c-12d7-4d2d-a596-c5e971551d0e" />
+                <MicrosoftBlockRulesExclusion Value="b7aefd8c-58ea-4fcd-9643-8ba9edd72bb5" />
+                <MicrosoftBlockRulesExclusion Value="a2dbcb15-efa5-4aad-b137-9a3cb1677027" />
+                <MicrosoftBlockRulesExclusion Value="83cabee9-867e-4e86-a76f-51220338fff8" />
+                <MicrosoftBlockRulesExclusion Value="3a599163-d4ed-404a-a8a8-1b0decd472a3" />
+            </MicrosoftBlockRules>
             <ShellExtension DefaultLanguage="en"
                             Menu="Run with Privilege Management">
                 <MenuStrings>
-                    <MenuString LangID="en"
-                                Text="Run with Privilege Management" />
+                    <MenuString Text="Run with Privilege Management"
+                                LangID="en" />
                 </MenuStrings>
                 <ApplicationAssignments />
             </ShellExtension>
-            <PrivilegeMonitoring ActivityLevel="Activity"
-                                 MaxRecords="100"
-                                 KeepLogs="14" />
+            <Accounts />
+            <URLAssignments />
             <ApplicationAssignments>
-                <ApplicationAssignment ID="3E4D5846-7103-4CFB-8D11-0D39313349F0"
-                                       TokenType="AddAdmin"
-                                       TokenTypeV2="AddAdmin"
-                                       TokenTypeV3="AddAdmin"
+                <ApplicationAssignment TokenTypeV2="AddAdminReducedPrivs"
+                                       Sandbox="None"
+                                       PrivilegeMonitoring="Off"
+                                       ForwardBeyondInsightReports="true"
                                        MessageType="Off"
                                        Audit="On"
-                                       PrivilegeMonitoring="On"
+                                       ApplicationGroup="c21f788e-9dd1-4924-91e4-6ea9d9311e23"
+                                       ForwardBeyondInsight="true"
                                        Action="Allow"
-                                       ApplicationGroup="494D07F7-DAE2-4053-A93B-35C13ACDAFE3" />
+                                       ID="660cefca-55a5-4159-a191-da08bd415ac2"
+                                       TokenType="AddAdmin"
+                                       TokenTypeV3="AddAdminReducedPrivs" />
             </ApplicationAssignments>
-            <ContentAssignments />
+        </Policy>
+        <Policy Description=""
+                FeatureVisibility="63"
+                Name="splunk"
+                GlobalOptionsSet="af04cd52-32a1-4023-a937-08e10f058450"
+                ID="f3ef22a2-8459-4cad-ad07-3b6165967860">
             <GeneralRules>
+                <RemoteManagementConnectionRule Configured="Not Configured" />
+                <EmailAttachmentsRule Configured="Not Configured" />
+                <ProhibitAccountMgmtRule Configured="Not Configured" />
+                <AllowClassifyContentRule Configured="Not Configured" />
+                <AutomaticallyClassifyDocumentsRule Configured="Not Configured" />
                 <CaptureUserInfoRule Configured="Not Configured" />
                 <CaptureHostInfoRule Configured="Not Configured" />
-                <ProhibitAccountMgmtRule Configured="Not Configured" />
-                <RemoteManagementConnectionRule Configured="Not Configured" />
             </GeneralRules>
-            <TrustedApplicationProtection Configured="Not Configured"
-                                          Audit="On" />
+            <ContentAssignments />
+            <Filters FiltersLogic="and">
+                <DeviceFilter>
+                    <Devices>
+                        <DeviceHostName HostName="FAILOVERCLUSTER2" />
+                    </Devices>
+                </DeviceFilter>
+            </Filters>
+            <PrivilegeMonitoring MaxRecords="100"
+                                 ActivityLevel="Activity"
+                                 KeepLogs="14"
+                                 LogEvent="true" />
             <MicrosoftBlockRules Configured="Not Configured"
-                                 BlockUntrustedDlls="true"
-                                 Audit="On" />
-            <JITAdmin />
+                                 Audit="On"
+                                 BlockUntrustedDlls="true">
+                <MicrosoftBlockRulesExclusion Value="020bfea4-ced4-4710-802f-fd289cf4fdf5" />
+                <MicrosoftBlockRulesExclusion Value="b03f3e0c-12d7-4d2d-a596-c5e971551d0e" />
+                <MicrosoftBlockRulesExclusion Value="b7aefd8c-58ea-4fcd-9643-8ba9edd72bb5" />
+                <MicrosoftBlockRulesExclusion Value="a2dbcb15-efa5-4aad-b137-9a3cb1677027" />
+                <MicrosoftBlockRulesExclusion Value="83cabee9-867e-4e86-a76f-51220338fff8" />
+                <MicrosoftBlockRulesExclusion Value="3a599163-d4ed-404a-a8a8-1b0decd472a3" />
+            </MicrosoftBlockRules>
+            <ShellExtension DefaultLanguage="en"
+                            Menu="Run with Privilege Management">
+                <MenuStrings>
+                    <MenuString Text="Run with Privilege Management"
+                                LangID="en" />
+                </MenuStrings>
+                <ApplicationAssignments />
+            </ShellExtension>
+            <Accounts />
+            <URLAssignments />
+            <ApplicationAssignments>
+                <ApplicationAssignment TokenTypeV2="AddAdminReducedPrivs"
+                                       Sandbox="None"
+                                       PrivilegeMonitoring="Off"
+                                       ForwardBeyondInsightReports="true"
+                                       MessageType="Off"
+                                       Audit="On"
+                                       ApplicationGroup="6eaadbeb-feb7-4b87-a2e7-72699e808079"
+                                       ForwardBeyondInsight="true"
+                                       Action="Allow"
+                                       ID="fd0971ed-1827-4452-bbef-5c8f0f0883e8"
+                                       TokenType="AddAdmin"
+                                       TokenTypeV3="AddAdminReducedPrivs" />
+            </ApplicationAssignments>
         </Policy>
-    </ClipboardItems>
-</ClipboardText>
+        <Policy Description=""
+                AuditCancelEvents="true"
+                FeatureVisibility="63"
+                Name="monitoringTest"
+                GlobalOptionsSet="af04cd52-32a1-4023-a937-08e10f058450"
+                ID="5e291f19-17e5-4d27-83f7-438704bda13f">
+            <GeneralRules>
+                <RemoteManagementConnectionRule Configured="Enabled" />
+                <ProhibitAccountMgmtRule Configured="Enabled" />
+                <CaptureUserInfoRule Configured="Enabled" />
+                <CaptureHostInfoRule Configured="Enabled" />
+            </GeneralRules>
+            <ContentAssignments />
+            <Filters FiltersLogic="and" />
+            <PrivilegeMonitoring LogActivity="true"
+                                 MaxRecords="100"
+                                 ActivityLevel="Activity"
+                                 KeepLogs="14"
+                                 LogEvent="true" />
+            <MicrosoftBlockRules Configured="Not Configured"
+                                 Audit="On"
+                                 BlockUntrustedDlls="true">
+                <MicrosoftBlockRulesExclusion Value="020bfea4-ced4-4710-802f-fd289cf4fdf5" />
+                <MicrosoftBlockRulesExclusion Value="b03f3e0c-12d7-4d2d-a596-c5e971551d0e" />
+                <MicrosoftBlockRulesExclusion Value="b7aefd8c-58ea-4fcd-9643-8ba9edd72bb5" />
+                <MicrosoftBlockRulesExclusion Value="a2dbcb15-efa5-4aad-b137-9a3cb1677027" />
+                <MicrosoftBlockRulesExclusion Value="83cabee9-867e-4e86-a76f-51220338fff8" />
+                <MicrosoftBlockRulesExclusion Value="3a599163-d4ed-404a-a8a8-1b0decd472a3" />
+            </MicrosoftBlockRules>
+            <ShellExtension DefaultLanguage="en"
+                            Menu="Run with Privilege Management">
+                <MenuStrings>
+                    <MenuString Text="Run with Privilege Management"
+                                LangID="en" />
+                </MenuStrings>
+                <ApplicationAssignments />
+            </ShellExtension>
+            <Accounts />
+            <URLAssignments />
+            <ApplicationAssignments>
+                <ApplicationAssignment TokenTypeV2="AddAdminReducedPrivs"
+                                       Sandbox="None"
+                                       PrivilegeMonitoring="Off"
+                                       ForwardBeyondInsightReports="true"
+                                       MessageType="Off"
+                                       Audit="On"
+                                       ApplicationGroup="99b2c671-301b-422c-963e-c2055a5d4981"
+                                       ForwardBeyondInsight="true"
+                                       Action="Allow"
+                                       ID="e694fbc0-86b7-46f0-9537-ef17982699fd"
+                                       TokenType="AddAdmin"
+                                       TokenTypeV3="AddAdminReducedPrivs" />
+            </ApplicationAssignments>
+        </Policy>
+    </Policies>
+    <MessagePolicies />
+    <Sandboxes />
+    <ApplicationGroupsOSX />
+    <Licenses>
+        <License Code="658EA9FB-295B-6F62-1E4B-4246-F747-6963" />
+    </Licenses>
+    <URLGroups />
+    <GlobalOptionsSets>
+        <GlobalOptionsSet _Parent="GlobalOptionsSets"
+                          ID="af04cd52-32a1-4023-a937-08e10f058450">
+            <ClassifyContentStrings DefaultLanguage="en" />
+            <ConfigurationOptions Security="PlainText" />
+            <TrustedApplicationProtection />
+            <TrustedAccounts>
+                <Account Name="NT AUTHORITY\SYSTEM"
+                         SID="S-1-5-32-544"
+                         Group="true" />
+                <Account Name="BUILTIN\Administrators"
+                         SID="S-1-5-18"
+                         Group="true" />
+                <Account Name="NT SERVICE\TrustedInstaller"
+                         SID="S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464"
+                         Group="true" />
+            </TrustedAccounts>
+            <ActiveXInstallationStrings DefaultLanguage="en" />
+            <MicrosoftBlockRules>
+                <Configuration RevisionNumber="0"
+                               Version="23.1.137.0"
+                               ConfigRevision="2310">
+                    <RegistryValues />
+                    <ApplicationGroups>
+                        <ApplicationGroup _Parent="ApplicationGroups"
+                                          Name="Microsoft Recommended Blocked DLLs"
+                                          ID="404b649f-840a-4afb-9715-7eef5abdb2b9">
+                            <Application Type="dll"
+                                         FileStringMatchTypeEx="EndsWith"
+                                         ID="1b8ea5ce-6c0c-44f8-87fb-1e512185b437"
+                                         UseSourceFileName="true"
+                                         Description="LxssManager.dll"
+                                         OpenDlgDropRights="true"
+                                         CheckFileNameEx="true"
+                                         FileNameEx="LxssManager.dll" />
+                            <Application Type="dll"
+                                         FileStringMatchTypeEx="EndsWith"
+                                         ID="dd5a44b0-f1f8-478e-8f9d-f5981e555b11"
+                                         UseSourceFileName="true"
+                                         Description="mfc40.dll"
+                                         OpenDlgDropRights="true"
+                                         CheckFileNameEx="true"
+                                         FileNameEx="mfc40.dll" />
+                            <Application Type="dll"
+                                         FileStringMatchTypeEx="EndsWith"
+                                         ID="628bbe9e-9a1d-4f2a-bf5a-5c53c04ac51c"
+                                         UseSourceFileName="true"
+                                         Description="Microsoft.Build.dll"
+                                         OpenDlgDropRights="true"
+                                         CheckFileNameEx="true"
+                                         FileNameEx="Microsoft.Build.dll" />
+                            <Application Type="dll"
+                                         FileStringMatchTypeEx="EndsWith"
+                                         ID="f1891208-cc11-486d-9054-af92ac3f898c"
+                                         UseSourceFileName="true"
+                                         Description="Microsoft.Build.dll (Native Image)"
+                                         OpenDlgDropRights="true"
+                                         CheckFileNameEx="true"
+                                         FileNameEx="Microsoft.Build.ni.dll" />
+                            <Application Type="dll"
+                                         FileStringMatchTypeEx="EndsWith"
+                                         ID="ce0aee9b-35de-41dc-b3c7-296f7da66ac7"
+                                         UseSourceFileName="true"
+                                         Description="Microsoft.Build.Framework.dll"
+                                         OpenDlgDropRights="true"
+                                         CheckFileNameEx="true"
+                                         FileNameEx="Microsoft.Build.Framework.dll" />
+                            <Application Type="dll"
+                                         FileStringMatchTypeEx="EndsWith"
+                                         ID="ca8451b4-d530-4ffe-b316-0761d384ad87"
+                                         UseSourceFileName="true"
+                                         Description="Microsoft.Build.Framework.dll (Native Image)"
+                                         OpenDlgDropRights="true"
+                                         CheckFileNameEx="true"
+                                         FileNameEx="Microsoft.Build.Framework.ni.dll" />
+                            <Application Type="dll"
+                                         FileStringMatchTypeEx="EndsWith"
+                                         ID="3ceb4630-0b65-40c2-bff7-3d83bab72de9"
+                                         UseSourceFileName="true"
+                                         Description="MSBuild.dll"
+                                         OpenDlgDropRights="true"
+                                         CheckFileNameEx="true"
+                                         FileNameEx="MSBuild.dll" />
+                            <Application Type="dll"
+                                         FileStringMatchTypeEx="EndsWith"
+                                         ID="24557e3c-01b3-41eb-bb01-0dad3cadb75e"
+                                         UseSourceFileName="true"
+                                         Description="MSBuild.dll (Native Image)"
+                                         OpenDlgDropRights="true"
+                                         CheckFileNameEx="true"
+                                         FileNameEx="MSBuild.ni.dll" />
+                            <Application Type="dll"
+                                         FileStringMatchTypeEx="EndsWith"
+                                         ID="8e0ec525-06d8-4cfc-bff2-5acee5f266be"
+                                         UseSourceFileName="true"
+                                         Description="BlockWebDAV WebClnt (legacy name)"
+                                         OpenDlgDropRights="true"
+                                         CheckFileNameEx="true"
+                                         FileNameEx="davsvc.dll" />
+                            <Application Type="dll"
+                                         FileStringMatchTypeEx="EndsWith"
+                                         ID="2ce0370e-5c29-42c9-bbcf-72bc4bd6fe78"
+                                         UseSourceFileName="true"
+                                         Description="BlockWebDAV WebClnt"
+                                         OpenDlgDropRights="true"
+                                         CheckFileNameEx="true"
+                                         FileNameEx="WebClnt.dll" />
+                            <Application Type="dll"
+                                         FileStringMatchTypeEx="EndsWith"
+                                         ID="020bfea4-ced4-4710-802f-fd289cf4fdf5"
+                                         UseSourceFileName="true"
+                                         MaxFileVersion="8.110.17763.54"
+                                         CheckMaxFileVersion="true"
+                                         Description="msxml3.dll (RS5 Windows 1809)"
+                                         OpenDlgDropRights="true"
+                                         CheckFileNameEx="true"
+                                         FileNameEx="msxml3.dll" />
+                            <Application Type="dll"
+                                         FileStringMatchTypeEx="EndsWith"
+                                         ID="b03f3e0c-12d7-4d2d-a596-c5e971551d0e"
+                                         UseSourceFileName="true"
+                                         MaxFileVersion="6.30.17763.54"
+                                         CheckMaxFileVersion="true"
+                                         Description="msxml6.dll (RS5 Windows 1809)"
+                                         OpenDlgDropRights="true"
+                                         CheckFileNameEx="true"
+                                         FileNameEx="msxml6.dll" />
+                            <Application Type="dll"
+                                         FileStringMatchTypeEx="EndsWith"
+                                         ID="b7aefd8c-58ea-4fcd-9643-8ba9edd72bb5"
+                                         UseSourceFileName="true"
+                                         MaxFileVersion="11.0.17763.133"
+                                         CheckMaxFileVersion="true"
+                                         Description="jscript9.dll (RS5 Windows 1809)"
+                                         OpenDlgDropRights="true"
+                                         CheckFileNameEx="true"
+                                         FileNameEx="jscript9.dll" />
+                            <Application Type="dll"
+                                         FileStringMatchTypeEx="EndsWith"
+                                         ID="a2dbcb15-efa5-4aad-b137-9a3cb1677027"
+                                         UseSourceFileName="true"
+                                         MaxFileVersion="8.110.14393.2550"
+                                         CheckMaxFileVersion="true"
+                                         Description="msxml3.dll (RS1 Windows 1607)"
+                                         OpenDlgDropRights="true"
+                                         CheckFileNameEx="true"
+                                         FileNameEx="msxml3.dll" />
+                            <Application Type="dll"
+                                         FileStringMatchTypeEx="EndsWith"
+                                         ID="83cabee9-867e-4e86-a76f-51220338fff8"
+                                         UseSourceFileName="true"
+                                         MaxFileVersion="6.30.14393.2550"
+                                         CheckMaxFileVersion="true"
+                                         Description="msxml6.dll (RS1 Windows 1607)"
+                                         OpenDlgDropRights="true"
+                                         CheckFileNameEx="true"
+                                         FileNameEx="msxml6.dll" />
+                            <Application Type="dll"
+                                         FileStringMatchTypeEx="EndsWith"
+                                         ID="3a599163-d4ed-404a-a8a8-1b0decd472a3"
+                                         UseSourceFileName="true"
+                                         MaxFileVersion="11.0.14393.2607"
+                                         CheckMaxFileVersion="true"
+                                         Description="jscript9.dll (RS1 Windows 1607)"
+                                         OpenDlgDropRights="true"
+                                         CheckFileNameEx="true"
+                                         FileNameEx="jscript9.dll" />
+                        </ApplicationGroup>
+                    </ApplicationGroups>
+                    <MessagePoliciesOSX />
+                    <Policies>
+                        <Policy Description="Default set of rules that apply to all users"
+                                FeatureVisibility="63"
+                                _Parent="Policies"
+                                Name="Microsoft Recommended Block Rules">
+                            <GeneralRules>
+                                <RemoteManagementConnectionRule Configured="Not Configured" />
+                                <EmailAttachmentsRule Configured="Not Configured" />
+                                <ProhibitAccountMgmtRule Configured="Not Configured" />
+                                <AllowClassifyContentRule Configured="Not Configured" />
+                                <AutomaticallyClassifyDocumentsRule Configured="Not Configured" />
+                                <CaptureUserInfoRule Configured="Not Configured" />
+                                <CaptureHostInfoRule Configured="Not Configured" />
+                            </GeneralRules>
+                            <ContentAssignments />
+                            <Filters FiltersLogic="and" />
+                            <PrivilegeMonitoring MaxRecords="100"
+                                                 ActivityLevel="Activity"
+                                                 KeepLogs="14" />
+                            <ShellExtension DefaultLanguage="en"
+                                            Menu="Run with Privilege Management">
+                                <MenuStrings>
+                                    <MenuString Text="Run with Privilege Management"
+                                                LangID="en" />
+                                </MenuStrings>
+                                <ApplicationAssignments />
+                            </ShellExtension>
+                            <Accounts />
+                            <URLAssignments />
+                            <ApplicationAssignments>
+                                <ApplicationAssignment BlockExecution="true"
+                                                       Sandbox="None"
+                                                       PrivilegeMonitoring="Off"
+                                                       MessageType="Off"
+                                                       Audit="On"
+                                                       ApplicationGroup="404b649f-840a-4afb-9715-7eef5abdb2b9"
+                                                       TokenType="Unmodified" />
+                            </ApplicationAssignments>
+                        </Policy>
+                    </Policies>
+                    <MessagePolicies />
+                    <Sandboxes />
+                    <ApplicationGroupsOSX />
+                    <Licenses />
+                    <URLGroups />
+                    <GlobalOptionsSets />
+                    <ContentGroups />
+                    <Files />
+                    <Tokens />
+                    <PoliciesOSX />
+                </Configuration>
+            </MicrosoftBlockRules>
+            <EventFormatOptions EnableLocalEventECSFormat="false"
+                                EnableRemoteEventECSFormat="false" />
+        </GlobalOptionsSet>
+    </GlobalOptionsSets>
+    <ContentGroups />
+    <Files />
+    <Tokens />
+    <PoliciesOSX />
+    <PasswordSafeLocalRotation>
+        <AccountDiscoveryInterval>0</AccountDiscoveryInterval>
+        <State>Not_Configured</State>
+        <PasswordHeartbeatInterval>60</PasswordHeartbeatInterval>
+    </PasswordSafeLocalRotation>
+</Configuration>
