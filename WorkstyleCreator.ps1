@@ -33,7 +33,7 @@ function Write-Log {
 $reportFile      = ".\GarantiMainPolicy.csv"  # Your CSV file
 #$reportFile      = ".\test.csv"
 
-$logFilePath     = ".\logs\logfile_Workstyle.txt"
+$logFilePath     = ".\logs\logfile_Workstyle.log"
 $outputFile      = ".\generated_policy_with_assignments.xml"
 
 Write-Host "Log file: $logFilePath"
@@ -286,7 +286,7 @@ try {
                 # Add the on demand application assignment
                 $newPolicy.ShellExtension.EnabledRunAs = $true
                 $newPolicy.ShellExtension.ApplicationAssignments.Add($appAssignment)
-                
+
                 Write-Log "SUCCESS: Application Assignment added to '$PolicyName'." "INFO"
             }
             else {

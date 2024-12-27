@@ -36,7 +36,7 @@ catch {
 ### ---------------------------
 
 $reportFile = ".\PolicySummary_Garanti.csv"
-$logFilePath = ".\logs\logfile_AppGroup.txt"
+$logFilePath = ".\logs\logfile_AppGroup.log"
 $csvFilePath = ".\GarantiMainPolicy.csv"
 $adminTasksFile = ".\AdminTasks.csv"  # example path for your admin tasks file
 
