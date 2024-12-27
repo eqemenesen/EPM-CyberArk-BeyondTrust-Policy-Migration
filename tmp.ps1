@@ -3,11 +3,36 @@ $logFilePath = ".\logs\logFile_ContenGroup.log"
 $outputFilePath = ".\ProcessedContentPolicy.xml"
 $blankPolicyFile = ".\blank_policy.xml"
 $reportFile = ".\PolicySummary_Garanti.csv"
+$csvFilePath = ".\GarantiMainPolicy.csv"
 
 # Ensure the log directory exists
 if (-not (Test-Path -Path (Split-Path -Path $logFilePath))) {
     New-Item -ItemType Directory -Force -Path (Split-Path -Path $logFilePath)
 }
+
+
+Write-Log "Importing ticket numbers from $csvFilePath"
+$policyDictionary = @{}
+
+try {
+    Import-Csv -Path $csvFilePath | ForEach-Object {
+        $policyName        = $_."Policy Name"
+        $policyDescription = $_."Policy Description"
+        
+        if ($policyName) {
+            $cleanedDescription = $policyDescription -replace "`r`n|`n|`r", " - "
+            if ($cleanedDescription) {
+                $policyDictionary[$policyName] = $cleanedDescription
+            }
+        }
+    }
+    Write-Log "Successfully built policy dictionary from $csvFilePath."
+}
+catch {
+    Write-Log "Error building policy dictionary. Error: $($_.Exception.Message)" "ERROR"
+    return
+}
+
 
 # Clear the old log file
 "" | Out-File -FilePath $logFilePath -Force
@@ -73,6 +98,11 @@ try {
             $contentGroup = New-Object Avecto.Defendpoint.Settings.ContentGroup
             $contentGroup.Name = $policyName
             $contentGroup.Description = "Content group for policy: $policyName"
+
+            if ($policyDictionary.ContainsKey($policyName)) {
+                $contentGroup.Description = $policyDictionary[$policyName]
+            }
+            
             $PGConfig.ContentGroups.Add($contentGroup)
             $processedContentGroups[$policyName] = $contentGroup
             Log "$lineCount Created new ContentGroup for Policy Name '$policyName'."
@@ -86,6 +116,11 @@ try {
         $content = [Avecto.Defendpoint.Settings.Content]::new($config)
         $content.ID = [guid]::NewGuid()
         $content.Description = $policyName
+
+        if ($policyDictionary.ContainsKey($policyName)) {
+            $content.Description = $policyDictionary[$policyName]
+        }
+
         $content.FileName = $fileFolderPath
         $content.CheckFileName = $true
 
