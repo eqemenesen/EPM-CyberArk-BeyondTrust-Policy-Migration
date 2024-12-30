@@ -1,7 +1,7 @@
 # Define paths
 $logFilePath = ".\logs\logFile_ContenGroup.log"
-$outputFilePath = ".\ProcessedContentPolicy.xml"
-$blankPolicyFile = ".\blank_policy.xml"
+$outputFilePath = ".\generated_AppAndContentGroups.xml"
+$blankPolicyFile = ".\generated_appGroup.xml"
 $reportFile = ".\PolicySummary_Garanti.csv"
 $csvFilePath = ".\GarantiMainPolicy.csv"
 

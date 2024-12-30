@@ -34,7 +34,7 @@ $reportFile      = ".\GarantiMainPolicy.csv"  # Your CSV file
 #$reportFile      = ".\test.csv"
 
 $logFilePath     = ".\logs\logfile_Workstyle.log"
-$outputFile      = ".\generated_policy_with_assignments.xml"
+$outputFile      = ".\generated_policy_Workstyles.xml"
 
 Write-Host "Log file: $logFilePath"
 Write-Host "Report file: $reportFile"
@@ -48,7 +48,7 @@ Write-Log "Log file initialized." "INFO"
 # ------------------------------------
 Write-Log "Loading blank policy configuration..." "INFO"
 try {
-    $PGConfig = Get-DefendpointSettings -LocalFile -FileLocation ".\generated_appGroup.xml" -ErrorAction Stop
+    $PGConfig = Get-DefendpointSettings -LocalFile -FileLocation ".\generated_AppAndContentGroups.xml" -ErrorAction Stop
     Write-Log "Successfully loaded blank policy configuration." "INFO"
 } catch {
     Write-Log "ERROR: Failed to load policy configuration. $_" "ERROR"
@@ -56,7 +56,7 @@ try {
 }
 
 # ------------------------------------
-# Prepare Tracking for Existing Policies
+# Prepare Tracking for Existing Policies 
 # ------------------------------------
 $existingPolicies = @($PGConfig.Policies | Select-Object -ExpandProperty Name)
 Write-Log "Loaded existing policies: $($existingPolicies -join ', ')" "DEBUG"
@@ -153,23 +153,12 @@ foreach ($appName in $WhiteListApps) {
     }
 }
 
-Write-Log "WhiteList Apps Processing Complete." "INFO"
-Write-Log "Total WhiteList Apps: $TotalWhiteListApps" "INFO"
-Write-Log "Failed WhiteList Apps: $FailedWhiteListApps" "INFO"
-if ($TotalWhiteListApps -gt 0) {
-    $successCount = $TotalWhiteListApps - $FailedWhiteListApps
-    $successRate  = [math]::Round(($successCount / $TotalWhiteListApps) * 100, 2)
-    Write-Log "WhiteList Apps Success Rate: $successRate%" "INFO"
-}
- Write-Log "------------------------------------" "INFO"
-#Start-Sleep -Seconds 2 # Optional pause
-
 # ------------------------------------
 # Process "Advanced Policy" Rows from CSV
 # ------------------------------------
 $line = 0
 $TotalAdvancedPolicies   = 0
-$FailedAdvancedPolicies  = 0
+$failedAdvancedPolicies  = 0
 
 Write-Log "Starting to process Advanced Policies from CSV..." "INFO"
 
@@ -212,7 +201,7 @@ try {
         # Check for duplicate policy name
         if ($existingPolicies -contains $PolicyName) {
             Write-Log "Line $line : Policy '$PolicyName' already exists. Skipping." "WARN"
-            $FailedAdvancedPolicies++
+            $failedAdvancedPolicies++
             return
         }
 
@@ -233,6 +222,10 @@ try {
             $newPolicy.GeneralRules.ProhibitAccountMgmtRule.Configured = "Enabled"
             #$newPolicy.GeneralRules = $generalRules
 
+
+            # ----------------------------
+            # Application Rule
+            # ----------------------------
 
             # Attempt to locate a matching Application Group
             $appGroup = $PGConfig.ApplicationGroups | Where-Object { $_.Name -eq $PolicyName }
@@ -288,12 +281,87 @@ try {
                 $newPolicy.ShellExtension.ApplicationAssignments.Add($appAssignment)
 
                 Write-Log "SUCCESS: Application Assignment added to '$PolicyName'." "INFO"
+
             }
             else {
-                $FailedAdvancedPolicies++
+                $failedAdvancedPolicies++
                 Write-Log "FAIL: No matching application group found for policy '$PolicyName'." "ERROR"
                 Write-Log "DETAILS: Application Group '$PolicyName' not found in PGConfig.ApplicationGroups." "DEBUG"
             }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            # ----------------------------
+            # Content Rules
+            # ----------------------------
+
+            # Create or reuse a ContentGroup for the Policy Name
+            $contentGroup = $PGConfig.ContentGroups | Where-Object { $_.Name -eq $PolicyName }
+            if ($contentGroup -ne $null) {
+
+                try {
+                    $contentAssignment = New-Object Avecto.Defendpoint.Settings.ContentAssignment($PGConfig)
+                    Write-Log "SUCCESS: ContentAssignment object created successfully." "INFO"
+                } catch {
+                    Write-Log "ERROR: Failed to create ContentAssignment object. $_" "ERROR"
+                    exit 1
+                }
+                
+
+                $contentAssignment.ContentGroup= $contentGroup
+
+                $contentAssignment.Action    = "Allow"
+                $contentAssignment.TokenType = "AddAdmin"
+
+                $contentAssignment.Audit     = "On"
+
+                $contentAssignment.ForwardBeyondInsight = $true
+                $contentAssignment.ForwardBeyondInsightReports = $true
+
+                # Add the application assignment to the policy
+                $newPolicy.ContentAssignments.Add($contentAssignment)
+                
+            } else {
+                Write-Log "Failed to create or reuse ContentGroup for policy $PolicyName." "ERROR"
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             # ----------------------------
             # Filters
@@ -428,7 +496,7 @@ try {
         catch {
             Write-Log "EXCEPTION: Failed to process policy '$PolicyName'. $_" "ERROR"
             Write-Log "DETAILS: Policy '$PolicyName' failed with error: $($_.Exception.Message)" "DEBUG"
-            $FailedAdvancedPolicies++
+            $failedAdvancedPolicies++
         }
 
         # Increment line counter
@@ -442,11 +510,20 @@ catch {
 
 
 Write-Log "----- SUMMARY REPORT -----" "INFO"
+Write-Log "WhiteList Apps Processing Complete." "INFO"
+Write-Log "Total WhiteList Apps: $TotalWhiteListApps" "INFO"
+Write-Log "Failed WhiteList Apps: $FailedWhiteListApps" "INFO"
+if ($TotalWhiteListApps -gt 0) {
+    $successCount = $TotalWhiteListApps - $FailedWhiteListApps
+    $successRate  = [math]::Round(($successCount / $TotalWhiteListApps) * 100, 2)
+    Write-Log "WhiteList Apps Success Rate: $successRate%" "INFO"
+}
+ Write-Log "------------------------------------" "INFO"
 Write-Log "Completed processing Advanced Policies." "INFO"
 Write-Log "Total Advanced Policies: $TotalAdvancedPolicies" "INFO"
-Write-Log "Failed Advanced Policies: $FailedAdvancedPolicies" "INFO"
+Write-Log "Failed Advanced Policies: $failedAdvancedPolicies" "INFO"
 if ($TotalAdvancedPolicies -gt 0) {
-    $successCount = $TotalAdvancedPolicies - $FailedAdvancedPolicies
+    $successCount = $TotalAdvancedPolicies - $failedAdvancedPolicies
     $successRate  = [math]::Round(($successCount / $TotalAdvancedPolicies) * 100, 2)
     Write-Log "Advanced Policy Success Rate: $successRate%" "INFO"
 }

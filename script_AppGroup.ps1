@@ -496,7 +496,7 @@ catch {
 ### ---------------------------
 
 try {
-    Set-DefendpointSettings -SettingsObject $PGConfig -LocalFile -FileLocation "$baseFolder\generated_appGroup.xml"
+    Set-DefendpointSettings -SettingsObject $PGConfig -LocalFile -FileLocation ".\generated_appGroup.xml"
     Write-Log "Successfully saved Defendpoint settings to generated_appGroup.xml."
 }
 catch {
