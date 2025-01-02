@@ -1,4 +1,6 @@
-﻿$baseFolder = ".\Areas"
+﻿param(
+    [string]$baseFolder = ".\Areas\GarantiTest"
+)
 
 ### ---------------------------
 ### IMPORT NECESSARY MODULES
