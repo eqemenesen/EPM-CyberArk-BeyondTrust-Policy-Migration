@@ -1,4 +1,20 @@
-﻿### --------------------------
+﻿$baseFolder = ".\Areas"
+
+### ---------------------------
+### IMPORT NECESSARY MODULES
+### ---------------------------
+
+try {
+    Import-Module 'C:\Program Files\Avecto\Privilege Guard Management Consoles\PowerShell\Avecto.Defendpoint.Cmdlets\Avecto.Defendpoint.Cmdlets.dll' -ErrorAction Stop
+    Import-Module 'C:\Program Files\Avecto\Privilege Guard Management Consoles\PowerShell\Avecto.Defendpoint.Cmdlets\Avecto.Defendpoint.Settings.dll' -ErrorAction Stop
+    Write-Log "Successfully imported Avecto modules."
+}
+catch {
+    Write-Log "Failed to import Avecto modules. Error: $($_.Exception.Message)" "ERROR"
+    return
+}
+
+### --------------------------
 ### SETUP & HELPER FUNCTIONS
 ### --------------------------
 
@@ -18,27 +34,13 @@ function Write-Log {
 }
 
 ### ---------------------------
-### IMPORT NECESSARY MODULES
-### ---------------------------
-
-try {
-    Import-Module 'C:\Program Files\Avecto\Privilege Guard Management Consoles\PowerShell\Avecto.Defendpoint.Cmdlets\Avecto.Defendpoint.Cmdlets.dll' -ErrorAction Stop
-    Import-Module 'C:\Program Files\Avecto\Privilege Guard Management Consoles\PowerShell\Avecto.Defendpoint.Cmdlets\Avecto.Defendpoint.Settings.dll' -ErrorAction Stop
-    Write-Log "Successfully imported Avecto modules."
-}
-catch {
-    Write-Log "Failed to import Avecto modules. Error: $($_.Exception.Message)" "ERROR"
-    return
-}
-
-### ---------------------------
 ### VARIABLES & INITIALIZATION
 ### ---------------------------
 
-$reportFile = ".\PolicySummary_Garanti.csv"
-$logFilePath = ".\logs\logfile_AppGroup.log"
-$csvFilePath = ".\GarantiMainPolicy.csv"
-$adminTasksFile = ".\AdminTasks.csv"  # example path for your admin tasks file
+$reportFile     = "$baseFolder\PolicySummary_Garanti.csv"
+$logFilePath    = "$baseFolder\logs\logfile_AppGroup.log"
+$csvFilePath    = "$baseFolder\GarantiMainPolicy.csv"
+$adminTasksFile = "$baseFolder\AdminTasks.csv"  # example path for your admin tasks file
 
 Write-Host "Log: $logFilePath, Report: $reportFile"
 
@@ -496,7 +498,7 @@ catch {
 ### ---------------------------
 
 try {
-    Set-DefendpointSettings -SettingsObject $PGConfig -LocalFile -FileLocation ".\generated_appGroup.xml"
+    Set-DefendpointSettings -SettingsObject $PGConfig -LocalFile -FileLocation "$baseFolder\generated_appGroup.xml"
     Write-Log "Successfully saved Defendpoint settings to generated_appGroup.xml."
 }
 catch {

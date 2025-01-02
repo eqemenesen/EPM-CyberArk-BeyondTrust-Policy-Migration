@@ -1,9 +1,22 @@
+$baseFolder = ".\Areas"
+
+# Import required modules
+try {
+    Import-Module 'C:\Program Files\Avecto\Privilege Guard Management Consoles\PowerShell\Avecto.Defendpoint.Cmdlets\Avecto.Defendpoint.Cmdlets.dll' -ErrorAction Stop
+    Import-Module 'C:\Program Files\Avecto\Privilege Guard Management Consoles\PowerShell\Avecto.Defendpoint.Cmdlets\Avecto.Defendpoint.Settings.dll' -ErrorAction Stop
+    Write-Log "Successfully imported Avecto modules."
+}
+catch {
+    Write-Log "Failed to import Avecto modules. Error: $($_.Exception.Message)" "ERROR"
+    return
+}
+
 # Define paths
-$logFilePath = ".\logs\logFile_ContenGroup.log"
-$outputFilePath = ".\generated_AppAndContentGroups.xml"
-$blankPolicyFile = ".\generated_appGroup.xml"
-$reportFile = ".\PolicySummary_Garanti.csv"
-$csvFilePath = ".\GarantiMainPolicy.csv"
+$logFilePath     = "$baseFolder\logs\logFile_ContenGroup.log"
+$outputFilePath  = "$baseFolder\generated_AppAndContentGroups.xml"
+$blankPolicyFile = "$baseFolder\generated_appGroup.xml"
+$reportFile      = "$baseFolder\PolicySummary_Garanti.csv"
+$csvFilePath     = "$baseFolder\GarantiMainPolicy.csv"
 
 # Ensure the log directory exists
 if (-not (Test-Path -Path (Split-Path -Path $logFilePath))) {
@@ -52,17 +65,6 @@ function Log {
 
 # Start script logging
 Log "Script started."
-
-# Import required modules
-try {
-    Import-Module 'C:\Program Files\Avecto\Privilege Guard Management Consoles\PowerShell\Avecto.Defendpoint.Cmdlets\Avecto.Defendpoint.Cmdlets.dll' -ErrorAction Stop
-    Import-Module 'C:\Program Files\Avecto\Privilege Guard Management Consoles\PowerShell\Avecto.Defendpoint.Cmdlets\Avecto.Defendpoint.Settings.dll' -ErrorAction Stop
-    Write-Log "Successfully imported Avecto modules."
-}
-catch {
-    Write-Log "Failed to import Avecto modules. Error: $($_.Exception.Message)" "ERROR"
-    return
-}
 
 # Load existing policy configuration
 try {

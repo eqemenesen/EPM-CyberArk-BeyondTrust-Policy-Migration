@@ -1,0 +1,665 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Configuration ID="04052bfa-c450-471f-b2ad-b5daedc6763e"
+               Version="24.8.98.0"
+               ConfigRevision="2470"
+               RevisionNumber="0">
+    <ApplicationGroups />
+    <ApplicationGroupsOSX />
+    <ContentGroups />
+    <URLGroups />
+    <Tokens />
+    <Sandboxes />
+    <Files>
+        <File ID="423CFE00-EC37-4F61-8C11-E1F3C2B9380A"
+              Name="BeyondTrust Banner"
+              Description="BeyondTrust Banner.png"
+              _Parent="Files"
+              Type="PNG"
+              Contents="iVBORw0KGgoAAAANSUhEUgAAAcIAAAAyCAIAAABAn0y/AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJqSURBVHhe7drLahNRAMdhn8W3EXwAFUR0US90oxS1QlsEFawICi4UQddeQKQVvIG6UBCkXqoWfAKp9dJMauqk0zjkpGXIRZIcV9Pv4784c8rZ/sii2xoARJBRgCgyChBFRgGiyChAFBkFiCKjAFFkFCCKjAJEkVGAKDIKEEVGgS0kqyyvvnjc+vhPZBTYKrLln8nEyO/bN1vf/4mMAltFcvbo8q7tMgowpLyhMgowsOzH0p+51/lBRgEGli0tVsZ2157M5GcZBRhYZWxPns5iRlduXF5b/Nq5/EdreDIoGQXKLKSzmNFeq14YD08GJaNAmYVE9p/R1ZfPssqv5tN+yShQZiGRIaPpp3fp+zedSyZGNjNam7mVTB7MlgcoqYwCZVbMaPb9W9clp0eLGc3PydTh5uu+yChQZsWMhnOvFTOar/m6LzIKlFlooowCDCk0sZjRZPpEOj9XXOX43vxeRgG6CE0sZrTz3++rl6byexkF6CI0UUYBhhSaKKMAQwpNlFGAIYUmFjNaObmvNnunuMqRHfm9jAJ0EZpYe3gvPyenDoTPrpNRgC5CE5PJQ41sLf34tjK6M9x0TkYBuqheOROyWHt0v3XVIQ9oW0ZXrl8Mf+qHjAJlli7Mh4zmS84dqz2dXX31vG3J+P5iRleuTa+naXjeDxkFSq724O5mSf+xkNF04cN6fYCG5mQUKL/0y+fq1fNt3WxbyOgQZBQgiowCRJFRgCgyChBFRgGiyChAFBkFiCKjAFFkFCCKjAJEkVGAvqz3IKMAPbVKuSHrkF/KKEC7EM2g1cssW9tQr9dbpyYZBYjQaPwFqjtSCgpeeMkAAAAASUVORK5CYII=" />
+        <File ID="E0CA5DBA-F7C1-46AC-973B-5CCE9B84B31A"
+              Name="BeyondTrust Banner (Red)"
+              Description="BeyondTrust Banner (Red).png"
+              _Parent="Files"
+              Type="PNG"
+              Contents="iVBORw0KGgoAAAANSUhEUgAAAcIAAAAyCAYAAADP/dvoAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKCSURBVHhe7dvdi0xxHMfx/T/2zn+j/AEoiQtP7Q0Jq5BCIUW5IMW1h5JQngoXlJKnxZa/QOtx5uyadezsT3PaM3F2Z1fT6mzzfb3qU+f3O3P/bi7OUAKAwIQQgNCEEIDQhBCA0IQQgNCEEIDQhBCA0IQQgNCEEIDQhBCA0IQQgNCEEIAVpd1spOnH9+ZO/58QArBitBvfUnZgS/px5dLczf8nhACsGNnRnamxdpUQAhBTJ4JCCEAo7a+f088Xz4pnIQQglPbnidTcvS617t8szkIIQCjN3euL8FVDOHXxTJqZ+NhznX+Ry0UIAahNGb5qCJfa5MnR4vfLQQgBqE0Ztn5DOP3kYWo3vxfP/RJCAGpThq0MYf7uVcpfP++5zjeGf4awdfNyyg5uTe1G/zEUQgBqUw1h+8unRZcdHpkXws45O7S9OPdDCAGoTTWE5XmpVUPYWb+EEIDalBETQgBCKiNWDWF2Ym/Kx17MW3PPhuK9EAIwEMqIVUPY64P6ydOHivdCCMBAKCMmhACEVEZMCAEIqYyYEAIQUhmxagib+zam1q2r89bcsbp4L4QADIQyYq0714tztn9z926xCSEAA6GMWHZwW0rtmZS/fZmaI2u6970mhAAMhMmzR7oha929MXfbWyeAC4Vw6sKp4twPIQSgNvn4WDeEnWXHdqXWg1tp+umjBZeNbpoXwqnzJ9JsnhfnfgghALVq3b72Vwz/ZWUI8/E3afZX/xHsEEIAapd/eJ8mzx1fMHoLrQzhchBCAEITQgBCE0IAQhNCAEITQgBCE0IAQhNCAEITQgBCE0IAQhNCAEITQgBCG3o8NJzMzMyiTgjNzCz0hNDMzAJvOP0GdEOpS47ERfMAAAAASUVORK5CYII=" />
+    </Files>
+    <GlobalOptionsSets>
+        <GlobalOptionsSet ID="a1252412-11c4-4b14-9952-5687980bebf5"
+                          _Parent="GlobalOptionsSets">
+            <TrustedAccounts>
+                <Account Name="NT AUTHORITY\SYSTEM"
+                         SID="S-1-5-18"
+                         Group="true" />
+                <Account Name="BUILTIN\Administrators"
+                         SID="S-1-5-32-544"
+                         Group="true" />
+                <Account Name="NT SERVICE\TrustedInstaller"
+                         SID="S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464"
+                         Group="true" />
+            </TrustedAccounts>
+            <ConfigurationOptions Security="PlainText" />
+            <ActiveXInstallationStrings DefaultLanguage="en">
+                <Language LangID="en"
+                          Title="Privilege Management ActiveX Installation"
+                          DownloadMessage="Downloading ActiveX control ..."
+                          InstallMessage="Installing ActiveX control ..."
+                          CancelButtonText="Cancel" />
+            </ActiveXInstallationStrings>
+            <ChallengeResponseOptions />
+            <AgentProtectionOptions />
+            <TrustedApplicationProtection>
+                <Configuration Version="5.0.10.0"
+                               ConfigRevision="500">
+                    <ApplicationGroups>
+                        <ApplicationGroup ID="a8e66553-062d-48ef-b849-46af9d6a721e"
+                                          Name="Browsers"
+                                          _Parent="ApplicationGroups">
+                            <Application Type="exe"
+                                         Description="Firefox"
+                                         OpenDlgDropRights="true"
+                                         CheckFileName="true"
+                                         FileName="Firefox.exe"
+                                         FileStringMatchingType="Contains"
+                                         UseSourceFileName="true"
+                                         CheckProductName="true"
+                                         ProductName="Firefox"
+                                         ProductNameStringMatchType="Contains"
+                                         TrustedOwnerRequired="true" />
+                            <Application Type="exe"
+                                         Description="Google Chrome"
+                                         OpenDlgDropRights="true"
+                                         UseSourceFileName="true"
+                                         CheckProductName="true"
+                                         ProductName="Google Chrome"
+                                         ProductNameStringMatchType="Exact"
+                                         TrustedOwnerRequired="true" />
+                            <Application Type="exe"
+                                         Description="Internet Explorer 10 or Lower"
+                                         OpenDlgDropRights="true"
+                                         UseSourceFileName="true"
+                                         CheckProductName="true"
+                                         ProductName="WindowsÂ® Internet Explorer"
+                                         ProductNameStringMatchType="Exact"
+                                         TrustedOwnerRequired="true" />
+                            <Application Type="exe"
+                                         Description="Internet Explorer 11"
+                                         OpenDlgDropRights="true"
+                                         UseSourceFileName="true"
+                                         CheckProductName="true"
+                                         ProductName="Internet Explorer"
+                                         ProductNameStringMatchType="Exact"
+                                         TrustedOwnerRequired="true" />
+                            <Application Type="exe"
+                                         Description="Microsoft Edge"
+                                         OpenDlgDropRights="true"
+                                         UseSourceFileName="true"
+                                         CheckProductName="true"
+                                         ProductName="Microsoft Edge"
+                                         ProductNameStringMatchType="Exact"
+                                         TrustedOwnerRequired="true" />
+                            <Application Type="exe"
+                                         Description="Microsoft Edge Browser Broker"
+                                         OpenDlgDropRights="true"
+                                         UseSourceFileName="true"
+                                         CheckProductDesc="true"
+                                         ProductDesc="Browser_Broker"
+                                         ProductDescStringMatchType="Contains"
+                                         TrustedOwnerRequired="true" />
+                        </ApplicationGroup>
+                        <ApplicationGroup ID="f562aa66-e326-4eb2-97a3-5cc92190d0bf"
+                                          Name="Browser Untrusted"
+                                          _Parent="ApplicationGroups">
+                            <Application Type="dll"
+                                         Description="Drop through for trusted and signed DLLs"
+                                         OpenDlgDropRights="true"
+                                         UseSourceFileName="true"
+                                         CheckCertificate="true"
+                                         CertificateNegateMatch="true"
+                                         Certificate="?*"
+                                         CertificatePatternMatching="true"
+                                         CertificateStringMatchType="Contains"
+                                         TrustedOwnerRequired="true"
+                                         TrustedOwnerNegateMatch="true"
+                                         CheckParentGroup="true"
+                                         ParentApplicationGroup="a8e66553-062d-48ef-b849-46af9d6a721e" />
+                        </ApplicationGroup>
+                        <ApplicationGroup ID="2aafdb4d-f046-4935-a3ec-e654eff0abac"
+                                          Name="Content Handlers"
+                                          _Parent="ApplicationGroups">
+                            <Application Type="exe"
+                                         Description="Adobe Acrobat Reader DC"
+                                         OpenDlgDropRights="true"
+                                         UseSourceFileName="true"
+                                         CheckProductName="true"
+                                         ProductName="Adobe Acrobat Reader DC"
+                                         ProductNameStringMatchType="Exact"
+                                         TrustedOwnerRequired="true" />
+                            <Application Type="exe"
+                                         Description="Adobe Reader 11 or Lower"
+                                         OpenDlgDropRights="true"
+                                         UseSourceFileName="true"
+                                         CheckProductName="true"
+                                         ProductName="Adobe Reader"
+                                         ProductNameStringMatchType="Contains"
+                                         TrustedOwnerRequired="true" />
+                            <Application Type="exe"
+                                         Description="Microsoft Excel"
+                                         OpenDlgDropRights="true"
+                                         UseSourceFileName="true"
+                                         CheckProductDesc="true"
+                                         ProductDesc="Microsoft Excel"
+                                         ProductDescStringMatchType="Contains"
+                                         TrustedOwnerRequired="true" />
+                            <Application Type="exe"
+                                         Description="Microsoft Outlook"
+                                         OpenDlgDropRights="true"
+                                         UseSourceFileName="true"
+                                         CheckProductDesc="true"
+                                         ProductDesc="Microsoft Outlook"
+                                         ProductDescStringMatchType="Contains"
+                                         TrustedOwnerRequired="true" />
+                            <Application Type="exe"
+                                         Description="Microsoft PowerPoint"
+                                         OpenDlgDropRights="true"
+                                         UseSourceFileName="true"
+                                         CheckProductDesc="true"
+                                         ProductDesc="Microsoft PowerPoint"
+                                         ProductDescStringMatchType="Contains"
+                                         TrustedOwnerRequired="true" />
+                            <Application Type="exe"
+                                         Description="Microsoft Publisher"
+                                         OpenDlgDropRights="true"
+                                         UseSourceFileName="true"
+                                         CheckProductDesc="true"
+                                         ProductDesc="Microsoft Publisher"
+                                         ProductDescStringMatchType="Contains"
+                                         TrustedOwnerRequired="true" />
+                            <Application Type="exe"
+                                         Description="Microsoft Word"
+                                         OpenDlgDropRights="true"
+                                         UseSourceFileName="true"
+                                         CheckProductDesc="true"
+                                         ProductDesc="Microsoft Word"
+                                         ProductDescStringMatchType="Contains"
+                                         TrustedOwnerRequired="true" />
+                            <Application Type="exe"
+                                         Description="Microsoft Excel 2007"
+                                         OpenDlgDropRights="true"
+                                         UseSourceFileName="true"
+                                         CheckProductDesc="true"
+                                         ProductDesc="Microsoft Office Excel"
+                                         ProductDescStringMatchType="Contains"
+                                         TrustedOwnerRequired="true" />
+                            <Application Type="exe"
+                                         Description="Microsoft Outlook 2007"
+                                         OpenDlgDropRights="true"
+                                         UseSourceFileName="true"
+                                         CheckProductDesc="true"
+                                         ProductDesc="Microsoft Office Outlook"
+                                         ProductDescStringMatchType="Contains"
+                                         TrustedOwnerRequired="true" />
+                            <Application Type="exe"
+                                         Description="Microsoft PowerPoint 2007"
+                                         OpenDlgDropRights="true"
+                                         UseSourceFileName="true"
+                                         CheckProductDesc="true"
+                                         ProductDesc="Microsoft Office PowerPoint"
+                                         ProductDescStringMatchType="Contains"
+                                         TrustedOwnerRequired="true" />
+                            <Application Type="exe"
+                                         Description="Microsoft Publisher 2007"
+                                         OpenDlgDropRights="true"
+                                         UseSourceFileName="true"
+                                         CheckProductDesc="true"
+                                         ProductDesc="Microsoft Office Publisher"
+                                         ProductDescStringMatchType="Contains"
+                                         TrustedOwnerRequired="true" />
+                            <Application Type="exe"
+                                         Description="Microsoft Word 2007"
+                                         OpenDlgDropRights="true"
+                                         UseSourceFileName="true"
+                                         CheckProductDesc="true"
+                                         ProductDesc="Microsoft Office Word"
+                                         ProductDescStringMatchType="Contains"
+                                         TrustedOwnerRequired="true" />
+                        </ApplicationGroup>
+                        <ApplicationGroup ID="d1648907-cfdf-4556-9966-5b4bd16878fc"
+                                          Name="Content Handler Untrusted"
+                                          _Parent="ApplicationGroups">
+                            <Application Type="dll"
+                                         Description="Drop through for trusted and signed DLLs"
+                                         OpenDlgDropRights="true"
+                                         UseSourceFileName="true"
+                                         CheckCertificate="true"
+                                         CertificateNegateMatch="true"
+                                         Certificate="?*"
+                                         CertificatePatternMatching="true"
+                                         CertificateStringMatchType="Contains"
+                                         TrustedOwnerRequired="true"
+                                         TrustedOwnerNegateMatch="true"
+                                         CheckParentGroup="true"
+                                         ParentApplicationGroup="2aafdb4d-f046-4935-a3ec-e654eff0abac" />
+                        </ApplicationGroup>
+                    </ApplicationGroups>
+                    <Policies>
+                        <Policy Name="Trusted Application DLL Protection"
+                                Description="Default set of rules that apply to all users"
+                                _Parent="Policies"
+                                FeatureVisibility="63">
+                            <ApplicationAssignments>
+                                <ApplicationAssignment TokenType="Unmodified"
+                                                       MessageType="Off"
+                                                       Audit="On"
+                                                       PrivilegeMonitoring="Off"
+                                                       BlockExecution="true"
+                                                       ApplicationGroup="f562aa66-e326-4eb2-97a3-5cc92190d0bf" />
+                                <ApplicationAssignment TokenType="Unmodified"
+                                                       MessageType="Off"
+                                                       Audit="On"
+                                                       PrivilegeMonitoring="Off"
+                                                       BlockExecution="true"
+                                                       ApplicationGroup="d1648907-cfdf-4556-9966-5b4bd16878fc" />
+                            </ApplicationAssignments>
+                        </Policy>
+                    </Policies>
+                </Configuration>
+            </TrustedApplicationProtection>
+            <EventFormatOptions />
+        </GlobalOptionsSet>
+    </GlobalOptionsSets>
+    <MessagePolicies>
+        <MessagePolicy ID="56064fbb-88b3-4887-a278-d9f18adc10f9"
+                       Name="Allow Message (Elevate)"
+                       Description="Simple confirmation before elevating privileges"
+                       _Parent="MessagePolicies"
+                       ShowOnIsolatedDesktop="true"
+                       HeaderBgType="CustomImage"
+                       HeaderType="Default"
+                       HeaderColor1="0xffffffff"
+                       HeaderColor2="0xffffffff"
+                       HeaderFontColor="0x0"
+                       CustomHeaderImage="423CFE00-EC37-4F61-8C11-E1F3C2B9380A"
+                       MessageMode="Automatic"
+                       ShowLineOne="true"
+                       ShowLineTwo="true"
+                       ShowLineThree="true"
+                       ShowProgramName="true"
+                       ShowProgramPath="true"
+                       ShowProgramPublisher="true"
+                       ShowCRInfoTip="true"
+                       OKAction="Proceed"
+                       ShowCancel="true"
+                       Reason="None"
+                       PasswordCheck="None"
+                       AuthenticationType="Any"
+                       IdpAuthTypes="0"
+                       IdpSuppressionDuration="0"
+                       AuthNRequirements="0"
+                       EmailTo="name@company"
+                       EmailSubject="Privilege Management - User request for privilege elevation"
+                       DefaultLanguage="en"
+                       DefaultPreview="Custom"
+                       ChallengeResponseType="None"
+                       ChallengeResponseTypeV2="None"
+                       ChallengeResponseRetention="Once"
+                       MaxCRFailures="0">
+            <MessageStrings LangID="en"
+                            OKButton="Yes"
+                            CancelButton="No"
+                            RequestButton="Request"
+                            Caption="IT Security Policy"
+                            Header="Confirm Elevation"
+                            HeaderRequest="Request Header goes here..."
+                            HeaderPending="Pending Header goes here..."
+                            HeaderApproved="Approved Header goes here..."
+                            HeaderDenied="Denied Header goes here..."
+                            Body="You are about to run this [PG_PROG_TYPE] with admin rights. Are you sure you wish to proceed?"
+                            BodyRequest="Request Body goes here..."
+                            BodyPending="Pending Body goes here..."
+                            BodyApproved="Approved Body goes here..."
+                            BodyDenied="Denied Body goes here..."
+                            PublisherUnknown="Unknown"
+                            PublisherNotVerifiedAppend="(Verification Failed)"
+                            Password="Password"
+                            Username="Username"
+                            UnauthorizedCredentials="You have entered unauthorized credentials"
+                            RequestReason="Please provide a reason"
+                            ReasonError="You must provide a reason before continuing"
+                            DropDownReasonPrompt="Select a reason"
+                            ReferURL="http://&lt;your_intranet>/about_elevation.aspx"
+                            ReferText="Click here to find out why this has happened"
+                            RequestReferText="For more information see request reference"
+                            SmartCardInsert="Insert a smart card"
+                            SmartCardError="Smart card error"
+                            SmartCardNoCert="No certificate on smart card"
+                            SmartCardReadingCert="Reading smart card ..."
+                            SmartCardWrongCert="Certificate must belong to the current user"
+                            SmartCardPin="Pin"
+                            SmartCardHint="Hint"
+                            Domain="Domain:"
+                            RequestCr="Enter Response Code"
+                            CrChallenge="Code"
+                            CrError="You have entered an incorrect Response Code"
+                            CrInfoTip="To get a Response Code contact IT Support and quote the number shown on the screen"
+                            CrMaxFailsError="You have exceeded the allowed number of Challenge / Response attempts"
+                            IdpHeader="Multifactor Authentication"
+                            IdpLink="Authenticate with your Identity Provider"
+                            IdpPendingState="Please check your browser to authenticate"
+                            IdpFailedError="Authentication failed. Try again or contact your Administrator for assistance"
+                            IdpIncompleteError="Please complete authentication with your Identity Provider before continuing"
+                            IdpCompletedState="Authenticated"
+                            AND="AND"
+                            OR="OR"
+                            RadiusPromptText="Please enter your Multifactor Authentication credentials"
+                            RadiusInProgressText="Authentication in progress"
+                            RadiusUsernameText="Username"
+                            RadiusPasswordText="Password"
+                            RadiusDefaultChallengeText="Enter your challenge code"
+                            AzureADLoginTimeoutText="The login request has timed out"
+                            HelloHeader="Windows Hello"
+                            HelloLink="Authenticate with Windows Hello"
+                            HelloInProgress="Authentication in progress"
+                            HelloAuthenticationSuccess="Authenticated"
+                            HelloPopupMessage="Authentication Required">
+                <PredefinedReasons>
+                    <PredefinedReason Text="One-off Task: I need to install an application" />
+                    <PredefinedReason Text="One-off Task: I need to run an application" />
+                    <PredefinedReason Text="One-off Task: I need to change a Windows setting" />
+                    <PredefinedReason Text="One-off Task: I'm troubleshooting an application that does not work correctly" />
+                    <PredefinedReason Text="Regular Task: I need to run an application" />
+                    <PredefinedReason Text="Regular Task: I need to perform this action as a routine/frequent part of my role" />
+                    <PredefinedReason Text="Other: Reason not listed" />
+                </PredefinedReasons>
+                <MessageLabels>
+                    <Labels MessageType="Application"
+                            LineOneLabel="Program Name"
+                            LineOneValue="[PG_PROG_NAME]"
+                            LineTwoLabel="Program Publisher"
+                            LineTwoValue="[PG_PROG_PUBLISHER]"
+                            LineThreeLabel="Program Path"
+                            LineThreeValue="[PG_PROG_PATH]" />
+                    <Labels MessageType="Content"
+                            LineOneLabel="Content Name"
+                            LineOneValue="[PG_CONTENT_FILE_PATH]"
+                            LineTwoLabel="Content Owner"
+                            LineTwoValue="[PG_CONTENT_FILE_OWNER]"
+                            LineThreeLabel="Content Program"
+                            LineThreeValue="[PG_PROG_PATH]" />
+                    <Labels MessageType="Custom"
+                            LineOneLabel="Program Name"
+                            LineOneValue="[PG_PROG_NAME]"
+                            LineTwoLabel="Program Publisher"
+                            LineTwoValue="[PG_PROG_PUBLISHER]"
+                            LineThreeLabel="Program Path"
+                            LineThreeValue="[PG_PROG_PATH]" />
+                </MessageLabels>
+            </MessageStrings>
+            <OtherUserAuthentication />
+            <OtherAzureUserAuthentication />
+        </MessagePolicy>
+        <MessagePolicy ID="ce1d63ac-4ca0-4360-a9df-8800ac046a76"
+                       Name="Block Message"
+                       Description="Block unauthorized privilege elevation"
+                       _Parent="MessagePolicies"
+                       HeaderBgType="CustomImage"
+                       HeaderType="Error"
+                       HeaderColor1="0xffffffff"
+                       HeaderColor2="0xffffffff"
+                       HeaderFontColor="0x0"
+                       CustomHeaderImage="E0CA5DBA-F7C1-46AC-973B-5CCE9B84B31A"
+                       MessageMode="Automatic"
+                       ShowLineOne="true"
+                       ShowLineTwo="true"
+                       ShowLineThree="true"
+                       ShowProgramName="true"
+                       ShowProgramPath="true"
+                       ShowProgramPublisher="true"
+                       ShowCRInfoTip="true"
+                       OKAction="Block"
+                       Reason="None"
+                       PasswordCheck="None"
+                       AuthenticationType="Any"
+                       IdpAuthTypes="0"
+                       IdpSuppressionDuration="0"
+                       AuthNRequirements="0"
+                       EmailTo="name@company"
+                       EmailSubject="Privilege Management - User request for privilege elevation"
+                       DefaultLanguage="en"
+                       DefaultPreview="Custom"
+                       ChallengeResponseType="None"
+                       ChallengeResponseTypeV2="None"
+                       ChallengeResponseRetention="Once"
+                       MaxCRFailures="0">
+            <MessageStrings LangID="en"
+                            OKButton="OK"
+                            CancelButton="Cancel"
+                            RequestButton="Request"
+                            Caption="IT Security Policy"
+                            Header="[PG_PROG_TYPE] Blocked"
+                            HeaderRequest="Request Header goes here..."
+                            HeaderPending="Pending Header goes here..."
+                            HeaderApproved="Approved Header goes here..."
+                            HeaderDenied="Denied Header goes here..."
+                            Body="This [PG_PROG_TYPE] has been blocked by IT Support."
+                            BodyRequest="Request Body goes here..."
+                            BodyPending="Pending Body goes here..."
+                            BodyApproved="Approved Body goes here..."
+                            BodyDenied="Denied Body goes here..."
+                            PublisherUnknown="Unknown"
+                            PublisherNotVerifiedAppend="(Verification Failed)"
+                            Password="Password"
+                            Username="Username"
+                            UnauthorizedCredentials="You have entered unauthorized credentials"
+                            RequestReason="Please provide a reason"
+                            ReasonError="You must provide a reason before continuing"
+                            DropDownReasonPrompt="Select a reason"
+                            ReferURL="http://&lt;your_intranet>/about_elevation.aspx"
+                            ReferText="Click here to find out why this has happened"
+                            RequestReferText="For more information see request reference"
+                            SmartCardInsert="Insert a smart card"
+                            SmartCardError="Smart card error"
+                            SmartCardNoCert="No certificate on smart card"
+                            SmartCardReadingCert="Reading smart card ..."
+                            SmartCardWrongCert="Certificate must belong to the current user"
+                            SmartCardPin="Pin"
+                            SmartCardHint="Hint"
+                            Domain="Domain:"
+                            RequestCr="Enter Response Code"
+                            CrChallenge="Code"
+                            CrError="You have entered an incorrect Response Code"
+                            CrInfoTip="To get a Response Code contact IT Support and quote the number shown on the screen"
+                            CrMaxFailsError="You have exceeded the allowed number of Challenge / Response attempts"
+                            IdpHeader="Multifactor Authentication"
+                            IdpLink="Authenticate with your Identity Provider"
+                            IdpPendingState="Please check your browser to authenticate"
+                            IdpFailedError="Authentication failed. Try again or contact your Administrator for assistance"
+                            IdpIncompleteError="Please complete authentication with your Identity Provider before continuing"
+                            IdpCompletedState="Authenticated"
+                            AND="AND"
+                            OR="OR"
+                            RadiusPromptText="Please enter your Multifactor Authentication credentials"
+                            RadiusInProgressText="Authentication in progress"
+                            RadiusUsernameText="Username"
+                            RadiusPasswordText="Password"
+                            RadiusDefaultChallengeText="Enter your challenge code"
+                            AzureADLoginTimeoutText="The login request has timed out"
+                            HelloHeader="Windows Hello"
+                            HelloLink="Authenticate with Windows Hello"
+                            HelloInProgress="Authentication in progress"
+                            HelloAuthenticationSuccess="Authenticated"
+                            HelloPopupMessage="Authentication Required">
+                <PredefinedReasons>
+                    <PredefinedReason Text="One-off Task: I need to install an application" />
+                    <PredefinedReason Text="One-off Task: I need to run an application" />
+                    <PredefinedReason Text="One-off Task: I need to change a Windows setting" />
+                    <PredefinedReason Text="One-off Task: I'm troubleshooting an application that does not work correctly" />
+                    <PredefinedReason Text="Regular Task: I need to run an application" />
+                    <PredefinedReason Text="Regular Task: I need to perform this action as a routine/frequent part of my role" />
+                    <PredefinedReason Text="Other: Reason not listed" />
+                </PredefinedReasons>
+                <MessageLabels>
+                    <Labels MessageType="Application"
+                            LineOneLabel="Program Name"
+                            LineOneValue="[PG_PROG_NAME]"
+                            LineTwoLabel="Program Publisher"
+                            LineTwoValue="[PG_PROG_PUBLISHER]"
+                            LineThreeLabel="Program Path"
+                            LineThreeValue="[PG_PROG_PATH]" />
+                    <Labels MessageType="Content"
+                            LineOneLabel="Content Name"
+                            LineOneValue="[PG_CONTENT_FILE_PATH]"
+                            LineTwoLabel="Content Owner"
+                            LineTwoValue="[PG_CONTENT_FILE_OWNER]"
+                            LineThreeLabel="Content Program"
+                            LineThreeValue="[PG_PROG_PATH]" />
+                    <Labels MessageType="Custom"
+                            LineOneLabel="Program Name"
+                            LineOneValue="[PG_PROG_NAME]"
+                            LineTwoLabel="Program Publisher"
+                            LineTwoValue="[PG_PROG_PUBLISHER]"
+                            LineThreeLabel="Program Path"
+                            LineThreeValue="[PG_PROG_PATH]" />
+                </MessageLabels>
+            </MessageStrings>
+            <OtherUserAuthentication />
+            <OtherAzureUserAuthentication />
+        </MessagePolicy>
+        <MessagePolicy ID="d72af743-ddd1-4397-a4ec-da944cd6924a"
+                       Name="Application Notification (Elevate)"
+                       Description="Simple notification shown on elevating privileges"
+                       _Parent="MessagePolicies"
+                       HeaderBgType="Gradient"
+                       HeaderType="Question"
+                       HeaderColor1="0xffffffff"
+                       HeaderColor2="0xffffffff"
+                       HeaderFontColor="0xffffffff"
+                       MessageMode="Automatic"
+                       ShowLineOne="true"
+                       ShowLineTwo="true"
+                       ShowLineThree="true"
+                       ShowProgramName="true"
+                       ShowProgramPath="true"
+                       ShowProgramPublisher="true"
+                       ShowCRInfoTip="true"
+                       OKAction="Proceed"
+                       ShowCancel="true"
+                       Reason="None"
+                       PasswordCheck="None"
+                       AuthenticationType="Any"
+                       IdpAuthTypes="0"
+                       IdpSuppressionDuration="0"
+                       AuthNRequirements="0"
+                       EmailTo="name@company"
+                       EmailSubject="Privilege Management - User request for privilege elevation"
+                       DefaultLanguage="en"
+                       DefaultPreview="Custom"
+                       ChallengeResponseType="None"
+                       ChallengeResponseTypeV2="None"
+                       ChallengeResponseRetention="Once"
+                       MaxCRFailures="0"
+                       Notification="true">
+            <MessageStrings LangID="en"
+                            OKButton="Yes"
+                            CancelButton="No"
+                            RequestButton="Request"
+                            Caption="[PG_PROG_TYPE] Elevated"
+                            Header="Confirm Elevation"
+                            HeaderRequest="Request Header goes here..."
+                            HeaderPending="Pending Header goes here..."
+                            HeaderApproved="Approved Header goes here..."
+                            HeaderDenied="Denied Header goes here..."
+                            Body="[PG_PROG_NAME] has been elevated."
+                            BodyRequest="Request Body goes here..."
+                            BodyPending="Pending Body goes here..."
+                            BodyApproved="Approved Body goes here..."
+                            BodyDenied="Denied Body goes here..."
+                            PublisherUnknown="Unknown"
+                            PublisherNotVerifiedAppend="(Verification Failed)"
+                            Password="Password"
+                            Username="Username"
+                            UnauthorizedCredentials="You have entered unauthorized credentials"
+                            RequestReason="Please provide a reason"
+                            ReasonError="You must provide a reason before continuing"
+                            DropDownReasonPrompt="Select a reason"
+                            ReferURL="http://&lt;your_intranet>/about_elevation.aspx"
+                            ReferText="Click here to find out why this has happened"
+                            RequestReferText="For more information see request reference"
+                            SmartCardInsert="Insert a smart card"
+                            SmartCardError="Smart card error"
+                            SmartCardNoCert="No certificate on smart card"
+                            SmartCardReadingCert="Reading smart card ..."
+                            SmartCardWrongCert="Certificate must belong to the current user"
+                            SmartCardPin="Pin"
+                            SmartCardHint="Hint"
+                            Domain="Domain:"
+                            RequestCr="Enter Response Code"
+                            CrChallenge="Code"
+                            CrError="You have entered an incorrect Response Code"
+                            CrInfoTip="To get a Response Code contact IT Support and quote the number shown on the screen"
+                            CrMaxFailsError="You have exceeded the allowed number of Challenge / Response attempts"
+                            IdpHeader="Multifactor Authentication"
+                            IdpLink="Authenticate with your Identity Provider"
+                            IdpPendingState="Please check your browser to authenticate"
+                            IdpFailedError="Authentication failed. Try again or contact your Administrator for assistance"
+                            IdpIncompleteError="Please complete authentication with your Identity Provider before continuing"
+                            IdpCompletedState="Authenticated"
+                            AND="AND"
+                            OR="OR"
+                            RadiusPromptText="Please enter your Multifactor Authentication credentials"
+                            RadiusInProgressText="Authentication in progress"
+                            RadiusUsernameText="Username"
+                            RadiusPasswordText="Password"
+                            RadiusDefaultChallengeText="Enter your challenge code"
+                            AzureADLoginTimeoutText="The login request has timed out"
+                            HelloHeader="Windows Hello"
+                            HelloLink="Authenticate with Windows Hello"
+                            HelloInProgress="Authentication in progress"
+                            HelloAuthenticationSuccess="Authenticated"
+                            HelloPopupMessage="Authentication Required">
+                <PredefinedReasons>
+                    <PredefinedReason Text="One-off Task: I need to install an application" />
+                    <PredefinedReason Text="One-off Task: I need to run an application" />
+                    <PredefinedReason Text="One-off Task: I need to change a Windows setting" />
+                    <PredefinedReason Text="One-off Task: I'm troubleshooting an application that does not work correctly" />
+                    <PredefinedReason Text="Regular Task: I need to run an application" />
+                    <PredefinedReason Text="Regular Task: I need to perform this action as a routine/frequent part of my role" />
+                    <PredefinedReason Text="Other: Reason not listed" />
+                </PredefinedReasons>
+                <MessageLabels>
+                    <Labels MessageType="Application"
+                            LineOneLabel="Program Name"
+                            LineOneValue="[PG_PROG_NAME]"
+                            LineTwoLabel="Program Publisher"
+                            LineTwoValue="[PG_PROG_PUBLISHER]"
+                            LineThreeLabel="Program Path"
+                            LineThreeValue="[PG_PROG_PATH]" />
+                    <Labels MessageType="Content"
+                            LineOneLabel="Content Name"
+                            LineOneValue="[PG_CONTENT_FILE_PATH]"
+                            LineTwoLabel="Content Owner"
+                            LineTwoValue="[PG_CONTENT_FILE_OWNER]"
+                            LineThreeLabel="Content Program"
+                            LineThreeValue="[PG_PROG_PATH]" />
+                    <Labels MessageType="Custom"
+                            LineOneLabel="Program Name"
+                            LineOneValue="[PG_PROG_NAME]"
+                            LineTwoLabel="Program Publisher"
+                            LineTwoValue="[PG_PROG_PUBLISHER]"
+                            LineThreeLabel="Program Path"
+                            LineThreeValue="[PG_PROG_PATH]" />
+                </MessageLabels>
+            </MessageStrings>
+            <OtherUserAuthentication />
+            <OtherAzureUserAuthentication />
+        </MessagePolicy>
+    </MessagePolicies>
+    <MessagePoliciesOSX />
+    <Policies />
+    <PoliciesOSX />
+    <Licenses />
+    <PasswordSafeLocalRotation>
+        <State>Not_Configured</State>
+        <PasswordHeartbeatInterval>60</PasswordHeartbeatInterval>
+        <AccountDiscoveryInterval>0</AccountDiscoveryInterval>
+    </PasswordSafeLocalRotation>
+</Configuration>

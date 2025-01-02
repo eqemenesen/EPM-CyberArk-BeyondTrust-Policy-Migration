@@ -1,39 +1,13 @@
-BI Event - on
-Reporting Event - on
----- bişeyler on
+Computer Filter da OU filan gördüm. Onları sil
+
+
+Run Normally dublicate olmuş. White List
+
+.\uygsun gibiler user
 
 
 
+Workstyle execute script
 
-DONE
-+   Active No ise Taşıma
-+
-+
-+
-+
-+
-+   Users
-+        USR_SRV - group
-+
-+        içinde boşlık varsa alma
-+
-+        içinde 1 geçenleri alma
-+
-+        User "" dışında herşey group
-+
-+
-+
-+
-+    notifi
-+        elevate - baloon
-+        lounch with - pop up
-+        block message
-+
-+
-+
-+
-+
-+
-+    Computer Groups
-+
-+        ou / filan varsa discard et
+
+Admin Taskaları - arttır

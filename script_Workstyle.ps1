@@ -1,3 +1,5 @@
+$baseFolder = ".\Areas"
+
 # ------------------------------------
 # Load Modules
 # ------------------------------------
@@ -30,11 +32,11 @@ function Write-Log {
 # Define Paths
 # ------------------------------------
 
-$reportFile      = ".\GarantiMainPolicy.csv"  # Your CSV file
-#$reportFile      = ".\test.csv"
 
-$logFilePath     = ".\logs\logfile_Workstyle.log"
-$outputFile      = ".\generated_policy_Workstyles.xml"
+$reportFile      = "$baseFolder\GarantiMainPolicy.csv"  # Your CSV file
+#$reportFile     = "$baseFolder\test.csv"
+$logFilePath     = "$baseFolder\logs\logfile_Workstyle.log"
+$outputFile      = "$baseFolder\generated_policy_Workstyles.xml"
 
 Write-Host "Log file: $logFilePath"
 Write-Host "Report file: $reportFile"
@@ -48,7 +50,7 @@ Write-Log "Log file initialized." "INFO"
 # ------------------------------------
 Write-Log "Loading blank policy configuration..." "INFO"
 try {
-    $PGConfig = Get-DefendpointSettings -LocalFile -FileLocation ".\generated_AppAndContentGroups.xml" -ErrorAction Stop
+    $PGConfig = Get-DefendpointSettings -LocalFile -FileLocation "$baseFolder\generated_AppAndContentGroups.xml" -ErrorAction Stop
     Write-Log "Successfully loaded blank policy configuration." "INFO"
 } catch {
     Write-Log "ERROR: Failed to load policy configuration. $_" "ERROR"
@@ -132,6 +134,8 @@ foreach ($appName in $WhiteListApps) {
             $appAssignment.TokenType           = "AddAdmin"
             $appAssignment.Audit               = "On"
             $appAssignment.PrivilegeMonitoring = "On"
+            $appAssignment.ForwardBeyondInsight = $true
+            $appAssignment.ForwardBeyondInsightReports = $true
             $appAssignment.ApplicationGroup    = $appGroup
 
             # Add the application assignment to the "White List" policy
@@ -382,7 +386,7 @@ try {
                     foreach ($computer in $selectedComputersList) {
                         $computer = $computer.Trim()
                         # Simple heuristic to skip invalid entries
-                        if ($computer -match "^OU=" -or $computer -match "\\") {
+                        if ($computer -match "^OU" -or $computer -match "\") {
                             Write-Log "Line $line : $PolicyName - Invalid SelectedComputers: $computer. Skipping." "WARN"
                         }
                         else {
