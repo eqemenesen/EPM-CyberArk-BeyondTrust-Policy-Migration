@@ -7,20 +7,18 @@
 ### ---------------------------
 
 try {
-    Import-Module 'C:\Program Files\Avecto\Privilege Guard Management Consoles\PowerShell\Avecto.Defendpoint.Cmdlets\Avecto.Defendpoint.Cmdlets.dll' -ErrorAction Stop
-    Import-Module 'C:\Program Files\Avecto\Privilege Guard Management Consoles\PowerShell\Avecto.Defendpoint.Cmdlets\Avecto.Defendpoint.Settings.dll' -ErrorAction Stop
-    Write-Log "Successfully imported Avecto modules."
-}
-catch {
-    Write-Log "Failed to import Avecto modules. Error: $($_.Exception.Message)" "ERROR"
-    return
+    Import-Module 'C:\Program Files\Avecto\Privilege Guard Management Consoles\PowerShell\Avecto.Defendpoint.Cmdlets\Avecto.Defendpoint.Cmdlets.dll' -Force -ErrorAction Stop
+    Import-Module 'C:\Program Files\Avecto\Privilege Guard Management Consoles\PowerShell\Avecto.Defendpoint.Cmdlets\Avecto.Defendpoint.Settings.dll' -Force -ErrorAction Stop
+    Write-Host "Successfully imported Avecto modules."
+} catch {
+    Write-Host "ERROR: Failed to import Avecto modules. $_"
+    exit 1
 }
 
 ### --------------------------
 ### SETUP & HELPER FUNCTIONS
 ### --------------------------
 
-# If you'd like time-stamped logs in a consistent format, define a Write-Log function:
 function Write-Log {
     param(
         [string]$Message,
@@ -35,6 +33,25 @@ function Write-Log {
     Write-Host $logEntry
 }
 
+# This helper shortens any string to max $maxLen characters, appending "..."
+# Policy Name must NOT be shortened.
+function Compress-String {
+    param(
+        [string]$inputString,
+        [int]$maxLen = 20
+    )
+
+    if ([string]::IsNullOrEmpty($inputString)) {
+        return $inputString
+    }
+    if ($inputString.Length -le $maxLen) {
+        return $inputString
+    }
+    else {
+        return $inputString.Substring(0, $maxLen) + "..."
+    }
+}
+
 ### ---------------------------
 ### VARIABLES & INITIALIZATION
 ### ---------------------------
@@ -43,6 +60,8 @@ $reportFile     = "$baseFolder\PolicySummary_Garanti.csv"
 $logFilePath    = "$baseFolder\logs\logfile_AppGroup.log"
 $csvFilePath    = "$baseFolder\GarantiMainPolicy.csv"
 $adminTasksFile = "$baseFolder\AdminTasks.csv"  # example path for your admin tasks file
+$generatedXML   = "$baseFolder\generated_appGroup.xml"
+$blankPolicyXML = "$baseFolder\blank_policy.xml"
 
 Write-Host "Log: $logFilePath, Report: $reportFile"
 
@@ -81,13 +100,13 @@ catch {
 ### LOAD DEFENDPOINT SETTINGS
 ### ---------------------------
 
-Write-Log "Retrieving Defendpoint Settings from blank_policy.xml"
+Write-Log "Retrieving Defendpoint Settings from $blankPolicyXML"
 try {
-    $PGConfig = Get-DefendpointSettings -LocalFile -FileLocation "$baseFolder\blank_policy.xml"
+    $PGConfig = Get-DefendpointSettings -LocalFile -FileLocation $blankPolicyXML
     Write-Log "Loaded Defendpoint settings successfully."
 }
 catch {
-    Write-Log "Failed to load blank_policy.xml: $($_.Exception.Message)" "ERROR"
+    Write-Log "Failed to load $blankPolicyXML : $($_.Exception.Message)" "ERROR"
     return
 }
 
@@ -110,83 +129,86 @@ catch {
 ### ---------------------------
 
 # We will keep counters for advanced logging
-[int]$lineCount   = 0
+[int]$lineCount = 0
 [int]$addedCount  = 0
-[int]$skippedCount = 0
-[int]$failedCount  = 0
+[int]$skippedCount  = 0
+[int]$failedCount     = 0   # general failures
+[int]$notSupportedCount = 0   # not-supported types
+[int]$failedAppGroupCount = 0   # if a group can't be created (rare scenario)
 
 Write-Log "Importing policy report from $reportFile"
 
 $TargetAppGroupPre = "xxxxx"
-$TargetAppGroup = $null
+$TargetAppGroup    = $null
 $processedAppGroups = @{}
 
 try {
     Import-Csv -Path $reportFile -Delimiter "," | ForEach-Object {
 
-        # Keep track of the line count
         $lineCount++
 
-        # Grab all CSV properties
-        $Policy_Name                      = $_."Policy Name"
-        $ApplicationType                  = $_."Application Type"
-        $FileName                         = $_."File Name"
-        $FileNameCompareAs                = $_."File Name Compare As"
-        $ChecksumAlgorithm                = $_."Checksum Algorithm"
-        $Checksum                         = $_."Checksum"
-        $Owner                            = $_."Owner"
-        $ArgumentsCompareAs               = $_."Arguments Compare As"
-        $SignedBy                         = $_."Signed By"
-        $Publisher                        = $_."Publisher"
-        $PublisherCompareAs               = $_."Publisher Compare As"
-        $ProductName                      = $_."Product Name"
-        $ProductNameCompareAs             = $_."Product Name Compare As"
-        $FileDescription                  = $_."File Description"
-        $FileDescriptionCompareAs         = $_."File Description Compare As"
-        $CompanyName                      = $_."Company Name"
-        $CompanyNameCompareAs             = $_."Company Name Compare As"
-        $ProductVersionFrom               = $_."Product Version From"
-        $ProductVersionTo                 = $_."Product Version To"
-        $FileVersionFrom                  = $_."File Version From"
-        $FileVersionTo                    = $_."File Version To"
-        $ScriptFileName                   = $_."Script File Name"
-        $ScriptShortcutName               = $_."Script Shortcut Name"
-        $MSPProductName                   = $_."MSI/MSP Product Name"
-        $MSPProductNameCompareAs          = $_."MSI/MSP Product Name Compare As"
-        $MSPCompanyName                   = $_."MSI/MSP Company Name"
-        $MSPCompanyNameCompareAs          = $_."MSI/MSP Company Name Compare As"
-        $MSPProductVersionFrom            = $_."MSI/MSP Product Version From"
-        $MSPProductVersionTo              = $_."MSI/MSP Product Version To"
-        $MSPProductCode                   = $_."MSI/MSP Product Code"
-        $MSPUpgradeCode                   = $_."MSI/MSP Upgrade Code"
-        $WebApplicationURL                = $_."Web Application URL"
-        $WebApplicationURLCompareAs       = $_."Web Application URL Compare As"
-        $WindowsAdminTask                 = $_."Windows Admin Task"
-        $AllActiveXInstallationAllowed    = $_."All ActiveX Installation Allowed"
-        $ActiveXSourceURL                 = $_."ActiveX Source URL"
-        $ActiveXSourceCompareAs           = $_."ActiveX Source Compare As"
-        $ActiveXMIMEType                  = $_."ActiveX MIME Type"
-        $ActiveXMIMETypeCompareAs         = $_."ActiveX MIME Type Compare As"
-        $ActiveXCLSID                     = $_."ActiveX CLSID"
-        $ActiveXVersionFrom               = $_."ActiveX Version From"
-        $ActiveXVersionTo                 = $_."ActiveX Version To"
-        $FileFolderPath                   = $_."File/Folder Path"
-        $FileFolderType                   = $_."File/Folder Type"
-        $FolderWithsubfoldersandfiles     = $_."Folder With subfolders and files"
-        $RegistryKey                      = $_."Registry Key"
-        $COMDisplayName                   = $_."COM Display Name"
-        $COMCLSID                         = $_."COM CLSID"
-        $ServiceName                      = $_."Service Name"
+        # Grab all CSV properties into variables
+        $Policy_Name                        = $_."Policy Name"
+        $ApplicationType                    = $_."Application Type"
+        $FileName                           = $_."File Name"
+        $FileNameCompareAs                  = $_."File Name Compare As"
+        $ChecksumAlgorithm                  = $_."Checksum Algorithm"
+        $Checksum                           = $_."Checksum"
+        $Owner                              = $_."Owner"
+        $ArgumentsCompareAs                 = $_."Arguments Compare As"
+        $SignedBy                           = $_."Signed By"
+        $Publisher                          = $_."Publisher"
+        $PublisherCompareAs                 = $_."Publisher Compare As"
+        $ProductName                        = $_."Product Name"
+        $ProductNameCompareAs               = $_."Product Name Compare As"
+        $FileDescription                    = $_."File Description"
+        $FileDescriptionCompareAs           = $_."File Description Compare As"
+        $CompanyName                        = $_."Company Name"
+        $CompanyNameCompareAs               = $_."Company Name Compare As"
+        $ProductVersionFrom                 = $_."Product Version From"
+        $ProductVersionTo                   = $_."Product Version To"
+        $FileVersionFrom                    = $_."File Version From"
+        $FileVersionTo                      = $_."File Version To"
+        $ScriptFileName                     = $_."Script File Name"
+        $ScriptShortcutName                 = $_."Script Shortcut Name"
+        $MSPProductName                     = $_."MSI/MSP Product Name"
+        $MSPProductNameCompareAs            = $_."MSI/MSP Product Name Compare As"
+        $MSPCompanyName                     = $_."MSI/MSP Company Name"
+        $MSPCompanyNameCompareAs            = $_."MSI/MSP Company Name Compare As"
+        $MSPProductVersionFrom              = $_."MSI/MSP Product Version From"
+        $MSPProductVersionTo                = $_."MSI/MSP Product Version To"
+        $MSPProductCode                     = $_."MSI/MSP Product Code"
+        $MSPUpgradeCode                     = $_."MSI/MSP Upgrade Code"
+        $WebApplicationURL                  = $_."Web Application URL"
+        $WebApplicationURLCompareAs         = $_."Web Application URL Compare As"
+        $WindowsAdminTask                   = $_."Windows Admin Task"
+        $AllActiveXInstallationAllowed      = $_."All ActiveX Installation Allowed"
+        $ActiveXSourceURL                   = $_."ActiveX Source URL"
+        $ActiveXSourceCompareAs             = $_."ActiveX Source Compare As"
+        $ActiveXMIMEType                    = $_."ActiveX MIME Type"
+        $ActiveXMIMETypeCompareAs           = $_."ActiveX MIME Type Compare As"
+        $ActiveXCLSID                       = $_."ActiveX CLSID"
+        $ActiveXVersionFrom                 = $_."ActiveX Version From"
+        $ActiveXVersionTo                   = $_."ActiveX Version To"
+        $FileFolderPath                     = $_."File/Folder Path"
+        $FileFolderType                     = $_."File/Folder Type"
+        $FolderWithsubfoldersandfiles       = $_."Folder With subfolders and files"
+        $RegistryKey                        = $_."Registry Key"
+        $COMDisplayName                     = $_."COM Display Name"
+        $COMCLSID                           = $_."COM CLSID"
+        $ServiceName                        = $_."Service Name"
         $ElevatePrivilegesforChildProcesses = $_."Elevate Privileges for Child Processes"
         $RemoveAdminrightsfromFileOpen      = $_."Remove Admin rights from File Open/Save common dialogs"
         $ApplicationDescription             = $_."Application Description"
-        
-        Write-Host "Processing line: $lineCount, Policy Name: $Policy_Name"
-        
-        # We’ll wrap the creation of the PGApp object and property assignment in a try block
+
+        # Log all CSV properties (DEBUG level) for this line
+        Write-Log "Processing line: $lineCount, Policy Name: $Policy_Name" "INFO"
+        Write-Log " CSV Values => ApplicationType: $ApplicationType, FileName: $FileName, ChecksumAlg: $ChecksumAlgorithm, Checksum: $Checksum, SignedBy: $SignedBy, Publisher: $Publisher, ProductName: $ProductName, FileDescription: $FileDescription, ServiceName: $ServiceName" "DEBUG"
+        Write-Log " CSV Values => ProductVersionFrom: $ProductVersionFrom, ProductVersionTo: $ProductVersionTo, FileVersionFrom: $FileVersionFrom, FileVersionTo: $FileVersionTo, WindowsAdminTask: $WindowsAdminTask" "DEBUG"
+
         try {
             # Skip known excluded lines
-            if ($Policy_Name.Length -eq 0 -or 
+            if ([string]::IsNullOrEmpty($Policy_Name) -or 
                 $Policy_Name -match "macOS" -or 
                 $Policy_Name -match "Default MAC Policy" -or 
                 $Policy_Name -clike 'Usage of "JIT*') {
@@ -196,36 +218,47 @@ try {
                 return
             }
 
-            # Create the new application object
-            $PGApp = New-Object Avecto.Defendpoint.Settings.Application $PGConfig
+            # Attempt to handle group creation or reuse
+            try {
+                if (-not $processedAppGroups.ContainsKey($Policy_Name)) {
+                    if ($Policy_Name -ne $TargetAppGroupPre) {
+                        # If there is an existing group, add it to the PGConfig
+                        if ($TargetAppGroup) {
+                            $PGConfig.ApplicationGroups.Add($TargetAppGroup)
+                            Write-Log "Added AppGroup '$($TargetAppGroup.Name)' to PGConfig." "DEBUG"
+                        }
 
-            # Check and prevent duplicate app group creation
-            if (-not $processedAppGroups.ContainsKey($Policy_Name)) {
-                if ($Policy_Name -ne $TargetAppGroupPre) {
-                    # If there is an existing group, add it to the PGConfig
-                    if ($TargetAppGroup) {
-                        $PGConfig.ApplicationGroups.Add($TargetAppGroup)
-                        Write-Log "Added AppGroup '$($TargetAppGroup.Name)' to PGConfig."
+                        # Create a new group
+                        $TargetAppGroup = New-Object Avecto.Defendpoint.Settings.ApplicationGroup
+                        $TargetAppGroup.Name        = $Policy_Name
+                        $TargetAppGroup.Description = $Policy_Name
+                        $TargetAppGroupPre          = $Policy_Name
+                        
+                        # Mark this app group as processed
+                        $processedAppGroups[$Policy_Name] = $true
+                        Write-Log "Created new application group '$Policy_Name'." "INFO"
                     }
-
-                    # Create a new group
-                    $TargetAppGroup = New-Object Avecto.Defendpoint.Settings.ApplicationGroup
-                    $TargetAppGroup.Name        = $Policy_Name
-                    $TargetAppGroup.Description = $Policy_Name
-                    $TargetAppGroupPre          = $Policy_Name
-
-                    # Mark this app group as processed
-                    $processedAppGroups[$Policy_Name] = $true
                 }
             }
+            catch {
+                # If group creation fails
+                $failedAppGroupCount++
+                throw $_  # rethrow so the outer catch captures it
+            }
 
-            # If we have a custom description, use it
-            if ($ApplicationDescription.Length -ge 1) {
+            # Create a new application object
+            $PGApp = New-Object Avecto.Defendpoint.Settings.Application $PGConfig
+            Write-Log "Created new Avecto application object for policy '$Policy_Name'." "DEBUG"
+
+            # If we have a custom description
+            if ($ApplicationDescription) {
                 $PGApp.Description = $ApplicationDescription
-            } elseif ($FileName.Length -ge 1) {
+            }
+            elseif ($FileName) {
                 $PGApp.Description = $FileName
             }
 
+            # Determine Application Type
             switch -Wildcard ($ApplicationType) {
                 "ActiveX Control" {
                     $PGApp.Type = [Avecto.Defendpoint.Settings.ApplicationType]::ActiveX
@@ -233,8 +266,7 @@ try {
                 "Admin Tasks" {
                     $AdminApplicationName = $WindowsAdminTask
                     $adminTask = $adminTasks | Where-Object { $_.AdminApplicationName -eq $AdminApplicationName }
-
-                    if ("" -eq $adminTask) {
+                    if ("" -eq $adminTask -or $null -eq $adminTask) {
                         Write-Log "Line $lineCount - Admin Task '$AdminApplicationName' not found in adminTasksFile." "WARN"
                         $failedCount++
                         return
@@ -244,35 +276,67 @@ try {
                         "Executable" {
                             $PGApp.Type = [Avecto.Defendpoint.Settings.ApplicationType]::Executable
                             $PGApp.AppxPackageNameMatchCase = "Contains"
-                            $PGApp.FileName  = $adminTask.AdminPath
-                            $PGApp.ProductName = $adminTask.AdminApplicationName
-                            $PGApp.DisplayName = $adminTask.AdminApplicationName
+                            $PGApp.FileName     = $adminTask.AdminPath
+                            $PGApp.ProductName  = $adminTask.AdminApplicationName
+                            $PGApp.DisplayName  = $adminTask.AdminApplicationName
                             if ($adminTask.AdminCommandLine -ne $null) {
                                 $PGApp.CmdLine = $adminTask.AdminCommandLine
                                 $PGApp.CmdLineMatchCase = "false"
                                 $PGApp.CmdLineStringMatchType = "Contains"
                             }
+                            if($adminTask.AdminPublisher -ne $null) {
+                                $PGApp.Publisher = $adminTask.AdminPublisher
+                                $PGApp.CheckPublisher = $true
+                                $PGApp.PublisherStringMatchType = "Contains"
+                                $PGApp.PublisherMatchCase = $true
+                            }
                         }
                         "COMClass" {
                             $PGApp.Type = [Avecto.Defendpoint.Settings.ApplicationType]::COMClass
                             $PGApp.DisplayName = $adminTask.AdminApplicationName
-                            $PGApp.CheckAppID = "true"
-                            $PGApp.CheckCLSID = "true"
-                            $PGApp.AppID = $adminTask.AdminCLSID
-                            $PGApp.CLSID = $adminTask.AdminCLSID
+                            $PGApp.CheckAppID  = "true"
+                            $PGApp.CheckCLSID  = "true"
+                            $PGApp.AppID       = $adminTask.AdminCLSID
+                            $PGApp.CLSID       = $adminTask.AdminCLSID
+                            
                         }
                         "ManagementConsoleSnapin" {
                             $PGApp.Type = [Avecto.Defendpoint.Settings.ApplicationType]::ManagementConsoleSnapin
                             $PGApp.DisplayName = $adminTask.AdminApplicationName
                             $PGApp.AppxPackageNameMatchCase = "Contains"
                             $PGApp.FileName = $adminTask.AdminPath
+                            if ($adminTask.AdminCommandLine -ne $null) {
+                                $PGApp.CmdLine = $adminTask.AdminCommandLine
+                                $PGApp.CmdLineMatchCase = "false"
+                                $PGApp.CmdLineStringMatchType = "Contains"
+                            }
+                            if($adminTask.AdminPublisher -ne $null) {
+                                $PGApp.Publisher = $adminTask.AdminPublisher
+                                $PGApp.CheckPublisher = $true
+                                $PGApp.PublisherStringMatchType = "Contains"
+                                $PGApp.PublisherMatchCase = $true
+                            }
                         }
                         "ControlPanelApplet" {
                             $PGApp.Type = [Avecto.Defendpoint.Settings.ApplicationType]::ControlPanelApplet
-                            $PGApp.CheckAppID = "true"
-                            $PGApp.CheckCLSID = "true"
-                            $PGApp.AppID = $adminTask.AdminCLSID
-                            $PGApp.CLSID = $adminTask.AdminCLSID
+                            $PGApp.CheckAppID  = "true"
+                            $PGApp.CheckCLSID  = "true"
+                            $PGApp.AppID       = $adminTask.AdminCLSID
+                            $PGApp.CLSID       = $adminTask.AdminCLSID
+                        }
+                        "Service" {
+                            $PGApp.Type = [Avecto.Defendpoint.Settings.ApplicationType]::Service
+                            $PGApp.ServiceName                = $adminTask.AdminPath
+                            $PGApp.CheckServiceName           = $true
+                            $PGApp.ServiceNamePatternMatching = [Avecto.Defendpoint.Settings.StringMatchType]::Exact
+                            $PGApp.ServicePause               = $true
+                            $PGApp.ServiceStart               = $true
+                            $PGApp.ServiceStop                = $true
+                            $PGApp.ServiceConfigure           = $true
+                            $PGApp.ServiceDisplayName         = $adminTask.AdminServiceDisName
+                            $PGApp.CheckServiceDisplayName    = $true
+                            $PGApp.ServiceDisplayNamePatternMatching = $true
+
                         }
                         default {
                             Write-Log "Line $lineCount - Policy '$Policy_Name', AdminType '$($adminTask.AdminType)' is not supported." "WARN"
@@ -294,11 +358,9 @@ try {
                     $PGApp.Type = [Avecto.Defendpoint.Settings.ApplicationType]::BatchFile
                 }
                 "Dynamic-Link Library" {
-                    $PGApp.Type = [Avecto.Defendpoint.Settings.ApplicationType]::Dll
                     Write-Log "Line $lineCount - Policy '$Policy_Name', 'Dynamic-Link Library' not supported." "WARN"
-                    $skippedCount++
+                    $notSupportedCount++
                     return
-
                 }
                 "Service" {
                     $PGApp.Type = [Avecto.Defendpoint.Settings.ApplicationType]::Service
@@ -307,42 +369,42 @@ try {
                     $PGApp.Type = [Avecto.Defendpoint.Settings.ApplicationType]::RegistrySettings
                 }
                 "File or Directory System Entry" {
-                    Write-Log "Line $lineCount - Policy '$Policy_Name', '$ApplicationType' is NOT supported (error)." "ERROR"
-                    $failedCount++
+                    Write-Log "Line $lineCount - Policy '$Policy_Name', '$ApplicationType' will be added later." "WARN"
                     return
                 }
                 "Microsoft Update (MSU)" {
-                    Write-Log "Line $lineCount - Policy '$Policy_Name', '$ApplicationType' is NOT supported (error)." "ERROR"
-                    $failedCount++
-                    return
+                    $PGApp.Type = [Avecto.Defendpoint.Settings.ApplicationType]::InstallerPackage
                 }
                 "Web Application" {
                     Write-Log "Line $lineCount - Policy '$Policy_Name', '$ApplicationType' is NOT supported (error)." "ERROR"
                     $failedCount++
+                    $notSupportedCount++
                     return
                 }
                 "Win App" {
                     Write-Log "Line $lineCount - Policy '$Policy_Name', '$ApplicationType' is NOT supported (error)." "ERROR"
                     $failedCount++
+                    $notSupportedCount++
                     return
                 }
-                #Default {
-                #    Write-Log "Line $lineCount - Policy '$Policy_Name', '$ApplicationType' is UNRECOGNIZED (error)." "ERROR"
-                #    $failedCount++
-                #    return
-                #}
+                default {
+                    # If desired, you can handle truly unknown types as fails:
+                    Write-Log "Line $lineCount - Policy '$Policy_Name', '$ApplicationType' is UNRECOGNIZED (error)." "ERROR"
+                    $failedCount++
+                    $notSupportedCount++
+                    return
+                }
             }
 
             # File Name
             if ($FileName) {
-                $PGApp.CheckFileName = 1
+                Write-Log "Setting FileName property for Policy '$Policy_Name' to '$FileName'." "DEBUG"
+                $PGApp.CheckFileName = $true
                 if ($FileName.StartsWith("*")) {
-                    # EndsWith
                     $PGApp.FileNameStringMatchType = [Avecto.Defendpoint.Settings.StringMatchType]::EndsWith
                     $PGApp.FileName = $FileName.Substring(1)
                 }
                 elseif ($FileName.EndsWith("*")) {
-                    # StartsWith
                     $PGApp.FileNameStringMatchType = [Avecto.Defendpoint.Settings.StringMatchType]::StartsWith
                     $PGApp.FileName = $FileName.Substring(0, $FileName.Length - 1)
                 }
@@ -354,13 +416,15 @@ try {
 
             # CheckSum
             if ($ChecksumAlgorithm -eq "SHA1" -and $Checksum) {
-                $PGApp.CheckFileHash = 1
-                $PGApp.FileHash = $Checksum
+                Write-Log "Setting CheckFileHash for Policy '$Policy_Name' to '$Checksum'." "DEBUG"
+                $PGApp.CheckFileHash = $true
+                $PGApp.FileHash      = $Checksum
             }
 
             # Publisher
             if ($SignedBy -eq "Specific Publishers" -and $Publisher) {
-                $PGApp.CheckPublisher = 1
+                Write-Log "Setting Publisher for Policy '$Policy_Name' to '$Publisher'." "DEBUG"
+                $PGApp.CheckPublisher = $true
                 if ($Publisher.StartsWith("*")) {
                     $PGApp.PublisherStringMatchType = [Avecto.Defendpoint.Settings.StringMatchType]::EndsWith
                     $PGApp.Publisher = $Publisher.Substring(1)
@@ -377,7 +441,8 @@ try {
 
             # Product Name
             if ($ProductName) {
-                $PGApp.CheckProductName = 1
+                Write-Log "Setting ProductName for Policy '$Policy_Name' to '$ProductName'." "DEBUG"
+                $PGApp.CheckProductName = $true
                 if ($ProductName.StartsWith("*")) {
                     $PGApp.ProductNameStringMatchType = [Avecto.Defendpoint.Settings.StringMatchType]::EndsWith
                     $PGApp.ProductName = $ProductName.Substring(1)
@@ -394,7 +459,8 @@ try {
 
             # File Description
             if ($FileDescription) {
-                $PGApp.CheckProductDesc = 1
+                Write-Log "Setting FileDescription for Policy '$Policy_Name' to '$FileDescription'." "DEBUG"
+                $PGApp.CheckProductDesc = $true
                 if ($FileDescription.StartsWith("*")) {
                     $PGApp.ProductDescStringMatchType = [Avecto.Defendpoint.Settings.StringMatchType]::EndsWith
                     $PGApp.ProductDesc = $FileDescription.Substring(1)
@@ -411,84 +477,88 @@ try {
 
             # Product Version From/To
             if ($ProductVersionFrom) {
-                $PGApp.CheckMinProductVersion = 1
-                $PGApp.MinProductVersion = $ProductVersionFrom
+                Write-Log "Setting MinProductVersion for Policy '$Policy_Name' to '$ProductVersionFrom'." "DEBUG"
+                $PGApp.CheckMinProductVersion = $true
+                $PGApp.MinProductVersion      = $ProductVersionFrom
             }
             if ($ProductVersionTo) {
-                $PGApp.CheckMaxProductVersion = 1
-                $PGApp.MaxProductVersion = $ProductVersionTo
+                Write-Log "Setting MaxProductVersion for Policy '$Policy_Name' to '$ProductVersionTo'." "DEBUG"
+                $PGApp.CheckMaxProductVersion = $true
+                $PGApp.MaxProductVersion      = $ProductVersionTo
             }
 
             # File Version From/To
             if ($FileVersionFrom) {
-                $PGApp.CheckMinFileVersion = 1
-                $PGApp.MinFileVersion = $FileVersionFrom
+                Write-Log "Setting MinFileVersion for Policy '$Policy_Name' to '$FileVersionFrom'." "DEBUG"
+                $PGApp.CheckMinFileVersion = $true
+                $PGApp.MinFileVersion      = $FileVersionFrom
             }
             if ($FileVersionTo) {
-                $PGApp.CheckMaxFileVersion = 1
-                $PGApp.MaxFileVersion = $FileVersionTo
+                Write-Log "Setting MaxFileVersion for Policy '$Policy_Name' to '$FileVersionTo'." "DEBUG"
+                $PGApp.CheckMaxFileVersion = $true
+                $PGApp.MaxFileVersion      = $FileVersionTo
             }
 
             # Service
             if ($ServiceName) {
-                $PGApp.CheckServiceName = 1
+                Write-Log "Setting ServiceName for Policy '$Policy_Name' to '$ServiceName'." "DEBUG"
+                $PGApp.CheckServiceName           = $true
                 $PGApp.ServiceNamePatternMatching = [Avecto.Defendpoint.Settings.StringMatchType]::Exact
-                $PGApp.ServiceName = $ServiceName
-                $PGApp.ServicePause = 1
-                $PGApp.ServiceStart = 1
-                $PGApp.ServiceStop = 1
-                $PGApp.ServiceConfigure = 1
+                $PGApp.ServiceName                = $ServiceName
+                $PGApp.ServicePause               = $true
+                $PGApp.ServiceStart               = $true
+                $PGApp.ServiceStop                = $true
+                $PGApp.ServiceConfigure           = $true
             }
 
             # Elevate / Remove Admin rights
             if ($ElevatePrivilegesforChildProcesses -eq "Yes") {
-                $PGApp.ChildrenInheritToken = 1
+                Write-Log "Setting ChildrenInheritToken for Policy '$Policy_Name'." "DEBUG"
+                $PGApp.ChildrenInheritToken = $true
             }
             if ($RemoveAdminrightsfromFileOpen -eq "Yes") {
-                $PGApp.OpenDlgDropRights = 1
+                Write-Log "Setting OpenDlgDropRights for Policy '$Policy_Name'." "DEBUG"
+                $PGApp.OpenDlgDropRights = $true
             }
 
             # Add descriptions from CSV dictionary, if any
             if ($policyDictionary.ContainsKey($Policy_Name)) {
+                Write-Log "Overriding description from dictionary for Policy '$Policy_Name'." "DEBUG"
                 $PGApp.Description = $policyDictionary[$Policy_Name]
             }
 
-            # Add the final application to the group
+            # Finally, add the application to the group
             $TargetAppGroup.Applications.Add($PGApp)
             $addedCount++
+            Write-Log "Successfully added application for Policy '$Policy_Name'." "INFO"
         }
         catch {
-            # If something fails in creating or adding the application, log it
             $failedCount++
 
-            Write-Log "Line $lineCount - FAILED to add application with Policy '$Policy_Name'. See details below." "ERROR"
-            
-            # Let's log all relevant properties for debugging
-            Write-Log " --- Policy_Name: $Policy_Name" "DEBUG"
-            Write-Log " --- ApplicationType: $ApplicationType" "DEBUG"
-            Write-Log " --- FileName: $FileName" "DEBUG"
-            Write-Log " --- ChecksumAlgorithm: $ChecksumAlgorithm" "DEBUG"
-            Write-Log " --- Checksum: $Checksum" "DEBUG"
-            Write-Log " --- SignedBy: $SignedBy" "DEBUG"
-            Write-Log " --- Publisher: $Publisher" "DEBUG"
-            Write-Log " --- ProductName: $ProductName" "DEBUG"
-            Write-Log " --- FileDescription: $FileDescription" "DEBUG"
-            Write-Log " --- ProductVersionFrom: $ProductVersionFrom" "DEBUG"
-            Write-Log " --- ProductVersionTo: $ProductVersionTo" "DEBUG"
-            Write-Log " --- FileVersionFrom: $FileVersionFrom" "DEBUG"
-            Write-Log " --- FileVersionTo: $FileVersionTo" "DEBUG"
-            Write-Log " --- WindowsAdminTask: $WindowsAdminTask" "DEBUG"
-            Write-Log " --- ServiceName: $ServiceName" "DEBUG"
-            Write-Log " --- ElevatePrivilegesForChildProcesses: $ElevatePrivilegesforChildProcesses" "DEBUG"
-            Write-Log " --- RemoveAdminrightsfromFileOpen: $RemoveAdminrightsfromFileOpen" "DEBUG"
-            Write-Log " --- Exception: $($_.Exception.Message)" "ERROR"
+            # Combine and shorten properties (except Policy Name) for a single-line log
+            $allFields = @(
+                "Policy Name: $Policy_Name"                                    # do NOT shorten
+                "ApplicationType: $(Compress-String $ApplicationType)"
+                "FileName: $(Compress-String $FileName)"
+                "ChecksumAlg: $(Compress-String $ChecksumAlgorithm)"
+                "Checksum: $(Compress-String $Checksum)"
+                "SignedBy: $(Compress-String $SignedBy)"
+                "Publisher: $(Compress-String $Publisher)"
+                "ProductName: $(Compress-String $ProductName)"
+                "FileDescription: $(Compress-String $FileDescription)"
+                "ServiceName: $(Compress-String $ServiceName)"
+                "WindowsAdminTask: $(Compress-String $WindowsAdminTask)"
+                "Exception: $(Compress-String $_.Exception.Message)"
+            ) -join " | "
+
+            Write-Log "Line $lineCount - FAILED to add application. $allFields" "ERROR"
         }
     }
 
-    # After the loop, if the last group is created but not added yet
+    # After the loop, if the last group was never added to PGConfig, add it
     if ($TargetAppGroup) {
         $PGConfig.ApplicationGroups.Add($TargetAppGroup)
-        Write-Log "Added final AppGroup '$($TargetAppGroup.Name)' to PGConfig."
+        Write-Log "Added final AppGroup '$($TargetAppGroup.Name)' to PGConfig." "INFO"
     }
 }
 catch {
@@ -500,11 +570,11 @@ catch {
 ### ---------------------------
 
 try {
-    Set-DefendpointSettings -SettingsObject $PGConfig -LocalFile -FileLocation "$baseFolder\generated_appGroup.xml"
-    Write-Log "Successfully saved Defendpoint settings to generated_appGroup.xml."
+    Set-DefendpointSettings -SettingsObject $PGConfig -LocalFile -FileLocation $generatedXML
+    Write-Log "Successfully saved Defendpoint settings to $(Split-Path $generatedXML -Leaf)."
 }
 catch {
-    Write-Log "Failed to save generated_appGroup.xml: $($_.Exception.Message)" "ERROR"
+    Write-Log "Failed to save $generatedXML : $($_.Exception.Message)" "ERROR"
 }
 
 ### ---------------------------
@@ -514,8 +584,10 @@ catch {
 Write-Log "----- SUMMARY REPORT -----"
 Write-Log "Total lines processed: $lineCount"
 Write-Log "Successfully added applications: $addedCount"
-Write-Log "Skipped applications: $skippedCount"
+Write-Log "Skipped applications (excluded patterns): $skippedCount"
 Write-Log "Failed applications: $failedCount"
+Write-Log "Not supported application types: $notSupportedCount"
+Write-Log "Failed app groups (if any): $failedAppGroupCount"
 
 if ($lineCount -gt 0) {
     $failPercentage = [Math]::Round(($failedCount / $lineCount * 100), 2)

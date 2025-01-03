@@ -10,4 +10,4 @@ Run Normally dublicate olmuş. White List
 Workstyle execute script
 
 
-Admin Taskaları - arttır
+Admin Taskaları - Service ekle

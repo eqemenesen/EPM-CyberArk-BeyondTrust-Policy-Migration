@@ -111,15 +111,15 @@ if (-not $whiteListPolicy) {
 Write-Log "Processing WhiteList Apps..." "INFO"
 
 # Counters
-$TotalWhiteListApps          = 0
-$FailedWhiteListApps         = 0  # Apps with no matching AppGroup or overall logic error
-$FailedWhiteListAppGroup     = 0  # Specifically failing to find the app group
-$FailedWhiteListAssignments  = 0  # Specifically failing to add assignment
+$TotalWhiteListApps   = 0
+$FailedWhiteListApps    = 0  # Apps with no matching AppGroup or overall logic error
+$FailedWhiteListAppGroup  = 0  # Specifically failing to find the app group
+$FailedWhiteListAssignments = 0  # Specifically failing to add assignment
 
 # Get Message IDs
-$allowMessage   = $PGConfig.Messages | Where-Object { $_.Name -like "Allow Message (Elevate)" }
-$blockMessage   = $PGConfig.Messages | Where-Object { $_.Name -eq "Block Message" }
-$allowBaloon    = $PGConfig.Messages | Where-Object { $_.Name -eq "Application Notification (Elevate)" }
+$allowMessage = $PGConfig.Messages | Where-Object { $_.Name -like "Allow Message (Elevate)" }
+$blockMessage = $PGConfig.Messages | Where-Object { $_.Name -eq "Block Message" }
+$allowBaloon  = $PGConfig.Messages | Where-Object { $_.Name -eq "Application Notification (Elevate)" }
 
 $allowMessageId = $allowMessage.ID
 $blockMessageId = $blockMessage.ID
@@ -329,8 +329,8 @@ try {
                 $newPolicy.ApplicationAssignments.Add($appAssignment)
 
                 # Add the on-demand application assignment
-                $newPolicy.ShellExtension.EnabledRunAs = $true
-                $newPolicy.ShellExtension.ApplicationAssignments.Add($appAssignment)
+                #$newPolicy.ShellExtension.EnabledRunAs = $true
+                #$newPolicy.ShellExtension.ApplicationAssignments.Add($appAssignment)
 
                 Write-Log "SUCCESS: Application Assignment added to '$PolicyName'." "INFO"
             }
