@@ -166,7 +166,7 @@ foreach ($appName in $WhiteListApps) {
 # -----------------------------------------------------------------------------
 # Process "Advanced Policy" Rows from CSV
 # -----------------------------------------------------------------------------
-$line = 0
+$line = 1
 $TotalAdvancedPolicies       = 0
 $failedAdvancedPolicies      = 0  # Overall advanced policy failures (for reference)
 $FailedPolicyAdd             = 0  # Specifically for failing to add the policy object
@@ -364,9 +364,9 @@ try {
                 Write-Log "SUCCESS: Content Assignment added to '$PolicyName'." "INFO"
             } 
             else {
-                Write-Log "ERROR: No matching Content Group found for '$PolicyName'." "ERROR"
+                Write-Log "No matching Content Group found for '$PolicyName'." "Warn"
                 Write-Log "DETAILS: Content Group '$PolicyName' not found in PGConfig.ContentGroups." "DEBUG"
-                $FailedPolicyContentGroup++
+                #$FailedPolicyContentGroup++
                 $ContentGroupFound = $false
             }
         }
@@ -430,7 +430,7 @@ try {
             #----------
             # AccountsFilter
             #----------
-            if ($Users -and $Users -ne "") {
+            if ($Users -ne "") {
                 try {
                     $accountsFilter = New-Object Avecto.Defendpoint.Settings.AccountsFilter
                     $accountsFilter.InverseFilter = $false
@@ -463,7 +463,7 @@ try {
                                 Write-Log "DETAILS: Skipping user (contains space or invalid): $trimmedUser for '$PolicyName'." "INFO"
                             }
                         }
-                        elseif ($trimmedUser -match "^.\") {
+                        elseif ($trimmedUser -match "^.\\") {
                             $UserAccount.Name  = $trimmedUser
                             $UserAccount.Group = $false
                             $accountsFilter.Accounts.WindowsAccounts.Add($UserAccount)
@@ -560,9 +560,9 @@ Write-Log "------------------------------------" "INFO"
 
 # -- Advanced Policies --
 Write-Log "Completed processing Advanced Policies." "INFO"
-Write-Log "Total Advanced Policies: $TotalAdvancedPolicies" "INFO"
-Write-Log "Failed Advanced Policies (any type of error): $failedAdvancedPolicies" "INFO"
+Write-Log "Total Advanced Policies (found in CSV): $TotalAdvancedPolicies" "INFO"
 Write-Log "Skipped Policies (due to Active=No, macOS, JIT, etc.): $SkippedPolicies" "INFO"
+Write-Log "Failed Advanced Policies (any type of error): $failedAdvancedPolicies" "INFO"
 
 Write-Log "----- DETAILED FAILURES FOR ADVANCED POLICIES -----" "INFO"
 Write-Log "Failed to create policy object:           $FailedPolicyAdd" "INFO"
@@ -573,11 +573,47 @@ Write-Log "Failed to add Filters (Device/Accounts):  $FailedPolicyFilters" "INFO
 if ($TotalAdvancedPolicies -gt 0) {
     $successCount = $TotalAdvancedPolicies - $failedAdvancedPolicies
     $successRate  = [math]::Round(($successCount / $TotalAdvancedPolicies) * 100, 2)
-    Write-Log "Advanced Policy Success Rate: $successRate%" "INFO"
+    Write-Log "Advanced Policy Overall Success Rate: $successRate%" "INFO"
 }
 
 # -----------------------------------------------------------------------------
-# Save Updated Configuration
+# ADDITIONAL METRICS / PARTIAL FAIL RATES
+# -----------------------------------------------------------------------------
+Write-Log "===== ADDITIONAL METRICS FOR ADVANCED POLICIES =====" "INFO"
+
+# How many policies were actually attempted (not skipped)?
+$attemptedPolicies = $TotalAdvancedPolicies - $SkippedPolicies
+Write-Log "Policies actually attempted (excluding skipped): $attemptedPolicies" "INFO"
+
+if ($attemptedPolicies -gt 0) {
+    # Calculate fail rates for each category
+    $policyCreationFailRate    = [math]::Round(($FailedPolicyAdd / $attemptedPolicies) * 100, 2)
+    $appGroupFailRate          = [math]::Round(($FailedPolicyAppGroup / $attemptedPolicies) * 100, 2)
+    $contentGroupFailRate      = [math]::Round(($FailedPolicyContentGroup / $attemptedPolicies) * 100, 2)
+    $filterFailRate            = [math]::Round(($FailedPolicyFilters / $attemptedPolicies) * 100, 2)
+
+    # You can also show success counts:
+    $policyCreationSuccessCount   = $attemptedPolicies - $FailedPolicyAdd
+    $appGroupSuccessCount         = $attemptedPolicies - $FailedPolicyAppGroup
+    $contentGroupSuccessCount     = $attemptedPolicies - $FailedPolicyContentGroup
+    $filterSuccessCount           = $attemptedPolicies - $FailedPolicyFilters
+
+    Write-Log "Policy Creation Fail Rate:    $policyCreationFailRate%       (Failures: $FailedPolicyAdd, Success: $policyCreationSuccessCount)" "INFO"
+    Write-Log "AppGroup Assignment Fail Rate:  $appGroupFailRate%           (Failures: $FailedPolicyAppGroup, Success: $appGroupSuccessCount)" "INFO"
+    Write-Log "ContentGroup Assignment Fail Rate: $contentGroupFailRate%    (Failures: $FailedPolicyContentGroup, Success: $contentGroupSuccessCount)" "INFO"
+    Write-Log "Filter Assignment Fail Rate:  $filterFailRate%               (Failures: $FailedPolicyFilters, Success: $filterSuccessCount)" "INFO"
+
+    # If you want to define "fully successful" vs. "partial success," you can do so here.
+    # For example, consider a policy fully successful only if it had no failures in creation/appGroup/contentGroup/filters, 
+    # but remember that the counters can overlap. One easy approach is using $failedAdvancedPolicies.
+    # If you want more granular logic, you’d need to track success/failure at the single-policy level above.
+}
+else {
+    Write-Log "No advanced policies were attempted (all skipped). Nothing to calculate fail rates for." "INFO"
+}
+
+# -----------------------------------------------------------------------------
+# Continue with saving the config, etc.
 # -----------------------------------------------------------------------------
 Write-Log "Saving updated configuration to XML: $outputFile" "INFO"
 try {

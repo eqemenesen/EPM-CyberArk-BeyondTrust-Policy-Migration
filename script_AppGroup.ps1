@@ -5,7 +5,6 @@
 ### ---------------------------
 ### IMPORT NECESSARY MODULES
 ### ---------------------------
-
 try {
     Import-Module 'C:\Program Files\Avecto\Privilege Guard Management Consoles\PowerShell\Avecto.Defendpoint.Cmdlets\Avecto.Defendpoint.Cmdlets.dll' -Force -ErrorAction Stop
     Import-Module 'C:\Program Files\Avecto\Privilege Guard Management Consoles\PowerShell\Avecto.Defendpoint.Cmdlets\Avecto.Defendpoint.Settings.dll' -Force -ErrorAction Stop
@@ -116,8 +115,9 @@ catch {
 Write-Log "Importing admin tasks from $adminTasksFile"
 $adminTasks = $null
 try {
-    $adminTasks = Import-Csv -Path $adminTasksFile -Delimiter ","
-    Write-Log "Admin tasks loaded. Found $($adminTasks.Count) entries."
+    $headers = @("AdminPolicyName", "AdminApplicationName", "AdminType", "AdminPath", "AdminPathType", "AdminCLSID", "AdminCommandLine", "CMDMatchCase", "CMDMatchType", "AdminPublisher", "AdminPubType", "AdminPubMatchCase", "AdminProduct", "AdminProdMatchCase", "AdminProdType", "AdminServiceDisName")
+    $adminTasks = Import-Csv -Path $adminTasksFile -Delimiter "," -Header $headers
+    Write-Log "Admin Tasks: $adminTasks" "DEBUG"
 }
 catch {
     Write-Log "Failed to load Admin Tasks CSV: $($_.Exception.Message)" "ERROR"
@@ -129,12 +129,29 @@ catch {
 ### ---------------------------
 
 # We will keep counters for advanced logging
-[int]$lineCount = 0
-[int]$addedCount  = 0
-[int]$skippedCount  = 0
-[int]$failedCount     = 0   # general failures
-[int]$notSupportedCount = 0   # not-supported types
-[int]$failedAppGroupCount = 0   # if a group can't be created (rare scenario)
+[int]$lineCount         = 1
+[int]$addedCount        = 0
+[int]$skippedCount      = 0
+[int]$failedCount       = 0    # general failures
+[int]$notSupportedCount = 0    # not-supported types
+[int]$failedAppGroupCount = 0  # if a group can't be created (rare scenario)
+
+# NEW: Track stats per ApplicationType
+$typeStats = @{}  # e.g. { "Executable" = [PSCustomObject]@{Total=0; Added=0; Failed=0; Skipped=0; NotSupported=0} }
+
+function Initialize-TypeStats {
+    param([string]$appType)
+
+    if (-not $typeStats.ContainsKey($appType)) {
+        $typeStats[$appType] = [PSCustomObject]@{
+            Total         = 0
+            Added         = 0
+            Skipped       = 0
+            Failed        = 0
+            NotSupported  = 0
+        }
+    }
+}
 
 Write-Log "Importing policy report from $reportFile"
 
@@ -201,7 +218,6 @@ try {
         $RemoveAdminrightsfromFileOpen      = $_."Remove Admin rights from File Open/Save common dialogs"
         $ApplicationDescription             = $_."Application Description"
 
-        # Log all CSV properties (DEBUG level) for this line
         Write-Log "Processing line: $lineCount, Policy Name: $Policy_Name" "INFO"
         Write-Log " CSV Values => ApplicationType: $ApplicationType, FileName: $FileName, ChecksumAlg: $ChecksumAlgorithm, Checksum: $Checksum, SignedBy: $SignedBy, Publisher: $Publisher, ProductName: $ProductName, FileDescription: $FileDescription, ServiceName: $ServiceName" "DEBUG"
         Write-Log " CSV Values => ProductVersionFrom: $ProductVersionFrom, ProductVersionTo: $ProductVersionTo, FileVersionFrom: $FileVersionFrom, FileVersionTo: $FileVersionTo, WindowsAdminTask: $WindowsAdminTask" "DEBUG"
@@ -211,12 +227,24 @@ try {
             if ([string]::IsNullOrEmpty($Policy_Name) -or 
                 $Policy_Name -match "macOS" -or 
                 $Policy_Name -match "Default MAC Policy" -or 
-                $Policy_Name -clike 'Usage of "JIT*') {
+                $Policy_Name -clike 'Usage of `"JIT*' -or
+                $ApplicationType -like "Script") {
                 
                 Write-Log "Line $lineCount - Skipped Policy '$Policy_Name' (excluded pattern)." "WARN"
                 $skippedCount++
+
+                # Also track it per-ApplicationType, if it exists
+                if ($ApplicationType) {
+                    Initialize-TypeStats -appType $ApplicationType
+                    $typeStats[$ApplicationType].Total++
+                    $typeStats[$ApplicationType].Skipped++
+                }
                 return
             }
+
+            # Initialize statistics for this ApplicationType
+            Initialize-TypeStats -appType $ApplicationType
+            $typeStats[$ApplicationType].Total++
 
             # Attempt to handle group creation or reuse
             try {
@@ -267,8 +295,9 @@ try {
                     $AdminApplicationName = $WindowsAdminTask
                     $adminTask = $adminTasks | Where-Object { $_.AdminApplicationName -eq $AdminApplicationName }
                     if ("" -eq $adminTask -or $null -eq $adminTask) {
-                        Write-Log "Line $lineCount - Admin Task '$AdminApplicationName' not found in adminTasksFile." "WARN"
+                        Write-Log "[AdminTask] Line $lineCount - Admin Task '$AdminApplicationName' not found in adminTasksFile." "WARN"
                         $failedCount++
+                        $typeStats[$ApplicationType].Failed++
                         return
                     }
 
@@ -298,7 +327,6 @@ try {
                             $PGApp.CheckCLSID  = "true"
                             $PGApp.AppID       = $adminTask.AdminCLSID
                             $PGApp.CLSID       = $adminTask.AdminCLSID
-                            
                         }
                         "ManagementConsoleSnapin" {
                             $PGApp.Type = [Avecto.Defendpoint.Settings.ApplicationType]::ManagementConsoleSnapin
@@ -336,11 +364,11 @@ try {
                             $PGApp.ServiceDisplayName         = $adminTask.AdminServiceDisName
                             $PGApp.CheckServiceDisplayName    = $true
                             $PGApp.ServiceDisplayNamePatternMatching = $true
-
                         }
                         default {
-                            Write-Log "Line $lineCount - Policy '$Policy_Name', AdminType '$($adminTask.AdminType)' is not supported." "WARN"
+                            Write-Log "[AdminTask] Line $lineCount - Policy '$Policy_Name', AdminType '$($adminTask.AdminType)' is not supported." "WARN"
                             $failedCount++
+                            $typeStats[$ApplicationType].NotSupported++
                             return
                         }
                     }
@@ -360,6 +388,7 @@ try {
                 "Dynamic-Link Library" {
                     Write-Log "Line $lineCount - Policy '$Policy_Name', 'Dynamic-Link Library' not supported." "WARN"
                     $notSupportedCount++
+                    $typeStats[$ApplicationType].NotSupported++
                     return
                 }
                 "Service" {
@@ -370,6 +399,8 @@ try {
                 }
                 "File or Directory System Entry" {
                     Write-Log "Line $lineCount - Policy '$Policy_Name', '$ApplicationType' will be added later." "WARN"
+                    $skippedCount++
+                    $typeStats[$ApplicationType].Skipped++
                     return
                 }
                 "Microsoft Update (MSU)" {
@@ -379,19 +410,21 @@ try {
                     Write-Log "Line $lineCount - Policy '$Policy_Name', '$ApplicationType' is NOT supported (error)." "ERROR"
                     $failedCount++
                     $notSupportedCount++
+                    $typeStats[$ApplicationType].NotSupported++
                     return
                 }
                 "Win App" {
                     Write-Log "Line $lineCount - Policy '$Policy_Name', '$ApplicationType' is NOT supported (error)." "ERROR"
                     $failedCount++
                     $notSupportedCount++
+                    $typeStats[$ApplicationType].NotSupported++
                     return
                 }
                 default {
-                    # If desired, you can handle truly unknown types as fails:
                     Write-Log "Line $lineCount - Policy '$Policy_Name', '$ApplicationType' is UNRECOGNIZED (error)." "ERROR"
                     $failedCount++
                     $notSupportedCount++
+                    $typeStats[$ApplicationType].NotSupported++
                     return
                 }
             }
@@ -530,10 +563,17 @@ try {
             # Finally, add the application to the group
             $TargetAppGroup.Applications.Add($PGApp)
             $addedCount++
+            $typeStats[$ApplicationType].Added++
             Write-Log "Successfully added application for Policy '$Policy_Name'." "INFO"
+
         }
         catch {
             $failedCount++
+
+            # If we got as far as having an ApplicationType stat bucket, increment fail
+            if ($ApplicationType -and $typeStats.ContainsKey($ApplicationType)) {
+                $typeStats[$ApplicationType].Failed++
+            }
 
             # Combine and shorten properties (except Policy Name) for a single-line log
             $allFields = @(
@@ -594,6 +634,12 @@ if ($lineCount -gt 0) {
     Write-Log "Failure percentage: $failPercentage %"
 } else {
     Write-Log "No lines were processed."
+}
+
+Write-Log "----- DETAILED APPLICATION TYPE SUMMARY -----"
+foreach ($appType in $typeStats.Keys) {
+    $stats = $typeStats[$appType]
+    Write-Log "$appType => Total: $($stats.Total), Added: $($stats.Added), Skipped: $($stats.Skipped), Failed: $($stats.Failed), NotSupported: $($stats.NotSupported)"
 }
 
 Write-Log "Script complete."
