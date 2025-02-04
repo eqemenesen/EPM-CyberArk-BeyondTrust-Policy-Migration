@@ -1,30 +1,1490 @@
-<ClipboardText>
-    <ClipboardResources>
-        <Config />
-    </ClipboardResources>
-    <ClipboardItems>
-        <Application ID="e1aea998-6e34-4756-bba6-6c414a2ced98"
-                     Type="svc"
-                     Description="File Server Storage Reports Manager"
-                     FileName="C:\Windows\system32\srmhost.exe"
+<Configuration PolicyName="Garanti_Deneme.xml"
+               RevisionNumber="0"
+               Version="23.9.205"
+               ID="016a2de0-aa9b-4960-b20c-afbc1dbd1ee0"
+               ConfigRevision="2340">
+    <RegistryValues />
+    <ApplicationGroups>
+        <ApplicationGroup Name="IIS"
+                          Description=""
+                          ID="c21f788e-9dd1-4924-91e4-6ea9d9311e23">
+            <Application AppxPackageNameStringMatchType="Contains"
+                         FileName="%SystemRoot%\System32\services.msc"
+                         Type="msc"
+                         FileStringMatchTypeEx="Contains"
+                         ProductNameStringMatchType="Contains"
+                         ID="b9c90ff5-a095-408b-bfe3-ab6f81b951de"
+                         CertificateStringMatchType="Contains"
+                         FileStringMatchingType="Contains"
+                         UseSourceFileName="true"
+                         CertificateMatchCase="false"
+                         ProductDescStringMatchType="Contains"
+                         ServiceNameStringMatchType="Contains"
+                         ChildrenInheritToken="true"
+                         CheckFileName="true"
+                         AppxPackagePublisherStringMatchType="Contains"
+                         CmdStringMatchType="Contains"
+                         CodebaseStringMatchType="Contains"
+                         ServiceDisplayNameStringMatchType="Contains"
+                         Certificate="Microsoft Windows"
+                         Description="Services"
+                         FileStringMatchType="Contains"
+                         DisplayNameStringMatchType="Contains"
+                         URLStringMatchType="Contains"
+                         OpenDlgDropRights="true" />
+        </ApplicationGroup>
+        <ApplicationGroup Name="Splunk"
+                          Description=""
+                          ID="6eaadbeb-feb7-4b87-a2e7-72699e808079">
+            <Application AppxPackageNameStringMatchType="Contains"
+                         FileName="%SystemRoot%\System32\compmgmt.msc"
+                         Type="msc"
+                         FileStringMatchTypeEx="Contains"
+                         ProductNameStringMatchType="Contains"
+                         ID="d13e178c-5656-4c41-8eaa-52611ff23fe3"
+                         CertificateStringMatchType="Contains"
+                         FileStringMatchingType="Contains"
+                         UseSourceFileName="true"
+                         CertificateMatchCase="false"
+                         ProductDescStringMatchType="Contains"
+                         ServiceNameStringMatchType="Contains"
+                         ChildrenInheritToken="true"
+                         CheckFileName="true"
+                         AppxPackagePublisherStringMatchType="Contains"
+                         CmdStringMatchType="Contains"
+                         CodebaseStringMatchType="Contains"
+                         ServiceDisplayNameStringMatchType="Contains"
+                         Certificate="Microsoft Windows"
+                         Description="Computer Management (Console)"
+                         FileStringMatchType="Contains"
+                         DisplayNameStringMatchType="Contains"
+                         URLStringMatchType="Contains"
+                         OpenDlgDropRights="true" />
+        </ApplicationGroup>
+        <ApplicationGroup Name="failover"
+                          Description=""
+                          ID="9e301dc4-d836-4ece-857e-c8538a1bd6dd">
+            <Application AppxPackageNameStringMatchType="Contains"
+                         FileName="%SystemRoot%\system32\Cluadmin.msc"
+                         Type="msc"
+                         FileStringMatchTypeEx="Contains"
+                         ProductNameStringMatchType="Contains"
+                         ID="bc9d9480-3b41-4a79-a0af-f518525affee"
+                         CertificateStringMatchType="Contains"
+                         FileStringMatchingType="Contains"
+                         UseSourceFileName="true"
+                         ProductDescStringMatchType="Contains"
+                         ServiceNameStringMatchType="Contains"
+                         ChildrenInheritToken="true"
+                         CheckFileName="true"
+                         ChildApplicationGroup="9e301dc4-d836-4ece-857e-c8538a1bd6dd"
+                         AppxPackagePublisherStringMatchType="Contains"
+                         CmdStringMatchType="Contains"
+                         CodebaseStringMatchType="Contains"
+                         ServiceDisplayNameStringMatchType="Contains"
+                         CheckCertificate="true"
+                         Certificate="Microsoft Windows"
+                         Description="FailOver"
+                         FileStringMatchType="Contains"
+                         DisplayNameStringMatchType="Contains"
+                         URLStringMatchType="Contains" />
+            <Application AppxPackageNameStringMatchType="Contains"
+                         FileName="cmd.exe"
+                         Type="exe"
+                         FileStringMatchTypeEx="Contains"
+                         ProductNameStringMatchType="Contains"
+                         ID="8a2147de-ccaf-49ee-ae59-f5b969139231"
+                         CertificateStringMatchType="Contains"
+                         UseSourceFileName="true"
+                         ProductDescStringMatchType="Contains"
+                         ServiceNameStringMatchType="Contains"
+                         CheckFileName="true"
+                         AppxPackagePublisherStringMatchType="Contains"
+                         CmdStringMatchType="Contains"
+                         CodebaseStringMatchType="Contains"
+                         ServiceDisplayNameStringMatchType="Contains"
+                         Description="cmd.exe"
+                         FileStringMatchType="Contains"
+                         DisplayNameStringMatchType="Contains"
+                         URLStringMatchType="Contains"
+                         OpenDlgDropRights="true" />
+            <Application AppxPackageNameStringMatchType="Contains"
+                         FileName="dismhost.exe"
+                         Type="exe"
+                         FileStringMatchTypeEx="Contains"
+                         ProductNameStringMatchType="Contains"
+                         ID="6a02b873-095b-48a8-acff-dbacb343e430"
+                         CertificateStringMatchType="Contains"
+                         FileStringMatchingType="Contains"
+                         UseSourceFileName="true"
+                         ProductDescStringMatchType="Contains"
+                         ServiceNameStringMatchType="Contains"
+                         ChildrenInheritToken="true"
+                         CheckFileName="true"
+                         AppxPackagePublisherStringMatchType="Contains"
+                         CmdStringMatchType="Contains"
+                         CodebaseStringMatchType="Contains"
+                         ServiceDisplayNameStringMatchType="Contains"
+                         Description="dismhost.exe"
+                         FileStringMatchType="Contains"
+                         DisplayNameStringMatchType="Contains"
+                         URLStringMatchType="Contains" />
+            <Application AppxPackageNameStringMatchType="Contains"
+                         FileName="dism"
+                         Type="exe"
+                         FileStringMatchTypeEx="Contains"
+                         ProductNameStringMatchType="Contains"
+                         ID="8bf0ee44-66df-4ac2-b693-f804d0b92e60"
+                         CertificateStringMatchType="Contains"
+                         FileStringMatchingType="Contains"
+                         UseSourceFileName="true"
+                         ProductDescStringMatchType="Contains"
+                         ServiceNameStringMatchType="Contains"
+                         ChildrenInheritToken="true"
+                         CheckFileName="true"
+                         AppxPackagePublisherStringMatchType="Contains"
+                         CmdStringMatchType="Contains"
+                         CodebaseStringMatchType="Contains"
+                         ServiceDisplayNameStringMatchType="Contains"
+                         Description="dism"
+                         FileStringMatchType="Contains"
+                         DisplayNameStringMatchType="Contains"
+                         URLStringMatchType="Contains" />
+            <Application AppxPackageNameStringMatchType="Contains"
+                         Type="com"
+                         FileStringMatchTypeEx="Contains"
+                         ProductNameStringMatchType="Contains"
+                         ID="8046c045-ab22-4d86-bbd3-ab9a31090ff3"
+                         CertificateStringMatchType="Contains"
+                         FileStringMatchingType="Contains"
+                         UseSourceFileName="true"
+                         CheckElevationIsRequired="true"
+                         ProductDescStringMatchType="Contains"
+                         ServiceNameStringMatchType="Contains"
+                         CLSID="{EB36AFE2-4D83-470D-A678-640A336812AD}"
+                         AppxPackagePublisherStringMatchType="Contains"
+                         CmdStringMatchType="Contains"
+                         CodebaseStringMatchType="Contains"
+                         ServiceDisplayNameStringMatchType="Contains"
+                         Description="COM Class {EB36AFE2-4D83-470D-A678-640A336812AD}"
+                         FileStringMatchType="Contains"
+                         DisplayNameStringMatchType="Contains"
+                         CheckCLSID="true"
+                         URLStringMatchType="Contains"
+                         OpenDlgDropRights="true" />
+            <Application AppxPackageNameStringMatchType="Contains"
+                         FileName=""
+                         Type="exe"
+                         FileStringMatchTypeEx="Contains"
+                         ProductNameStringMatchType="Contains"
+                         ID="73d9b921-f0d1-4363-8de5-26306fdc3e77"
+                         CertificateStringMatchType="Contains"
+                         FileStringMatchingType="Contains"
+                         UseSourceFileName="true"
+                         ProductDescStringMatchType="Contains"
+                         ServiceNameStringMatchType="Contains"
+                         FileHash="9FD99403B433857F23B71EE58AAA4FCC0577A16E"
+                         AppxPackagePublisherStringMatchType="Contains"
+                         CmdStringMatchType="Contains"
+                         CodebaseStringMatchType="Contains"
+                         ServiceDisplayNameStringMatchType="Contains"
+                         Description="Executable"
+                         FileStringMatchType="Contains"
+                         CheckFileHash="true"
+                         DisplayNameStringMatchType="Contains"
+                         URLStringMatchType="Contains"
+                         OpenDlgDropRights="true" />
+            <Application AppxPackageNameStringMatchType="Contains"
+                         FileName=""
+                         Type="exe"
+                         FileStringMatchTypeEx="Contains"
+                         ProductNameStringMatchType="Contains"
+                         ID="f728dcd7-4053-4be8-bf60-b615d342594f"
+                         CertificateStringMatchType="Contains"
+                         FileStringMatchingType="Contains"
+                         UseSourceFileName="true"
+                         ProductDescStringMatchType="Contains"
+                         CheckFileHashSha256="true"
+                         ServiceNameStringMatchType="Contains"
+                         FileHashSha256="AED9C922FD6BF7A21FDD96DFE6C16280C267A5309950FD92F2B6DF6A743AF8CD"
+                         AppxPackagePublisherStringMatchType="Contains"
+                         CmdStringMatchType="Contains"
+                         CodebaseStringMatchType="Contains"
+                         ServiceDisplayNameStringMatchType="Contains"
+                         Description="Executable"
+                         FileStringMatchType="Contains"
+                         DisplayNameStringMatchType="Contains"
+                         URLStringMatchType="Contains"
+                         OpenDlgDropRights="true" />
+            <Application AppxPackageNameStringMatchType="Contains"
+                         Type="com"
+                         FileStringMatchTypeEx="Contains"
+                         ProductNameStringMatchType="Contains"
+                         ID="7905811c-ce7b-49c6-9aa6-597844151fc5"
+                         CertificateStringMatchType="Contains"
+                         FileStringMatchingType="Contains"
+                         UseSourceFileName="true"
+                         CheckElevationIsRequired="true"
+                         ProductDescStringMatchType="Contains"
+                         ServiceNameStringMatchType="Contains"
+                         CLSID="{4D111E08-CBF7-4F12-A926-2C7920AF52FC}"
+                         AppxPackagePublisherStringMatchType="Contains"
+                         CmdStringMatchType="Contains"
+                         CodebaseStringMatchType="Contains"
+                         ServiceDisplayNameStringMatchType="Contains"
+                         Description="COM Class {4D111E08-CBF7-4F12-A926-2C7920AF52FC}"
+                         FileStringMatchType="Contains"
+                         DisplayNameStringMatchType="Contains"
+                         CheckCLSID="true"
+                         URLStringMatchType="Contains"
+                         OpenDlgDropRights="true" />
+        </ApplicationGroup>
+        <ApplicationGroup Name="AdminRights"
+                          Description=""
+                          ID="02a41f2c-c406-4642-b51a-27a4f43dfbec">
+            <Application AppxPackageNameStringMatchType="Contains"
+                         FileName="*"
+                         Type="exe"
+                         FileStringMatchTypeEx="Contains"
+                         ProductNameStringMatchType="Contains"
+                         ID="2570c91e-2e23-4184-b406-7970da74ef7a"
+                         CertificateStringMatchType="Contains"
+                         UseSourceFileName="true"
+                         ProductDescStringMatchType="Contains"
+                         ServiceNameStringMatchType="Contains"
+                         ChildrenInheritToken="true"
+                         CheckFileName="true"
+                         AppxPackagePublisherStringMatchType="Contains"
+                         CmdStringMatchType="Contains"
+                         CodebaseStringMatchType="Contains"
+                         ServiceDisplayNameStringMatchType="Contains"
+                         Description="*"
+                         FileStringMatchType="Contains"
+                         DisplayNameStringMatchType="Contains"
+                         URLStringMatchType="Contains"
+                         OpenDlgDropRights="true" />
+            <Application AppxPackageNameStringMatchType="Contains"
+                         FileName="*"
+                         Type="cpl"
+                         FileStringMatchTypeEx="Contains"
+                         ProductNameStringMatchType="Contains"
+                         ID="f53efee0-6e5c-4afa-8f3f-45e8223df958"
+                         CertificateStringMatchType="Contains"
+                         UseSourceFileName="true"
+                         ProductDescStringMatchType="Contains"
+                         ServiceNameStringMatchType="Contains"
+                         CheckFileName="true"
+                         AppxPackagePublisherStringMatchType="Contains"
+                         CmdStringMatchType="Contains"
+                         CodebaseStringMatchType="Contains"
+                         ServiceDisplayNameStringMatchType="Contains"
+                         Description="*"
+                         FileStringMatchType="Contains"
+                         DisplayNameStringMatchType="Contains"
+                         URLStringMatchType="Contains"
+                         OpenDlgDropRights="true" />
+            <Application AppxPackageNameStringMatchType="Contains"
+                         FileName="*"
+                         Type="msc"
+                         FileStringMatchTypeEx="Contains"
+                         ProductNameStringMatchType="Contains"
+                         ID="4973b83a-1467-4d42-9077-c4b9bec558f4"
+                         CertificateStringMatchType="Contains"
+                         UseSourceFileName="true"
+                         ProductDescStringMatchType="Contains"
+                         ServiceNameStringMatchType="Contains"
+                         CheckFileName="true"
+                         AppxPackagePublisherStringMatchType="Contains"
+                         CmdStringMatchType="Contains"
+                         CodebaseStringMatchType="Contains"
+                         ServiceDisplayNameStringMatchType="Contains"
+                         Description="*"
+                         FileStringMatchType="Contains"
+                         DisplayNameStringMatchType="Contains"
+                         URLStringMatchType="Contains"
+                         OpenDlgDropRights="true" />
+            <Application AppxPackageNameStringMatchType="Contains"
+                         FileName="*"
+                         Type="msi"
+                         FileStringMatchTypeEx="Contains"
+                         ProductNameStringMatchType="Contains"
+                         ID="e5e5379c-b2e0-4f38-904f-f2fb60827986"
+                         CertificateStringMatchType="Contains"
+                         UseSourceFileName="true"
+                         ProductDescStringMatchType="Contains"
+                         ServiceNameStringMatchType="Contains"
+                         ChildrenInheritToken="true"
+                         CheckFileName="true"
+                         AppxPackagePublisherStringMatchType="Contains"
+                         CmdStringMatchType="Contains"
+                         CodebaseStringMatchType="Contains"
+                         ServiceDisplayNameStringMatchType="Contains"
+                         Description="*"
+                         FileStringMatchType="Contains"
+                         DisplayNameStringMatchType="Contains"
+                         URLStringMatchType="Contains"
+                         OpenDlgDropRights="true" />
+            <Application AppxPackageNameStringMatchType="Contains"
+                         FileName=""
+                         Type="svc"
+                         FileStringMatchTypeEx="Contains"
+                         ProductNameStringMatchType="Contains"
+                         ID="fcaf5863-bdea-4d25-9499-d0fbc8344ab5"
+                         CertificateStringMatchType="Contains"
+                         UseSourceFileName="true"
+                         ProductDescStringMatchType="Contains"
+                         ServiceNameStringMatchType="Contains"
+                         ServiceStop="true"
+                         ServiceStart="true"
+                         AppxPackagePublisherStringMatchType="Contains"
+                         CmdStringMatchType="Contains"
+                         CodebaseStringMatchType="Contains"
+                         ServiceDisplayNameStringMatchType="Contains"
+                         ServiceConfigure="true"
+                         Description="*"
+                         CheckServiceName="true"
+                         FileStringMatchType="Contains"
+                         ServicePause="true"
+                         DisplayNameStringMatchType="Contains"
+                         URLStringMatchType="Contains"
+                         ServiceName="*" />
+        </ApplicationGroup>
+    </ApplicationGroups>
+    <MessagePoliciesOSX />
+    <Policies>
+        <Policy Description=""
+                AuditCancelEvents="true"
+                FeatureVisibility="63"
+                Name="TestFailOver"
+                GlobalOptionsSet="af04cd52-32a1-4023-a937-08e10f058450"
+                ID="73bf8492-3006-4e98-a692-8cb50e91665b">
+            <GeneralRules>
+                <RemoteManagementConnectionRule Configured="Enabled" />
+                <EmailAttachmentsRule Configured="Not Configured" />
+                <ProhibitAccountMgmtRule Configured="Enabled" />
+                <AllowClassifyContentRule Configured="Not Configured" />
+                <AutomaticallyClassifyDocumentsRule Configured="Not Configured" />
+                <CaptureUserInfoRule Configured="Enabled" />
+                <CaptureHostInfoRule Configured="Enabled" />
+            </GeneralRules>
+            <ContentAssignments />
+            <Filters FiltersLogic="and">
+                <AccountsFilter InverseFilter="true">
+                    <Accounts>
+                        <Account Name="Administrators"
+                                 SID="S-1-5-32-544"
+                                 Group="true" />
+                    </Accounts>
+                </AccountsFilter>
+            </Filters>
+            <PrivilegeMonitoring LogActivity="true"
+                                 MaxRecords="100"
+                                 ActivityLevel="Activity"
+                                 KeepLogs="14"
+                                 LogEvent="true" />
+            <MicrosoftBlockRules Configured="Disabled"
+                                 Audit="On"
+                                 BlockUntrustedDlls="true">
+                <MicrosoftBlockRulesExclusion Value="020bfea4-ced4-4710-802f-fd289cf4fdf5" />
+                <MicrosoftBlockRulesExclusion Value="b03f3e0c-12d7-4d2d-a596-c5e971551d0e" />
+                <MicrosoftBlockRulesExclusion Value="b7aefd8c-58ea-4fcd-9643-8ba9edd72bb5" />
+                <MicrosoftBlockRulesExclusion Value="a2dbcb15-efa5-4aad-b137-9a3cb1677027" />
+                <MicrosoftBlockRulesExclusion Value="83cabee9-867e-4e86-a76f-51220338fff8" />
+                <MicrosoftBlockRulesExclusion Value="3a599163-d4ed-404a-a8a8-1b0decd472a3" />
+            </MicrosoftBlockRules>
+            <ShellExtension HideRunAs="true"
+                            DefaultLanguage="en"
+                            EnabledRunAs="true"
+                            Menu="Run with Privilege Management"
+                            Enabled="true">
+                <MenuStrings>
+                    <MenuString Text="Run with Privilege Management"
+                                LangID="en" />
+                </MenuStrings>
+                <ApplicationAssignments>
+                    <ApplicationAssignment TokenTypeV2="AddAdmin"
+                                           Sandbox="None"
+                                           Message="ff211f20-b3de-4d05-950e-13d1dcc261cd"
+                                           PrivilegeMonitoring="On"
+                                           ForwardBeyondInsightReports="true"
+                                           MessageType="On"
+                                           Audit="On"
+                                           ApplicationGroup="9e301dc4-d836-4ece-857e-c8538a1bd6dd"
+                                           ForwardBeyondInsight="true"
+                                           Action="Allow"
+                                           ID="e45cdd9d-741e-490d-87d1-9f5f38b31a0c"
+                                           TokenType="AddAdmin"
+                                           TokenTypeV3="AddAdmin" />
+                </ApplicationAssignments>
+            </ShellExtension>
+            <Accounts />
+            <URLAssignments />
+            <ApplicationAssignments>
+                <ApplicationAssignment TokenTypeV2="AddAdmin"
+                                       PowerRulesScript="43a1f6db-da3b-42c1-b7dd-08602d5aaebf"
+                                       Sandbox="None"
+                                       PrivilegeMonitoring="On"
+                                       RunAsPasswordSafeUsername="beyondtrust\administrator"
+                                       ForwardBeyondInsightReports="true"
+                                       MessageType="Off"
+                                       Audit="On"
+                                       ApplicationGroup="9e301dc4-d836-4ece-857e-c8538a1bd6dd"
+                                       ForwardBeyondInsight="true"
+                                       Action="Allow"
+                                       ID="7970b88a-c048-4ce2-9ef0-135fa1738ba8"
+                                       TokenType="AddAdmin"
+                                       TokenTypeV3="AddAdmin" />
+            </ApplicationAssignments>
+        </Policy>
+        <Policy Description=""
+                AuditCancelEvents="true"
+                FeatureVisibility="63"
+                Name="Admins"
+                Disabled="true"
+                GlobalOptionsSet="af04cd52-32a1-4023-a937-08e10f058450"
+                ID="ab67eac2-c988-4a67-86b9-e31578cf2399">
+            <GeneralRules>
+                <RemoteManagementConnectionRule Configured="Not Configured" />
+                <EmailAttachmentsRule Configured="Not Configured" />
+                <ProhibitAccountMgmtRule Configured="Not Configured" />
+                <AllowClassifyContentRule Configured="Not Configured" />
+                <AutomaticallyClassifyDocumentsRule Configured="Not Configured" />
+                <CaptureUserInfoRule Configured="Enabled" />
+                <CaptureHostInfoRule Configured="Enabled" />
+            </GeneralRules>
+            <ContentAssignments />
+            <Filters FiltersLogic="and">
+                <AccountsFilter>
+                    <Accounts>
+                        <Account Name="Administrators"
+                                 SID="S-1-5-32-544"
+                                 Group="true" />
+                    </Accounts>
+                </AccountsFilter>
+            </Filters>
+            <PrivilegeMonitoring MaxRecords="100"
+                                 ActivityLevel="Activity"
+                                 KeepLogs="14"
+                                 LogEvent="true" />
+            <MicrosoftBlockRules Configured="Not Configured"
+                                 Audit="On"
+                                 BlockUntrustedDlls="true">
+                <MicrosoftBlockRulesExclusion Value="020bfea4-ced4-4710-802f-fd289cf4fdf5" />
+                <MicrosoftBlockRulesExclusion Value="b03f3e0c-12d7-4d2d-a596-c5e971551d0e" />
+                <MicrosoftBlockRulesExclusion Value="b7aefd8c-58ea-4fcd-9643-8ba9edd72bb5" />
+                <MicrosoftBlockRulesExclusion Value="a2dbcb15-efa5-4aad-b137-9a3cb1677027" />
+                <MicrosoftBlockRulesExclusion Value="83cabee9-867e-4e86-a76f-51220338fff8" />
+                <MicrosoftBlockRulesExclusion Value="3a599163-d4ed-404a-a8a8-1b0decd472a3" />
+            </MicrosoftBlockRules>
+            <ShellExtension DefaultLanguage="en"
+                            Menu="Run with Privilege Management">
+                <MenuStrings>
+                    <MenuString Text="Run with Privilege Management"
+                                LangID="en" />
+                </MenuStrings>
+                <ApplicationAssignments />
+            </ShellExtension>
+            <Accounts />
+            <URLAssignments />
+            <ApplicationAssignments>
+                <ApplicationAssignment TokenTypeV2="AddAdmin"
+                                       Sandbox="None"
+                                       PrivilegeMonitoring="On"
+                                       ForwardBeyondInsightReports="true"
+                                       MessageType="Off"
+                                       Audit="On"
+                                       ApplicationGroup="02a41f2c-c406-4642-b51a-27a4f43dfbec"
+                                       ForwardBeyondInsight="true"
+                                       Action="Allow"
+                                       ID="184dad1b-d723-4d12-b428-ef84487e1f98"
+                                       TokenType="AddAdmin"
+                                       TokenTypeV3="AddAdmin" />
+            </ApplicationAssignments>
+        </Policy>
+        <Policy Description=""
+                FeatureVisibility="63"
+                Name="IIS"
+                Disabled="true"
+                GlobalOptionsSet="af04cd52-32a1-4023-a937-08e10f058450"
+                ID="087160ce-ff89-4fee-9993-4239ffd83dfa">
+            <GeneralRules>
+                <RemoteManagementConnectionRule Configured="Not Configured" />
+                <EmailAttachmentsRule Configured="Not Configured" />
+                <ProhibitAccountMgmtRule Configured="Not Configured" />
+                <AllowClassifyContentRule Configured="Not Configured" />
+                <AutomaticallyClassifyDocumentsRule Configured="Not Configured" />
+                <CaptureUserInfoRule Configured="Not Configured" />
+                <CaptureHostInfoRule Configured="Not Configured" />
+            </GeneralRules>
+            <ContentAssignments />
+            <Filters FiltersLogic="and">
+                <DeviceFilter>
+                    <Devices>
+                        <DeviceHostName HostName="EC2AMAZ-072D9VV" />
+                    </Devices>
+                </DeviceFilter>
+            </Filters>
+            <PrivilegeMonitoring MaxRecords="100"
+                                 ActivityLevel="Activity"
+                                 KeepLogs="14"
+                                 LogEvent="true" />
+            <MicrosoftBlockRules Configured="Not Configured"
+                                 Audit="On"
+                                 BlockUntrustedDlls="true">
+                <MicrosoftBlockRulesExclusion Value="020bfea4-ced4-4710-802f-fd289cf4fdf5" />
+                <MicrosoftBlockRulesExclusion Value="b03f3e0c-12d7-4d2d-a596-c5e971551d0e" />
+                <MicrosoftBlockRulesExclusion Value="b7aefd8c-58ea-4fcd-9643-8ba9edd72bb5" />
+                <MicrosoftBlockRulesExclusion Value="a2dbcb15-efa5-4aad-b137-9a3cb1677027" />
+                <MicrosoftBlockRulesExclusion Value="83cabee9-867e-4e86-a76f-51220338fff8" />
+                <MicrosoftBlockRulesExclusion Value="3a599163-d4ed-404a-a8a8-1b0decd472a3" />
+            </MicrosoftBlockRules>
+            <ShellExtension DefaultLanguage="en"
+                            Menu="Run with Privilege Management">
+                <MenuStrings>
+                    <MenuString Text="Run with Privilege Management"
+                                LangID="en" />
+                </MenuStrings>
+                <ApplicationAssignments />
+            </ShellExtension>
+            <Accounts />
+            <URLAssignments />
+            <ApplicationAssignments>
+                <ApplicationAssignment TokenTypeV2="AddAdminReducedPrivs"
+                                       Sandbox="None"
+                                       PrivilegeMonitoring="Off"
+                                       ForwardBeyondInsightReports="true"
+                                       MessageType="Off"
+                                       Audit="On"
+                                       ApplicationGroup="c21f788e-9dd1-4924-91e4-6ea9d9311e23"
+                                       ForwardBeyondInsight="true"
+                                       Action="Allow"
+                                       ID="660cefca-55a5-4159-a191-da08bd415ac2"
+                                       TokenType="AddAdmin"
+                                       TokenTypeV3="AddAdminReducedPrivs" />
+            </ApplicationAssignments>
+        </Policy>
+        <Policy Description=""
+                FeatureVisibility="63"
+                Name="splunk"
+                Disabled="true"
+                GlobalOptionsSet="af04cd52-32a1-4023-a937-08e10f058450"
+                ID="f3ef22a2-8459-4cad-ad07-3b6165967860">
+            <GeneralRules>
+                <RemoteManagementConnectionRule Configured="Not Configured" />
+                <EmailAttachmentsRule Configured="Not Configured" />
+                <ProhibitAccountMgmtRule Configured="Not Configured" />
+                <AllowClassifyContentRule Configured="Not Configured" />
+                <AutomaticallyClassifyDocumentsRule Configured="Not Configured" />
+                <CaptureUserInfoRule Configured="Not Configured" />
+                <CaptureHostInfoRule Configured="Not Configured" />
+            </GeneralRules>
+            <ContentAssignments />
+            <Filters FiltersLogic="and">
+                <DeviceFilter>
+                    <Devices>
+                        <DeviceHostName HostName="FAILOVERCLUSTER2" />
+                    </Devices>
+                </DeviceFilter>
+            </Filters>
+            <PrivilegeMonitoring MaxRecords="100"
+                                 ActivityLevel="Activity"
+                                 KeepLogs="14"
+                                 LogEvent="true" />
+            <MicrosoftBlockRules Configured="Not Configured"
+                                 Audit="On"
+                                 BlockUntrustedDlls="true">
+                <MicrosoftBlockRulesExclusion Value="020bfea4-ced4-4710-802f-fd289cf4fdf5" />
+                <MicrosoftBlockRulesExclusion Value="b03f3e0c-12d7-4d2d-a596-c5e971551d0e" />
+                <MicrosoftBlockRulesExclusion Value="b7aefd8c-58ea-4fcd-9643-8ba9edd72bb5" />
+                <MicrosoftBlockRulesExclusion Value="a2dbcb15-efa5-4aad-b137-9a3cb1677027" />
+                <MicrosoftBlockRulesExclusion Value="83cabee9-867e-4e86-a76f-51220338fff8" />
+                <MicrosoftBlockRulesExclusion Value="3a599163-d4ed-404a-a8a8-1b0decd472a3" />
+            </MicrosoftBlockRules>
+            <ShellExtension DefaultLanguage="en"
+                            Menu="Run with Privilege Management">
+                <MenuStrings>
+                    <MenuString Text="Run with Privilege Management"
+                                LangID="en" />
+                </MenuStrings>
+                <ApplicationAssignments />
+            </ShellExtension>
+            <Accounts />
+            <URLAssignments />
+            <ApplicationAssignments>
+                <ApplicationAssignment TokenTypeV2="AddAdminReducedPrivs"
+                                       Sandbox="None"
+                                       PrivilegeMonitoring="Off"
+                                       ForwardBeyondInsightReports="true"
+                                       MessageType="Off"
+                                       Audit="On"
+                                       ApplicationGroup="6eaadbeb-feb7-4b87-a2e7-72699e808079"
+                                       ForwardBeyondInsight="true"
+                                       Action="Allow"
+                                       ID="fd0971ed-1827-4452-bbef-5c8f0f0883e8"
+                                       TokenType="AddAdmin"
+                                       TokenTypeV3="AddAdminReducedPrivs" />
+            </ApplicationAssignments>
+        </Policy>
+        <Policy Description=""
+                AuditCancelEvents="true"
+                FeatureVisibility="63"
+                Name="monitoringTest"
+                Disabled="true"
+                GlobalOptionsSet="af04cd52-32a1-4023-a937-08e10f058450"
+                ID="5e291f19-17e5-4d27-83f7-438704bda13f">
+            <GeneralRules>
+                <RemoteManagementConnectionRule Configured="Enabled" />
+                <EmailAttachmentsRule Configured="Not Configured" />
+                <ProhibitAccountMgmtRule Configured="Enabled" />
+                <AllowClassifyContentRule Configured="Not Configured" />
+                <AutomaticallyClassifyDocumentsRule Configured="Not Configured" />
+                <CaptureUserInfoRule Configured="Enabled" />
+                <CaptureHostInfoRule Configured="Enabled" />
+            </GeneralRules>
+            <ContentAssignments />
+            <Filters FiltersLogic="and" />
+            <PrivilegeMonitoring LogActivity="true"
+                                 MaxRecords="100"
+                                 ActivityLevel="Activity"
+                                 KeepLogs="14"
+                                 LogEvent="true" />
+            <MicrosoftBlockRules Configured="Not Configured"
+                                 Audit="On"
+                                 BlockUntrustedDlls="true">
+                <MicrosoftBlockRulesExclusion Value="020bfea4-ced4-4710-802f-fd289cf4fdf5" />
+                <MicrosoftBlockRulesExclusion Value="b03f3e0c-12d7-4d2d-a596-c5e971551d0e" />
+                <MicrosoftBlockRulesExclusion Value="b7aefd8c-58ea-4fcd-9643-8ba9edd72bb5" />
+                <MicrosoftBlockRulesExclusion Value="a2dbcb15-efa5-4aad-b137-9a3cb1677027" />
+                <MicrosoftBlockRulesExclusion Value="83cabee9-867e-4e86-a76f-51220338fff8" />
+                <MicrosoftBlockRulesExclusion Value="3a599163-d4ed-404a-a8a8-1b0decd472a3" />
+            </MicrosoftBlockRules>
+            <ShellExtension DefaultLanguage="en"
+                            Menu="Run with Privilege Management">
+                <MenuStrings>
+                    <MenuString Text="Run with Privilege Management"
+                                LangID="en" />
+                </MenuStrings>
+                <ApplicationAssignments />
+            </ShellExtension>
+            <Accounts />
+            <URLAssignments />
+            <ApplicationAssignments>
+                <ApplicationAssignment TokenTypeV2="AddAdminReducedPrivs"
+                                       Sandbox="None"
+                                       PrivilegeMonitoring="Off"
+                                       ForwardBeyondInsightReports="true"
+                                       MessageType="Off"
+                                       Audit="On"
+                                       ApplicationGroup="99b2c671-301b-422c-963e-c2055a5d4981"
+                                       ForwardBeyondInsight="true"
+                                       Action="Allow"
+                                       ID="e694fbc0-86b7-46f0-9537-ef17982699fd"
+                                       TokenType="AddAdmin"
+                                       TokenTypeV3="AddAdminReducedPrivs" />
+            </ApplicationAssignments>
+        </Policy>
+    </Policies>
+    <MessagePolicies>
+        <MessagePolicy Reason="None"
+                       ShowCancel="true"
+                       ChallengeResponseRetention="Once"
+                       MaxCRFailures="0"
+                       IdpSuppressionDuration="0"
+                       ShowLineThree="true"
+                       _Parent="MessagePolicies"
+                       ID="ff211f20-b3de-4d05-950e-13d1dcc261cd"
+                       ChallengeResponseType="None"
+                       OKAction="Proceed"
+                       MessageMode="Automatic"
+                       Name="Allow Message (Elevate)"
+                       ShowLineOne="true"
+                       HeaderType="Default"
+                       DefaultPreview="Custom"
+                       IdpAuthTypes="0"
+                       CustomHeaderImage="423cfe00-ec37-4f61-8c11-e1f3c2b9380a"
+                       Description="Simple confirmation before elevating privileges"
+                       HeaderBgType="CustomImage"
+                       ShowCRInfoTip="true"
+                       EmailSubject="Privilege Management - User request for privilege elevation"
+                       ChallengeResponseTypeV2="None"
+                       DefaultLanguage="en"
+                       ShowLineTwo="true"
+                       AuthNRequirements="0"
+                       HeaderColor2="0xffffffff"
+                       EmailTo="name@company"
+                       HeaderColor1="0x802700"
+                       PasswordCheck="None"
+                       ShowOnIsolatedDesktop="true"
+                       AuthenticationType="Any"
+                       HeaderFontColor="0x000000">
+            <MessageStrings BodyDenied="Body denied goes here..."
+                            CrMaxFailsError="You have exceeded the allowed number of Challenge / Response attempts"
+                            PublisherNotVerifiedAppend="(Verification Failed)"
+                            SmartCardInsert="Insert a smart card"
+                            BodyPending="Body pending goes here..."
+                            RequestCr="Enter Response Code"
+                            RadiusPasswordText="Password"
+                            CrChallenge="Code"
+                            HeaderApproved="Header approved goes here..."
+                            InvalidPassword="Invalid password"
+                            Caption="IT Security Policy"
+                            RequestStateText="For more information see request reference [SNOW_TICKET_LINK]"
+                            Body="You are about to run this [PG_PROG_TYPE] with admin rights. Are you sure you wish to proceed?"
+                            InvalidCredentials="You have entered incorrect credentials"
+                            HelloPopupMessage="Authentication required"
+                            IdpFailedError="Authentication failed. Try again or contact your Administrator for assistance"
+                            Password="Password"
+                            RequestButton="Request"
+                            SmartCardReadingCert="Reading smart card ..."
+                            SmartCardHint="Hint"
+                            HeaderDenied="Header denied goes here..."
+                            ProgramName="Program Name"
+                            PublisherUnknown="Unknown"
+                            BodyRequest="Body request goes here..."
+                            OKButton="Yes"
+                            ReferText="Click here to find out why this has happened"
+                            RadiusDefaultChallengeText="Enter your challenge code"
+                            ReferURL="http://&lt;your_intranet>/about_elevation.aspx"
+                            IdpIncompleteError="Please complete authentication with your Identity Provider before continuing"
+                            RequestReason="Please provide a reason"
+                            DropDownReasonPrompt="Select a reason"
+                            SmartCardWrongCert="Certificate must belong to the current user"
+                            IdpLink="Authenticate with your Identity Provider"
+                            RadiusUsernameText="Username"
+                            HeaderRequest="Header request goes here..."
+                            AND="AND"
+                            Domain="Domain:"
+                            Header="Confirm Elevation"
+                            HelloLink="Authenticate with Windows Hello"
+                            HeaderPending="Header pending goes here..."
+                            ProgramPublisherNotVerifiedAppend="Unknown"
+                            RadiusPromptText="Please enter your Multifactor Authentication credentials"
+                            BodyApproved="Body approved goes here..."
+                            CrError="You have entered an incorrect Response Code"
+                            SmartCardNoCert="No certificate on smart card"
+                            SmartCardError="Smart card error"
+                            RadiusInProgressText="Authentication in progress"
+                            CancelButton="No"
+                            HelloHeader="Windows Hello"
+                            RequestReferText="For more information see request reference"
+                            ReasonError="You must provide a reason before continuing"
+                            LangID="en"
+                            IdpPendingState="Please check your browser to authenticate"
+                            HelloAuthenticationSuccess="Authenticated"
+                            OR="OR"
+                            IdpCompletedState="Authenticated"
+                            SmartCardPin="Pin"
+                            UnauthorizedCredentials="You have entered unauthorized credentials"
+                            HelloInProgress="Authentication in progress"
+                            ProgramPublisher="Program Publisher"
+                            ProgramPath="Program Path"
+                            CrInfoTip="To get a Response Code contact IT Support and quote the number shown on the screen"
+                            IdpHeader="Multifactor Authentication"
+                            Username="Username">
+                <PredefinedReasons>
+                    <PredefinedReason Text="One-off Task: I need to install an application" />
+                    <PredefinedReason Text="One-off Task: I need to run an application" />
+                    <PredefinedReason Text="One-off Task: I need to change a Windows setting" />
+                    <PredefinedReason Text="One-off Task: I'm troubleshooting an application that does not work correctly" />
+                    <PredefinedReason Text="Regular Task: I need to run an application" />
+                    <PredefinedReason Text="Regular Task: I need to perform this action as a routine/frequent part of my role" />
+                    <PredefinedReason Text="Other: Reason not listed" />
+                </PredefinedReasons>
+                <MessageLabels>
+                    <Labels LineTwoLabel="Program Publisher"
+                            LineTwoValue="[PG_PROG_PUBLISHER]"
+                            MessageType="Application"
+                            LineOneValue="[PG_PROG_NAME]"
+                            LineThreeValue="[PG_PROG_PATH]"
+                            LineOneLabel="Program Name"
+                            LineThreeLabel="Program Path" />
+                    <Labels LineTwoLabel="Content Owner"
+                            LineTwoValue="[PG_CONTENT_FILE_OWNER]"
+                            MessageType="Content"
+                            LineOneValue="[PG_CONTENT_FILE_PATH]"
+                            LineThreeValue="[PG_PROG_PATH]"
+                            LineOneLabel="Content Name"
+                            LineThreeLabel="Content Program" />
+                    <Labels LineTwoLabel="Program Publisher"
+                            LineTwoValue="[PG_PROG_PUBLISHER]"
+                            MessageType="Custom"
+                            LineOneValue="[PG_PROG_NAME]"
+                            LineThreeValue="[PG_PROG_PATH]"
+                            LineOneLabel="Program Name"
+                            LineThreeLabel="Program Path" />
+                </MessageLabels>
+            </MessageStrings>
+            <OtherUserAuthentication />
+            <OtherAzureUserAuthentication />
+        </MessagePolicy>
+        <MessagePolicy Reason="None"
+                       ShowCancel="true"
+                       ChallengeResponseRetention="Once"
+                       MaxCRFailures="0"
+                       IdpSuppressionDuration="0"
+                       ShowLineThree="true"
+                       _Parent="MessagePolicies"
+                       ID="bcf04806-a523-4435-8912-9ff70d07131b"
+                       ChallengeResponseType="None"
+                       OKAction="Proceed"
+                       MessageMode="Automatic"
+                       Name="Allow Message (Elevate) - ON DEMAND"
+                       ShowLineOne="true"
+                       HeaderType="Default"
+                       DefaultPreview="Custom"
+                       IdpAuthTypes="0"
+                       CustomHeaderImage="423cfe00-ec37-4f61-8c11-e1f3c2b9380a"
+                       Description="Simple confirmation before elevating privileges"
+                       HeaderBgType="CustomImage"
+                       ShowCRInfoTip="true"
+                       EmailSubject="Privilege Management - User request for privilege elevation"
+                       ChallengeResponseTypeV2="None"
+                       DefaultLanguage="en"
+                       ShowLineTwo="true"
+                       AuthNRequirements="0"
+                       HeaderColor2="0xffffffff"
+                       EmailTo="name@company"
+                       HeaderColor1="0x802700"
+                       PasswordCheck="None"
+                       ShowOnIsolatedDesktop="true"
+                       AuthenticationType="Any"
+                       HeaderFontColor="0x0">
+            <MessageStrings BodyDenied="Body denied goes here..."
+                            CrMaxFailsError="You have exceeded the allowed number of Challenge / Response attempts"
+                            PublisherNotVerifiedAppend="(Verification Failed)"
+                            SmartCardInsert="Insert a smart card"
+                            BodyPending="Body pending goes here..."
+                            RequestCr="Enter Response Code"
+                            RadiusPasswordText="Password"
+                            CrChallenge="Code"
+                            HeaderApproved="Header approved goes here..."
+                            InvalidPassword="Invalid password"
+                            Caption="IT Security Policy - ON DEMAND"
+                            RequestStateText="For more information see request reference [SNOW_TICKET_LINK]"
+                            Body="You are about to run this [PG_PROG_TYPE] with admin rights. Are you sure you wish to proceed?"
+                            InvalidCredentials="You have entered incorrect credentials"
+                            HelloPopupMessage="Authentication required"
+                            IdpFailedError="Authentication failed. Try again or contact your Administrator for assistance"
+                            Password="Password"
+                            RequestButton="Request"
+                            SmartCardReadingCert="Reading smart card ..."
+                            SmartCardHint="Hint"
+                            HeaderDenied="Header denied goes here..."
+                            ProgramName="Program Name"
+                            PublisherUnknown="Unknown"
+                            BodyRequest="Body request goes here..."
+                            OKButton="Yes"
+                            ReferText="Click here to find out why this has happened"
+                            RadiusDefaultChallengeText="Enter your challenge code"
+                            ReferURL="http://&lt;your_intranet>/about_elevation.aspx"
+                            IdpIncompleteError="Please complete authentication with your Identity Provider before continuing"
+                            RequestReason="Please provide a reason"
+                            DropDownReasonPrompt="Select a reason"
+                            SmartCardWrongCert="Certificate must belong to the current user"
+                            IdpLink="Authenticate with your Identity Provider"
+                            RadiusUsernameText="Username"
+                            HeaderRequest="Header request goes here..."
+                            AND="AND"
+                            Domain="Domain:"
+                            Header="Confirm Elevation - ON DEMAND"
+                            HelloLink="Authenticate with Windows Hello"
+                            HeaderPending="Header pending goes here..."
+                            ProgramPublisherNotVerifiedAppend="Unknown"
+                            RadiusPromptText="Please enter your Multifactor Authentication credentials"
+                            BodyApproved="Body approved goes here..."
+                            CrError="You have entered an incorrect Response Code"
+                            SmartCardNoCert="No certificate on smart card"
+                            SmartCardError="Smart card error"
+                            RadiusInProgressText="Authentication in progress"
+                            CancelButton="No"
+                            HelloHeader="Windows Hello"
+                            RequestReferText="For more information see request reference"
+                            ReasonError="You must provide a reason before continuing"
+                            LangID="en"
+                            IdpPendingState="Please check your browser to authenticate"
+                            HelloAuthenticationSuccess="Authenticated"
+                            OR="OR"
+                            IdpCompletedState="Authenticated"
+                            SmartCardPin="Pin"
+                            UnauthorizedCredentials="You have entered unauthorized credentials"
+                            HelloInProgress="Authentication in progress"
+                            ProgramPublisher="Program Publisher"
+                            ProgramPath="Program Path"
+                            CrInfoTip="To get a Response Code contact IT Support and quote the number shown on the screen"
+                            IdpHeader="Multifactor Authentication"
+                            Username="Username">
+                <PredefinedReasons>
+                    <PredefinedReason Text="One-off Task: I need to install an application" />
+                    <PredefinedReason Text="One-off Task: I need to run an application" />
+                    <PredefinedReason Text="One-off Task: I need to change a Windows setting" />
+                    <PredefinedReason Text="One-off Task: I'm troubleshooting an application that does not work correctly" />
+                    <PredefinedReason Text="Regular Task: I need to run an application" />
+                    <PredefinedReason Text="Regular Task: I need to perform this action as a routine/frequent part of my role" />
+                    <PredefinedReason Text="Other: Reason not listed" />
+                </PredefinedReasons>
+                <MessageLabels>
+                    <Labels LineTwoLabel="Program Publisher"
+                            LineTwoValue="[PG_PROG_PUBLISHER]"
+                            MessageType="Application"
+                            LineOneValue="[PG_PROG_NAME]"
+                            LineThreeValue="[PG_PROG_PATH]"
+                            LineOneLabel="Program Name"
+                            LineThreeLabel="Program Path" />
+                    <Labels LineTwoLabel="Content Owner"
+                            LineTwoValue="[PG_CONTENT_FILE_OWNER]"
+                            MessageType="Content"
+                            LineOneValue="[PG_CONTENT_FILE_PATH]"
+                            LineThreeValue="[PG_PROG_PATH]"
+                            LineOneLabel="Content Name"
+                            LineThreeLabel="Content Program" />
+                    <Labels LineTwoLabel="Program Publisher"
+                            LineTwoValue="[PG_PROG_PUBLISHER]"
+                            MessageType="Custom"
+                            LineOneValue="[PG_PROG_NAME]"
+                            LineThreeValue="[PG_PROG_PATH]"
+                            LineOneLabel="Program Name"
+                            LineThreeLabel="Program Path" />
+                </MessageLabels>
+            </MessageStrings>
+            <OtherUserAuthentication />
+            <OtherAzureUserAuthentication />
+        </MessagePolicy>
+        <MessagePolicy Reason="None"
+                       ShowCancel="true"
+                       ChallengeResponseRetention="Once"
+                       MaxCRFailures="0"
+                       IdpSuppressionDuration="0"
+                       ShowLineThree="true"
+                       _Parent="MessagePolicies"
+                       ID="71a21769-bd90-4ca0-ba66-d1a747cd78aa"
+                       ChallengeResponseType="None"
+                       OKAction="Proceed"
+                       MessageMode="Automatic"
+                       Name="Allow Message (with Authentication)"
+                       ShowLineOne="true"
+                       HeaderType="Default"
+                       DefaultPreview="Custom"
+                       RunAsAuthUser="true"
+                       IdpAuthTypes="0"
+                       CustomHeaderImage="423cfe00-ec37-4f61-8c11-e1f3c2b9380a"
+                       Description="Confirmation before elevating privileges, with reason and re-authentication"
+                       HeaderBgType="CustomImage"
+                       ShowCRInfoTip="true"
+                       EmailSubject="Privilege Management - User request for privilege elevation"
+                       ChallengeResponseTypeV2="None"
+                       DefaultLanguage="en"
+                       ShowLineTwo="true"
+                       AuthNRequirements="3"
+                       HeaderColor2="0xffffffff"
+                       EmailTo="name@company"
+                       HeaderColor1="0x802700"
+                       PasswordCheck="PwdAndRWUsername"
+                       ShowOnIsolatedDesktop="true"
+                       AuthenticationType="Password"
+                       HeaderFontColor="0x000000">
+            <MessageStrings BodyDenied="Body denied goes here..."
+                            CrMaxFailsError="You have exceeded the allowed number of Challenge / Response attempts"
+                            PublisherNotVerifiedAppend="(Verification Failed)"
+                            SmartCardInsert="Insert a smart card"
+                            BodyPending="Body pending goes here..."
+                            RequestCr="Enter Response Code"
+                            RadiusPasswordText="Password"
+                            CrChallenge="Code"
+                            HeaderApproved="Header approved goes here..."
+                            InvalidPassword="Invalid password"
+                            Caption="IT Security Policy"
+                            RequestStateText="For more information see request reference [SNOW_TICKET_LINK]"
+                            Body="You are about to run this [PG_PROG_TYPE] with admin rights. Please enter your credentials to proceed."
+                            InvalidCredentials="You have entered incorrect credentials"
+                            HelloPopupMessage="Authentication required"
+                            IdpFailedError="Authentication failed. Try again or contact your Administrator for assistance"
+                            Password="Password"
+                            RequestButton="Request"
+                            SmartCardReadingCert="Reading smart card ..."
+                            SmartCardHint="Hint"
+                            HeaderDenied="Header denied goes here..."
+                            ProgramName="Program Name"
+                            PublisherUnknown="Unknown"
+                            BodyRequest="Body request goes here..."
+                            OKButton="OK"
+                            ReferText="Click here to find out why this has happened"
+                            RadiusDefaultChallengeText="Enter your challenge code"
+                            ReferURL="http://&lt;your_intranet>/about_elevation.aspx"
+                            IdpIncompleteError="Please complete authentication with your Identity Provider before continuing"
+                            RequestReason="Please provide a reason"
+                            DropDownReasonPrompt="Select a reason"
+                            SmartCardWrongCert="Certificate must belong to the current user"
+                            IdpLink="Authenticate with your Identity Provider"
+                            RadiusUsernameText="Username"
+                            HeaderRequest="Header request goes here..."
+                            AND="AND"
+                            Domain="Domain:"
+                            Header="Credentials Required"
+                            HelloLink="Authenticate with Windows Hello"
+                            HeaderPending="Header pending goes here..."
+                            ProgramPublisherNotVerifiedAppend="Unknown"
+                            RadiusPromptText="Please enter your Multifactor Authentication credentials"
+                            BodyApproved="Body approved goes here..."
+                            CrError="You have entered an incorrect Response Code"
+                            SmartCardNoCert="No certificate on smart card"
+                            SmartCardError="Smart card error"
+                            RadiusInProgressText="Authentication in progress"
+                            CancelButton="Cancel"
+                            HelloHeader="Windows Hello"
+                            RequestReferText="For more information see request reference"
+                            ReasonError="You must provide a reason before continuing"
+                            LangID="en"
+                            IdpPendingState="Please check your browser to authenticate"
+                            HelloAuthenticationSuccess="Authenticated"
+                            OR="OR"
+                            IdpCompletedState="Authenticated"
+                            SmartCardPin="Pin"
+                            UnauthorizedCredentials="You have entered unauthorized credentials"
+                            HelloInProgress="Authentication in progress"
+                            ProgramPublisher="Program Publisher"
+                            ProgramPath="Program Path"
+                            CrInfoTip="To get a Response Code contact IT Support and quote the number shown on the screen"
+                            IdpHeader="Multifactor Authentication"
+                            Username="Username">
+                <PredefinedReasons>
+                    <PredefinedReason Text="One-off Task: I need to install an application" />
+                    <PredefinedReason Text="One-off Task: I need to run an application" />
+                    <PredefinedReason Text="One-off Task: I need to change a Windows setting" />
+                    <PredefinedReason Text="One-off Task: I'm troubleshooting an application that does not work correctly" />
+                    <PredefinedReason Text="Regular Task: I need to run an application" />
+                    <PredefinedReason Text="Regular Task: I need to perform this action as a routine/frequent part of my role" />
+                    <PredefinedReason Text="Other: Reason not listed" />
+                </PredefinedReasons>
+                <MessageLabels>
+                    <Labels LineTwoLabel="Program Publisher"
+                            LineTwoValue="[PG_PROG_PUBLISHER]"
+                            MessageType="Application"
+                            LineOneValue="[PG_PROG_NAME]"
+                            LineThreeValue="[PG_PROG_PATH]"
+                            LineOneLabel="Program Name"
+                            LineThreeLabel="Program Path" />
+                    <Labels LineTwoLabel="Content Owner"
+                            LineTwoValue="[PG_CONTENT_FILE_OWNER]"
+                            MessageType="Content"
+                            LineOneValue="[PG_CONTENT_FILE_PATH]"
+                            LineThreeValue="[PG_PROG_PATH]"
+                            LineOneLabel="Content Name"
+                            LineThreeLabel="Content Program" />
+                    <Labels LineTwoLabel="Program Publisher"
+                            LineTwoValue="[PG_PROG_PUBLISHER]"
+                            MessageType="Custom"
+                            LineOneValue="[PG_PROG_NAME]"
+                            LineThreeValue="[PG_PROG_PATH]"
+                            LineOneLabel="Program Name"
+                            LineThreeLabel="Program Path" />
+                </MessageLabels>
+            </MessageStrings>
+            <OtherUserAuthentication>
+                <Account Name="Administrators"
+                         SID="S-1-5-32-544"
+                         Group="true" />
+            </OtherUserAuthentication>
+            <OtherAzureUserAuthentication />
+        </MessagePolicy>
+    </MessagePolicies>
+    <Sandboxes />
+    <ApplicationGroupsOSX />
+    <Licenses>
+        <License Code="658EA9FB-295B-6F62-1E4B-4246-F747-6963" />
+    </Licenses>
+    <URLGroups />
+    <GlobalOptionsSets>
+        <GlobalOptionsSet _Parent="GlobalOptionsSets"
+                          ID="af04cd52-32a1-4023-a937-08e10f058450">
+            <ClassifyContentStrings DefaultLanguage="en" />
+            <ConfigurationOptions Security="PlainText" />
+            <TrustedApplicationProtection />
+            <TrustedAccounts>
+                <Account Name="NT AUTHORITY\SYSTEM"
+                         SID="S-1-5-32-544"
+                         Group="true" />
+                <Account Name="BUILTIN\Administrators"
+                         SID="S-1-5-18"
+                         Group="true" />
+                <Account Name="NT SERVICE\TrustedInstaller"
+                         SID="S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464"
+                         Group="true" />
+            </TrustedAccounts>
+            <ActiveXInstallationStrings DefaultLanguage="en" />
+            <MicrosoftBlockRules>
+                <Configuration RevisionNumber="0"
+                               Version="23.1.137.0"
+                               ConfigRevision="2310">
+                    <RegistryValues />
+                    <ApplicationGroups>
+                        <ApplicationGroup _Parent="ApplicationGroups"
+                                          Name="Microsoft Recommended Blocked DLLs"
+                                          ID="404b649f-840a-4afb-9715-7eef5abdb2b9">
+                            <Application Type="dll"
+                                         FileStringMatchTypeEx="EndsWith"
+                                         ID="1b8ea5ce-6c0c-44f8-87fb-1e512185b437"
+                                         UseSourceFileName="true"
+                                         Description="LxssManager.dll"
+                                         OpenDlgDropRights="true"
+                                         CheckFileNameEx="true"
+                                         FileNameEx="LxssManager.dll" />
+                            <Application Type="dll"
+                                         FileStringMatchTypeEx="EndsWith"
+                                         ID="dd5a44b0-f1f8-478e-8f9d-f5981e555b11"
+                                         UseSourceFileName="true"
+                                         Description="mfc40.dll"
+                                         OpenDlgDropRights="true"
+                                         CheckFileNameEx="true"
+                                         FileNameEx="mfc40.dll" />
+                            <Application Type="dll"
+                                         FileStringMatchTypeEx="EndsWith"
+                                         ID="628bbe9e-9a1d-4f2a-bf5a-5c53c04ac51c"
+                                         UseSourceFileName="true"
+                                         Description="Microsoft.Build.dll"
+                                         OpenDlgDropRights="true"
+                                         CheckFileNameEx="true"
+                                         FileNameEx="Microsoft.Build.dll" />
+                            <Application Type="dll"
+                                         FileStringMatchTypeEx="EndsWith"
+                                         ID="f1891208-cc11-486d-9054-af92ac3f898c"
+                                         UseSourceFileName="true"
+                                         Description="Microsoft.Build.dll (Native Image)"
+                                         OpenDlgDropRights="true"
+                                         CheckFileNameEx="true"
+                                         FileNameEx="Microsoft.Build.ni.dll" />
+                            <Application Type="dll"
+                                         FileStringMatchTypeEx="EndsWith"
+                                         ID="ce0aee9b-35de-41dc-b3c7-296f7da66ac7"
+                                         UseSourceFileName="true"
+                                         Description="Microsoft.Build.Framework.dll"
+                                         OpenDlgDropRights="true"
+                                         CheckFileNameEx="true"
+                                         FileNameEx="Microsoft.Build.Framework.dll" />
+                            <Application Type="dll"
+                                         FileStringMatchTypeEx="EndsWith"
+                                         ID="ca8451b4-d530-4ffe-b316-0761d384ad87"
+                                         UseSourceFileName="true"
+                                         Description="Microsoft.Build.Framework.dll (Native Image)"
+                                         OpenDlgDropRights="true"
+                                         CheckFileNameEx="true"
+                                         FileNameEx="Microsoft.Build.Framework.ni.dll" />
+                            <Application Type="dll"
+                                         FileStringMatchTypeEx="EndsWith"
+                                         ID="3ceb4630-0b65-40c2-bff7-3d83bab72de9"
+                                         UseSourceFileName="true"
+                                         Description="MSBuild.dll"
+                                         OpenDlgDropRights="true"
+                                         CheckFileNameEx="true"
+                                         FileNameEx="MSBuild.dll" />
+                            <Application Type="dll"
+                                         FileStringMatchTypeEx="EndsWith"
+                                         ID="24557e3c-01b3-41eb-bb01-0dad3cadb75e"
+                                         UseSourceFileName="true"
+                                         Description="MSBuild.dll (Native Image)"
+                                         OpenDlgDropRights="true"
+                                         CheckFileNameEx="true"
+                                         FileNameEx="MSBuild.ni.dll" />
+                            <Application Type="dll"
+                                         FileStringMatchTypeEx="EndsWith"
+                                         ID="8e0ec525-06d8-4cfc-bff2-5acee5f266be"
+                                         UseSourceFileName="true"
+                                         Description="BlockWebDAV WebClnt (legacy name)"
+                                         OpenDlgDropRights="true"
+                                         CheckFileNameEx="true"
+                                         FileNameEx="davsvc.dll" />
+                            <Application Type="dll"
+                                         FileStringMatchTypeEx="EndsWith"
+                                         ID="2ce0370e-5c29-42c9-bbcf-72bc4bd6fe78"
+                                         UseSourceFileName="true"
+                                         Description="BlockWebDAV WebClnt"
+                                         OpenDlgDropRights="true"
+                                         CheckFileNameEx="true"
+                                         FileNameEx="WebClnt.dll" />
+                            <Application Type="dll"
+                                         FileStringMatchTypeEx="EndsWith"
+                                         ID="020bfea4-ced4-4710-802f-fd289cf4fdf5"
+                                         UseSourceFileName="true"
+                                         MaxFileVersion="8.110.17763.54"
+                                         CheckMaxFileVersion="true"
+                                         Description="msxml3.dll (RS5 Windows 1809)"
+                                         OpenDlgDropRights="true"
+                                         CheckFileNameEx="true"
+                                         FileNameEx="msxml3.dll" />
+                            <Application Type="dll"
+                                         FileStringMatchTypeEx="EndsWith"
+                                         ID="b03f3e0c-12d7-4d2d-a596-c5e971551d0e"
+                                         UseSourceFileName="true"
+                                         MaxFileVersion="6.30.17763.54"
+                                         CheckMaxFileVersion="true"
+                                         Description="msxml6.dll (RS5 Windows 1809)"
+                                         OpenDlgDropRights="true"
+                                         CheckFileNameEx="true"
+                                         FileNameEx="msxml6.dll" />
+                            <Application Type="dll"
+                                         FileStringMatchTypeEx="EndsWith"
+                                         ID="b7aefd8c-58ea-4fcd-9643-8ba9edd72bb5"
+                                         UseSourceFileName="true"
+                                         MaxFileVersion="11.0.17763.133"
+                                         CheckMaxFileVersion="true"
+                                         Description="jscript9.dll (RS5 Windows 1809)"
+                                         OpenDlgDropRights="true"
+                                         CheckFileNameEx="true"
+                                         FileNameEx="jscript9.dll" />
+                            <Application Type="dll"
+                                         FileStringMatchTypeEx="EndsWith"
+                                         ID="a2dbcb15-efa5-4aad-b137-9a3cb1677027"
+                                         UseSourceFileName="true"
+                                         MaxFileVersion="8.110.14393.2550"
+                                         CheckMaxFileVersion="true"
+                                         Description="msxml3.dll (RS1 Windows 1607)"
+                                         OpenDlgDropRights="true"
+                                         CheckFileNameEx="true"
+                                         FileNameEx="msxml3.dll" />
+                            <Application Type="dll"
+                                         FileStringMatchTypeEx="EndsWith"
+                                         ID="83cabee9-867e-4e86-a76f-51220338fff8"
+                                         UseSourceFileName="true"
+                                         MaxFileVersion="6.30.14393.2550"
+                                         CheckMaxFileVersion="true"
+                                         Description="msxml6.dll (RS1 Windows 1607)"
+                                         OpenDlgDropRights="true"
+                                         CheckFileNameEx="true"
+                                         FileNameEx="msxml6.dll" />
+                            <Application Type="dll"
+                                         FileStringMatchTypeEx="EndsWith"
+                                         ID="3a599163-d4ed-404a-a8a8-1b0decd472a3"
+                                         UseSourceFileName="true"
+                                         MaxFileVersion="11.0.14393.2607"
+                                         CheckMaxFileVersion="true"
+                                         Description="jscript9.dll (RS1 Windows 1607)"
+                                         OpenDlgDropRights="true"
+                                         CheckFileNameEx="true"
+                                         FileNameEx="jscript9.dll" />
+                        </ApplicationGroup>
+                    </ApplicationGroups>
+                    <MessagePoliciesOSX />
+                    <Policies>
+                        <Policy Description="Default set of rules that apply to all users"
+                                FeatureVisibility="63"
+                                _Parent="Policies"
+                                Name="Microsoft Recommended Block Rules">
+                            <GeneralRules>
+                                <RemoteManagementConnectionRule Configured="Not Configured" />
+                                <EmailAttachmentsRule Configured="Not Configured" />
+                                <ProhibitAccountMgmtRule Configured="Not Configured" />
+                                <AllowClassifyContentRule Configured="Not Configured" />
+                                <AutomaticallyClassifyDocumentsRule Configured="Not Configured" />
+                                <CaptureUserInfoRule Configured="Not Configured" />
+                                <CaptureHostInfoRule Configured="Not Configured" />
+                            </GeneralRules>
+                            <ContentAssignments />
+                            <Filters FiltersLogic="and" />
+                            <PrivilegeMonitoring MaxRecords="100"
+                                                 ActivityLevel="Activity"
+                                                 KeepLogs="14" />
+                            <ShellExtension DefaultLanguage="en"
+                                            Menu="Run with Privilege Management">
+                                <MenuStrings>
+                                    <MenuString Text="Run with Privilege Management"
+                                                LangID="en" />
+                                </MenuStrings>
+                                <ApplicationAssignments />
+                            </ShellExtension>
+                            <Accounts />
+                            <URLAssignments />
+                            <ApplicationAssignments>
+                                <ApplicationAssignment BlockExecution="true"
+                                                       Sandbox="None"
+                                                       PrivilegeMonitoring="Off"
+                                                       MessageType="Off"
+                                                       Audit="On"
+                                                       ApplicationGroup="404b649f-840a-4afb-9715-7eef5abdb2b9"
+                                                       TokenType="Unmodified" />
+                            </ApplicationAssignments>
+                        </Policy>
+                    </Policies>
+                    <MessagePolicies />
+                    <Sandboxes />
+                    <ApplicationGroupsOSX />
+                    <Licenses />
+                    <URLGroups />
+                    <GlobalOptionsSets />
+                    <ContentGroups />
+                    <Files />
+                    <Tokens />
+                    <PoliciesOSX />
+                </Configuration>
+            </MicrosoftBlockRules>
+            <EventFormatOptions EnableLocalEventECSFormat="false"
+                                EnableRemoteEventECSFormat="false" />
+        </GlobalOptionsSet>
+    </GlobalOptionsSets>
+    <ContentGroups>
+        <ContentGroup Name="CluAdminRights"
+                      Description=""
+                      ID="a61da1a8-db93-4793-bffc-ab97f5e8cd94">
+            <Content FileName="C:\Users\localadmin"
+                     DriveType="PG_DRIVE_FIXED"
                      UseSourceFileName="true"
-                     ProductName="Microsoft® Windows® Operating System"
-                     MinProductVersion="6.1.7600.16385"
-                     MaxProductVersion="6.1.7600.16385"
-                     ProductDesc="Microsoft® File Server Resource Management Service Host"
-                     MinFileVersion="6.1.7600.16385 (win7_rtm.090713-1255)"
-                     MaxFileVersion="6.1.7600.16385 (win7_rtm.090713-1255)"
-                     FileHash="B997BB455B1B9FAC7E6032B384A6BD14AF43BC68"
-                     Certificate="Microsoft Windows"
-                     CheckServiceName="true"
-                     ServiceName="SrmReports"
-                     ServiceNameStringMatchType="Contains"
-                     CheckServiceDisplayName="true"
-                     ServiceDisplayName="File Server Storage Reports Manager"
-                     ServiceDisplayNameStringMatchType="Contains"
-                     ServiceStop="true"
-                     ServiceStart="true"
-                     ServicePause="true"
-                     ServiceConfigure="true" />
-    </ClipboardItems>
-</ClipboardText>
+                     Description="localadmin"
+                     Type="cont"
+                     FileStringMatchType="Contains"
+                     ID="64e767c1-ef53-41f9-a065-0d05c29c09a3"
+                     CheckFileName="true" />
+        </ContentGroup>
+    </ContentGroups>
+    <Files>
+        <File Contents="iVBORw0KGgoAAAANSUhEUgAAAcIAAAAyCAYAAADP/dvoAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAKUSURBVHhe7dvLahNhHMZhr8W7EbwAFUR04YlulKJWsEVQwYqg4EIRdO0BRFrBE6gLBUHqoWrBK5BaD820pk4z+WSGTrBp0kqoTM33PPBC/jPZ/8gimwIAREwIAYiaEAIQNSEEIGpCCEDUhBCAqAkhAFETQgCiJoQARE0IAYiaEAIQNSEEYEPJarNh4dnDpevfE0IANoxs9ntITuwNP29eX3ry7wkhABtGcvpQmN22WQgBiFMeQSEEICrZt5nwa+Jl8VkIAYhKNjMdaoPbQ/3RWHELIQBRqQ3uKMLXHsL5axdDY/pz1+W/IteLEAJQmTJ87SFca3PnhorvrwchBKAyZdh6DeHC8ychq/0oPvdKCAGoTBm2MoTphzchffuq6/L/GP4ZwvrYjZAM7wvZbO8xFEIAKtMewuzrl1WXnBxYEcL8TkYOFHcvhBCAyrSHsLzXWnsI8/VKCAGoTBkxIQQgSmXE2kOYjB4N6eTEitWO7CzeCyEAfaGMWHsIu/2hfu7CSPFeCAHoC2XEhBCAKJURE0IAolRGTAgBiFIZsfYQ1o7tCvXxWytWO7ileC+EAPSFMmL1+3eKOzm+p/VstQkhAH2hjFgyvD+ErBHS969DbWBr63m3CSEAfWHu0qlWyOoP7i497S4PYKcQzl89X9y9EEIAKpNOTbZCmC85czjUH4+HhRdPOy4Z2r0ihPNXRkMzTYu7F0IIQKXq924vi+HfrAxhOvUuNBd7j2BOCAGoXPrpY5i7fLZj9DqtDOF6EEIAoiaEAERNCAGImhACEDUhBCBqQghA1IQQgKgJIQBRE0IAoiaEAERNCAHoa81mc9UJIQB9pVPssizruPydEALw31stfI1Go7XFxcVldz4hBCBiIfwGf8vjPygEXgsAAAAASUVORK5CYII="
+              Name="BeyondTrust Banner"
+              Description="BeyondTrust Banner.png"
+              ID="423cfe00-ec37-4f61-8c11-e1f3c2b9380a"
+              Type="PNG"
+              OrigFileName="BeyondTrust Banner" />
+        <ScriptFile Contents="IyBMb2FkIHRoZSBTZXR0aW5ncyBmaWxlDQokU2V0dGluZ3NGaWxlUGF0aCA9ICJDOlxQb3dlclJ1bGVzXFNldHRpbmdzLmpzb24iDQppZiAoVGVzdC1QYXRoICRTZXR0aW5nc0ZpbGVQYXRoKSB7DQogICAgJFNldHRpbmdzID0gR2V0LUNvbnRlbnQgLVBhdGggJFNldHRpbmdzRmlsZVBhdGggfCBDb252ZXJ0RnJvbS1Kc29uDQp9IGVsc2Ugew0KICAgIFdyaXRlLUVycm9yICJTZXR0aW5ncyBmaWxlIG5vdCBmb3VuZCBhdCAkU2V0dGluZ3NGaWxlUGF0aCINCiAgICBleGl0DQp9DQoNCiMgUmV0cmlldmUgdXNlciBjcmVkZW50aWFscyBmcm9tIHRoZSBTZXR0aW5ncyBmaWxlDQokQWNjb3VudE5hbWUgPSAkU2V0dGluZ3MuQWNjb3VudC5Vc2VyTmFtZQ0KJFBhc3N3b3JkID0gJFNldHRpbmdzLkFjY291bnQuUGFzc3dvcmQNCg0KIyBSZXRyaWV2ZSB0aGUgZXhlY3V0aW5nIHByb2dyYW0gcGF0aA0KJEV4ZWN1dGluZ1Byb2dyYW1QYXRoID0gR2V0LVBSVmFyaWFibGUgLU5hbWUgIlBHX1BST0dfUEFUSCINCg0KIyBEZWZpbmUgdGhlIHByb2dyYW0gbmFtZSB0byBtYXRjaA0KJFByb2dyYW1OYW1lVG9NYXRjaCA9ICJjbHVhZG1pbi5tc2MiDQoNCiMgQ2hlY2sgaWYgdGhlIGV4ZWN1dGluZyBwcm9ncmFtIG1hdGNoZXMgdGhlIHRhcmdldCBwcm9ncmFtDQppZiAoJEV4ZWN1dGluZ1Byb2dyYW1QYXRoIC1saWtlICIqJFByb2dyYW1OYW1lVG9NYXRjaCoiKSB7DQogICAgIyBTZXQgdGhlIFJ1bkFzIHByb3BlcnRpZXMgZm9yIHRoZSB0YXJnZXQgdXNlcg0KICAgIFNldC1QUlJ1bkFzUHJvcGVydHkgLVVzZXJuYW1lICIkQWNjb3VudE5hbWUiIC1QYXNzd29yZCAiJFBhc3N3b3JkIg0KDQogICAgIyBBbGxvdyBleGVjdXRpb24gYW5kIHByb3ZpZGUgZmVlZGJhY2sNCiAgICBTZXQtUFJSdWxlUHJvcGVydHkgLUFjdGlvbiAiQWxsb3ciIA0KfQ0K"
+                    Name="failover"
+                    ScriptContext="RunAsUser"
+                    ID="fc4c2a56-e5c6-4ad7-b510-662f693e6864"
+                    Type="PSScript"
+                    TimeoutSecs="60" />
+        <PowerRulesScriptFile Contents="//4jACAATABvAGEAZAAgAHQAaABlACAAUwBlAHQAdABpAG4AZwBzACAAZgBpAGwAZQANAAoAJABTAGUAdAB0AGkAbgBnAHMARgBpAGwAZQBQAGEAdABoACAAPQAgACIAQwA6AFwAUABvAHcAZQByAFIAdQBsAGUAcwBcAFMAZQB0AHQAaQBuAGcAcwAuAGoAcwBvAG4AIgANAAoAaQBmACAAKABUAGUAcwB0AC0AUABhAHQAaAAgACQAUwBlAHQAdABpAG4AZwBzAEYAaQBsAGUAUABhAHQAaAApACAAewANAAoAIAAgACAAIAAkAFMAZQB0AHQAaQBuAGcAcwAgAD0AIABHAGUAdAAtAEMAbwBuAHQAZQBuAHQAIAAtAFAAYQB0AGgAIAAkAFMAZQB0AHQAaQBuAGcAcwBGAGkAbABlAFAAYQB0AGgAIAB8ACAAQwBvAG4AdgBlAHIAdABGAHIAbwBtAC0ASgBzAG8AbgANAAoAfQAgAGUAbABzAGUAIAB7AA0ACgAgACAAIAAgAFcAcgBpAHQAZQAtAEUAcgByAG8AcgAgACIAUwBlAHQAdABpAG4AZwBzACAAZgBpAGwAZQAgAG4AbwB0ACAAZgBvAHUAbgBkACAAYQB0ACAAJABTAGUAdAB0AGkAbgBnAHMARgBpAGwAZQBQAGEAdABoACIADQAKACAAIAAgACAAZQB4AGkAdAANAAoAfQANAAoADQAKACMAIABSAGUAdAByAGkAZQB2AGUAIAB1AHMAZQByACAAYwByAGUAZABlAG4AdABpAGEAbABzACAAZgByAG8AbQAgAHQAaABlACAAUwBlAHQAdABpAG4AZwBzACAAZgBpAGwAZQANAAoAJABBAGMAYwBvAHUAbgB0AE4AYQBtAGUAIAA9ACAAJABTAGUAdAB0AGkAbgBnAHMALgBBAGMAYwBvAHUAbgB0AC4AVQBzAGUAcgBOAGEAbQBlAA0ACgAkAFAAYQBzAHMAdwBvAHIAZAAgAD0AIAAkAFMAZQB0AHQAaQBuAGcAcwAuAEEAYwBjAG8AdQBuAHQALgBQAGEAcwBzAHcAbwByAGQADQAKAA0ACgAjACAAUgBlAHQAcgBpAGUAdgBlACAAdABoAGUAIABlAHgAZQBjAHUAdABpAG4AZwAgAHAAcgBvAGcAcgBhAG0AIABwAGEAdABoAA0ACgAkAEUAeABlAGMAdQB0AGkAbgBnAFAAcgBvAGcAcgBhAG0AUABhAHQAaAAgAD0AIABHAGUAdAAtAFAAUgBWAGEAcgBpAGEAYgBsAGUAIAAtAE4AYQBtAGUAIAAiAFAARwBfAFAAUgBPAEcAXwBQAEEAVABIACIADQAKAA0ACgAjACAARABlAGYAaQBuAGUAIAB0AGgAZQAgAHAAcgBvAGcAcgBhAG0AIABuAGEAbQBlACAAdABvACAAbQBhAHQAYwBoAA0ACgAkAFAAcgBvAGcAcgBhAG0ATgBhAG0AZQBUAG8ATQBhAHQAYwBoACAAPQAgACIAYwBsAHUAYQBkAG0AaQBuAC4AbQBzAGMAIgANAAoADQAKACMAIABDAGgAZQBjAGsAIABpAGYAIAB0AGgAZQAgAGUAeABlAGMAdQB0AGkAbgBnACAAcAByAG8AZwByAGEAbQAgAG0AYQB0AGMAaABlAHMAIAB0AGgAZQAgAHQAYQByAGcAZQB0ACAAcAByAG8AZwByAGEAbQANAAoAaQBmACAAKAAkAEUAeABlAGMAdQB0AGkAbgBnAFAAcgBvAGcAcgBhAG0AUABhAHQAaAAgAC0AbABpAGsAZQAgACIAKgAkAFAAcgBvAGcAcgBhAG0ATgBhAG0AZQBUAG8ATQBhAHQAYwBoACoAIgApACAAewANAAoAIAAgACAAIAAjACAAUwBlAHQAIAB0AGgAZQAgAFIAdQBuAEEAcwAgAHAAcgBvAHAAZQByAHQAaQBlAHMAIABmAG8AcgAgAHQAaABlACAAdABhAHIAZwBlAHQAIAB1AHMAZQByAA0ACgAgACAAIAAgAFMAZQB0AC0AUABSAFIAdQBuAEEAcwBQAHIAbwBwAGUAcgB0AHkAIAAtAFUAcwBlAHIAbgBhAG0AZQAgACIAJABBAGMAYwBvAHUAbgB0AE4AYQBtAGUAIgAgAC0AUABhAHMAcwB3AG8AcgBkACAAIgAkAFAAYQBzAHMAdwBvAHIAZAAiAA0ACgANAAoAIAAgACAAIAAjACAAQQBsAGwAbwB3ACAAZQB4AGUAYwB1AHQAaQBvAG4AIABhAG4AZAAgAHAAcgBvAHYAaQBkAGUAIABmAGUAZQBkAGIAYQBjAGsADQAKACAAIAAgACAAUwBlAHQALQBQAFIAUgB1AGwAZQBQAHIAbwBwAGUAcgB0AHkAIAAtAEEAYwB0AGkAbwBuACAAIgBBAGwAbABvAHcAIgAgAA0ACgB9AA0ACgA="
+                              Name="failover"
+                              ScriptContext="RunAsUser"
+                              ID="43a1f6db-da3b-42c1-b7dd-08602d5aaebf"
+                              SettingsFile="a5a88eb4-c291-44a8-bdaf-9b7c0ba98aca"
+                              Type="PSScript"
+                              TimeoutSecs="60" />
+        <PowerRulesSettingsFile Contents="sMweA5HrfQTdu0rSJpBdgR2b7L0XMyPAjSva0TIaIX7vO2LZKZHwmrAyVaCbstmH0CLu5jjzFfUeqT0UdHTS0mzeexq1k4vLsRRFmeAkho8bobxmC/oACuj+FMmp+W0G8OjnqpbayD6/PtlTaVdw7FLEwmhJ+sTHHjRkVpussHxTjqATQgHPk4UeqpJR7LnBigz1UAxMnzszrVrgBOnU5xuaYap8YPPdTI6eDAWibd8PkUyksasfSZ7401XF4kmCNjrGiw5B0xYxzg1VLXcvzDyiB2SsE6MSxzSdc9wneF8="
+                                Name="Settings.json"
+                                ID="a5a88eb4-c291-44a8-bdaf-9b7c0ba98aca"
+                                Type="JSON" />
+    </Files>
+    <Tokens>
+        <Token Description=""
+               SetAdminOwner="true"
+               Name="addAdmin"
+               ID="d8dbee40-deb9-4ca6-b903-b53b6d6db59f"
+               IntegrityLevel="High">
+            <PrivilegesToRemove />
+            <AccountModifications>
+                <Account Name="BUILTIN\Administrators"
+                         SID="S-1-5-32-544"
+                         Group="true" />
+            </AccountModifications>
+            <PrivilegesToAdd>
+                <Privilege Name="SeBackupPrivilege" />
+                <Privilege Name="SeChangeNotifyPrivilege" />
+                <Privilege Name="SeCreateGlobalPrivilege" />
+                <Privilege Name="SeCreatePagefilePrivilege" />
+                <Privilege Name="SeDebugPrivilege" />
+                <Privilege Name="SeEnableDelegationPrivilege" />
+                <Privilege Name="SeImpersonatePrivilege" />
+                <Privilege Name="SeIncreaseBasePriorityPrivilege" />
+                <Privilege Name="SeIncreaseQuotaPrivilege" />
+                <Privilege Name="SeIncreaseWorkingSetPrivilege" />
+                <Privilege Name="SeLoadDriverPrivilege" />
+                <Privilege Name="SeMachineAccountPrivilege" />
+                <Privilege Name="SeManageVolumePrivilege" />
+                <Privilege Name="SeProfileSingleProcessPrivilege" />
+                <Privilege Name="SeRemoteShutdownPrivilege" />
+                <Privilege Name="SeRestorePrivilege" />
+                <Privilege Name="SeSecurityPrivilege" />
+                <Privilege Name="SeShutdownPrivilege" />
+                <Privilege Name="SeSystemEnvironmentPrivilege" />
+                <Privilege Name="SeSystemProfilePrivilege" />
+                <Privilege Name="SeSystemtimePrivilege" />
+                <Privilege Name="SeTakeOwnershipPrivilege" />
+                <Privilege Name="SeTimeZonePrivilege" />
+                <Privilege Name="SeUndockPrivilege" />
+                <Privilege Name="SeCreateSymbolicLinkPrivilege" />
+            </PrivilegesToAdd>
+            <HandleAccessRights>
+                <AccessRight Name="GENERIC_READ" />
+                <AccessRight Name="READ_CONTROL" />
+                <AccessRight Name="SYNCHRONIZE" />
+            </HandleAccessRights>
+        </Token>
+        <Token Description=""
+               SetAdminOwner="true"
+               EnableAntiTamper="false"
+               Name="cluadmin"
+               ID="314ffe91-ce99-438c-9282-2d43d14a8618"
+               IntegrityLevel="High">
+            <PrivilegesToRemove />
+            <AccountModifications />
+            <PrivilegesToAdd>
+                <Privilege Name="SeAssignPrimaryTokenPrivilege" />
+                <Privilege Name="SeAuditPrivilege" />
+                <Privilege Name="SeBackupPrivilege" />
+                <Privilege Name="SeChangeNotifyPrivilege" />
+                <Privilege Name="SeCreateGlobalPrivilege" />
+                <Privilege Name="SeCreatePagefilePrivilege" />
+                <Privilege Name="SeCreatePermanentPrivilege" />
+                <Privilege Name="SeCreateSymbolicLinkPrivilege" />
+                <Privilege Name="SeCreateTokenPrivilege" />
+                <Privilege Name="SeDebugPrivilege" />
+                <Privilege Name="SeEnableDelegationPrivilege" />
+                <Privilege Name="SeImpersonatePrivilege" />
+                <Privilege Name="SeIncreaseBasePriorityPrivilege" />
+                <Privilege Name="SeIncreaseQuotaPrivilege" />
+                <Privilege Name="SeIncreaseWorkingSetPrivilege" />
+                <Privilege Name="SeLoadDriverPrivilege" />
+                <Privilege Name="SeLockMemoryPrivilege" />
+                <Privilege Name="SeMachineAccountPrivilege" />
+                <Privilege Name="SeManageVolumePrivilege" />
+                <Privilege Name="SeProfileSingleProcessPrivilege" />
+                <Privilege Name="SeRelabelPrivilege" />
+                <Privilege Name="SeRemoteShutdownPrivilege" />
+                <Privilege Name="SeRestorePrivilege" />
+                <Privilege Name="SeSecurityPrivilege" />
+                <Privilege Name="SeShutdownPrivilege" />
+                <Privilege Name="SeSyncAgentPrivilege" />
+                <Privilege Name="SeSystemEnvironmentPrivilege" />
+                <Privilege Name="SeSystemProfilePrivilege" />
+                <Privilege Name="SeSystemtimePrivilege" />
+                <Privilege Name="SeTakeOwnershipPrivilege" />
+                <Privilege Name="SeTcbPrivilege" />
+                <Privilege Name="SeTimeZonePrivilege" />
+                <Privilege Name="SeTrustedCredManAccessPrivilege" />
+                <Privilege Name="SeUndockPrivilege" />
+                <Privilege Name="SeUnsolicitedInputPrivilege" />
+            </PrivilegesToAdd>
+            <HandleAccessRights>
+                <AccessRight Name="GENERIC_READ" />
+                <AccessRight Name="READ_CONTROL" />
+                <AccessRight Name="SYNCHRONIZE" />
+                <AccessRight Name="PROCESS_CREATE_PROCESS" />
+                <AccessRight Name="PROCESS_CREATE_THREAD" />
+                <AccessRight Name="PROCESS_DUP_HANDLE" />
+                <AccessRight Name="PROCESS_QUERY_INFORMATION" />
+                <AccessRight Name="PROCESS_QUERY_LIMITED_INFORMATION" />
+                <AccessRight Name="PROCESS_SET_INFORMATION" />
+                <AccessRight Name="PROCESS_SET_QUOTA" />
+                <AccessRight Name="PROCESS_SUSPEND_RESUME" />
+                <AccessRight Name="PROCESS_TERMINATE" />
+                <AccessRight Name="PROCESS_VM_OPERATION" />
+                <AccessRight Name="PROCESS_VM_READ" />
+                <AccessRight Name="PROCESS_VM_WRITE" />
+            </HandleAccessRights>
+        </Token>
+        <Token Description=""
+               SetAdminOwner="true"
+               Name="trk"
+               ID="cc84dce7-b5db-47fd-9f8d-4fe43564d99e"
+               IntegrityLevel="NotSet">
+            <PrivilegesToRemove />
+            <AccountModifications />
+            <PrivilegesToAdd />
+            <HandleAccessRights>
+                <AccessRight Name="GENERIC_READ" />
+                <AccessRight Name="READ_CONTROL" />
+                <AccessRight Name="SYNCHRONIZE" />
+            </HandleAccessRights>
+        </Token>
+    </Tokens>
+    <PoliciesOSX />
+    <PasswordSafeLocalRotation>
+        <AccountDiscoveryInterval>0</AccountDiscoveryInterval>
+        <State>Not_Configured</State>
+        <PasswordHeartbeatInterval>60</PasswordHeartbeatInterval>
+    </PasswordSafeLocalRotation>
+</Configuration>

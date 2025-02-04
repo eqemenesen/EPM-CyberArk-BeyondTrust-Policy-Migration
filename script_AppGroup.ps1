@@ -37,7 +37,7 @@ function Write-Log {
 function Compress-String {
     param(
         [string]$inputString,
-        [int]$maxLen = 20
+        [int]$maxLen = 40
     )
 
     if ([string]::IsNullOrEmpty($inputString)) {
@@ -225,7 +225,8 @@ try {
         try {
             # Skip known excluded lines
             if ([string]::IsNullOrEmpty($Policy_Name) -or 
-                $Policy_Name -match "macOS" -or 
+                $Policy_Name -match "macOS" -or
+                $Policy_Name -match "mac OS" -or
                 $Policy_Name -match "Default MAC Policy" -or 
                 $Policy_Name -clike 'Usage of `"JIT*' -or
                 $ApplicationType -like "Script") {
@@ -281,15 +282,26 @@ try {
             # If we have a custom description
             if ($ApplicationDescription) {
                 $PGApp.Description = $ApplicationDescription
-            }
-            elseif ($FileName) {
+            } elseif ($FileName) {
                 $PGApp.Description = $FileName
+            } elseif ($ServiceName) {
+                $PGApp.Description = $ServiceName
+            } elseif ($ProductName) {
+                $PGApp.Description = $ProductName
+            } elseif ($Publisher) {
+                $PGApp.Description = $Publisher
+            } elseif ($MSPProductName) {
+                $PGApp.Description = $MSPProductName
+            } elseif ($Policy_Name) {
+                $PGApp.Description = $Policy_Name   
+            } else {
+                $PGApp.Description = ""
             }
 
             # Determine Application Type
             switch -Wildcard ($ApplicationType) {
                 "ActiveX Control" {
-                    $PGApp.Type = [Avecto.Defendpoint.Settings.ApplicationType]::ActiveX
+                    $PGApp.Type = [Avecto.Defendpoint.Settings.ApplicationType]::ActiveXControl
                 }
                 "Admin Tasks" {
                     $AdminApplicationName = $WindowsAdminTask
@@ -380,10 +392,43 @@ try {
                     $PGApp.Type = [Avecto.Defendpoint.Settings.ApplicationType]::COMClass
                 }
                 "MSI/MSP Installation" {
+                    
                     $PGApp.Type = [Avecto.Defendpoint.Settings.ApplicationType]::InstallerPackage
+                    
+                    $PGApp.ProductName = $MSPProductName
+
+                    if($MSPProductNameCompareAs -eq "Exactly") {
+                        $PGApp.ProductNameStringMatchType = [Avecto.Defendpoint.Settings.StringMatchType]::Exact
+                    }else{
+                        $PGApp.ProductNameStringMatchType = [Avecto.Defendpoint.Settings.StringMatchType]::Contains
+                    }
+                    
+                    if($MSPProductCode -and $MSPProductCode -ne "Not specified") {
+                        $PGApp.ProductCode = $MSPProductCode.Trim('"')
+                        $PGApp.CheckProductCode = $true
+                    }
+                    if($MSPUpgradeCode -and $MSPUpgradeCode -ne "Not specified") {
+                        $PGApp.ProductCode = $MSPUpgradeCode.Trim('"')
+                        $PGApp.CheckUpgradeCode = $true
+                    }
+                    if ($MSPProductVersionFrom -or $MSPProductVersionTo) {
+                        $PGApp.CheckProductVersion = $true
+                        if($MSPProductVersionFrom){
+                            $PGApp.CheckMinProductVersion = $true
+                            $PGApp.MinProductVersion = $MSPProductVersionFrom
+                        }
+                        if($MSPProductVersionTo){
+                            $PGApp.CheckMaxProductVersion = $true
+                            $PGApp.MaxProductVersion = $MSPProductVersionTo
+                        }
+                    }
+                    
                 }
                 "Script" {
-                    $PGApp.Type = [Avecto.Defendpoint.Settings.ApplicationType]::BatchFile
+                    Write-Log "Line $lineCount - Policy '$Policy_Name', '$ApplicationType' not supported." "WARN"
+                    $notSupportedCount++
+                    $typeStats[$ApplicationType].NotSupported++
+                    return
                 }
                 "Dynamic-Link Library" {
                     Write-Log "Line $lineCount - Policy '$Policy_Name', 'Dynamic-Link Library' not supported." "WARN"
@@ -405,6 +450,29 @@ try {
                 }
                 "Microsoft Update (MSU)" {
                     $PGApp.Type = [Avecto.Defendpoint.Settings.ApplicationType]::InstallerPackage
+                    $PGApp.ProductName = $MSPProductName
+
+                    if($MSPProductNameCompareAs -eq "Exactly") {
+                        $PGApp.ProductNameStringMatchType = [Avecto.Defendpoint.Settings.StringMatchType]::Exact
+                    }else{
+                        $PGApp.ProductNameStringMatchType = [Avecto.Defendpoint.Settings.StringMatchType]::Contains
+                    }
+                    
+                    if($MSPProductCode -and $MSPProductCode -ne "Not specified") {
+                        $PGApp.ProductCode = $MSPProductCode.Trim('"')
+                    }
+                    if($MSPUpgradeCode -and $MSPUpgradeCode -ne "Not specified") {
+                        $PGApp.ProductCode = $MSPUpgradeCode.Trim('"')
+                    }
+                    if($MSPProductVersionFrom){
+                        $PGApp.CheckMinProductVersion = $true
+                        $PGApp.MinProductVersion = $MSPProductVersionFrom
+                    }
+                    if($MSPProductVersionTo){
+                        $PGApp.CheckMaxProductVersion = $true
+                        $PGApp.MaxProductVersion = $MSPProductVersionTo
+                    }
+
                 }
                 "Web Application" {
                     Write-Log "Line $lineCount - Policy '$Policy_Name', '$ApplicationType' is NOT supported (error)." "ERROR"
@@ -637,9 +705,38 @@ if ($lineCount -gt 0) {
 }
 
 Write-Log "----- DETAILED APPLICATION TYPE SUMMARY -----"
-foreach ($appType in $typeStats.Keys) {
-    $stats = $typeStats[$appType]
-    Write-Log "$appType => Total: $($stats.Total), Added: $($stats.Added), Skipped: $($stats.Skipped), Failed: $($stats.Failed), NotSupported: $($stats.NotSupported)"
+
+if ($typeStats.Count -gt 0) {
+    # Find the longest application type name
+    $maxLength = "File or Directory System Entry".Length  # Reference max length
+
+    foreach ($appType in $typeStats.Keys) {
+        $stats = $typeStats[$appType]
+
+        # Create formatted name with '=' padding and '=>' at the end
+        $formattedName = $appType
+        $fillGap = $maxLength - $formattedName.Length
+        $formattedName = $formattedName + ("=" * $fillGap) + ">"
+
+        # Format numbers to align in 8-character width columns
+        $total        = "Total: {0,-8}" -f $stats.Total
+        $added        = "Added: {0,-8}" -f $stats.Added
+        $skipped      = "Skipped: {0,-8}" -f $stats.Skipped
+        $failed       = "Failed: {0,-8}" -f $stats.Failed
+        $notSupported = "NotSupported: {0,-8}" -f $stats.NotSupported
+
+        # Construct the final line
+        $outputLine = "$formattedName $total $added $skipped $failed $notSupported"
+
+        # Print and log
+        Write-Host $outputLine
+        Write-Log $outputLine
+    }
+} else {
+    Write-Host "No data available in typeStats."
+    Write-Log "No data available in typeStats."
 }
+
+
 
 Write-Log "Script complete."

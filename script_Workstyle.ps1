@@ -2,6 +2,8 @@ param(
     [string]$baseFolder = ".\Areas\GarantiTest"
 )
 
+$useContent = $true
+
 # -----------------------------------------------------------------------------
 # Load Modules
 # -----------------------------------------------------------------------------
@@ -37,7 +39,13 @@ $reportFile         = Join-Path $baseFolder "GarantiMainPolicy.csv"  # Your CSV 
 #$reportFile       = Join-Path $baseFolder "test.csv"
 $logFilePath        = Join-Path $baseFolder "logs\logfile_Workstyle.log"
 $outputFile         = Join-Path $baseFolder "generated_policy_Workstyles.xml"
-$basePolicyXMLFile = Join-Path $baseFolder "generated_AppAndContentGroups.xml"
+
+if($useContent){
+    $basePolicyXMLFile = Join-Path $baseFolder "generated_AppAndContentGroups.xml"
+} else {
+    $basePolicyXMLFile = Join-Path $baseFolder "generated_appGroup.xml"
+}
+    
 
 Write-Host "Log file: $logFilePath"
 Write-Host "Report file: $reportFile"
@@ -54,7 +62,7 @@ try {
     $PGConfig = Get-DefendpointSettings -LocalFile -FileLocation $basePolicyXMLFile -ErrorAction Stop
     Write-Log "Successfully loaded base policy configuration." "INFO"
 } catch {
-    Write-Log "ERROR: Failed to load policy configuration. $_" "ERROR"
+    Write-Log "Failed to load policy configuration. $_" "ERROR"
     throw
 }
 
@@ -73,15 +81,21 @@ try {
     Import-Csv -Path $reportFile -Delimiter "," | ForEach-Object {
         $PolicyName = $_."Policy Name"
         $PolicyType = $_."Policy Type"
+        $Action = $_."Action"
+
         if ($PolicyType -eq "Predefined Application Group" -or $PolicyType -eq "Custom Application Group") {
-            $WhiteListApps += $PolicyName
+            $WhiteListApps += @{Name=$PolicyName; Action=$Action}
         }
     }
     Write-Log "Completed gathering WhiteList Apps from CSV." "INFO"
 } catch {
-    Write-Log "ERROR: Failed to parse CSV for WhiteList apps. $_" "ERROR"
+    Write-Log "Failed to parse CSV for WhiteList apps. $_" "ERROR"
     throw
 }
+
+
+
+
 
 # -----------------------------------------------------------------------------
 # Ensure "White List" Policy Exists
@@ -98,7 +112,7 @@ if (-not $whiteListPolicy) {
         $PGConfig.Policies.Add($whiteListPolicy)
         Write-Log "Created and added 'White List' policy." "INFO"
     } catch {
-        Write-Log "ERROR: Failed to create 'White List' policy. $_" "ERROR"
+        Write-Log "Failed to create 'White List' policy. $_" "ERROR"
         throw
     }
 } else {
@@ -125,26 +139,43 @@ $allowMessageId = $allowMessage.ID
 $blockMessageId = $blockMessage.ID
 $allowBaloonId  = $allowBaloon.ID
 
-foreach ($appName in $WhiteListApps) {
+foreach ($appEntry in $WhiteListApps) {
+    $appName = $appEntry.Name
+    $appAction = $appEntry.Action
     $TotalWhiteListApps++
     try {
         $appGroup = $PGConfig.ApplicationGroups | Where-Object { $_.Name -eq $appName }
-        
+
         if ($appGroup) {
             try {
-                # Create an application assignment
+                # Create an application assignment with dynamic Action and TokenType
                 $appAssignment = New-Object Avecto.Defendpoint.Settings.ApplicationAssignment($PGConfig)
-                $appAssignment.Action                = "Allow"
-                $appAssignment.TokenType             = "AddAdmin"
-                $appAssignment.Audit                 = "On"
-                $appAssignment.PrivilegeMonitoring   = "On"
-                $appAssignment.ForwardBeyondInsight  = $true
+
+                if($appAction -eq "Elevate") {
+                    $appAssignment.Action = "Allow"
+                    $appAssignment.TokenType = "AddAdmin"
+                } elseif ($appAction -eq "Block") {
+                    $appAssignment.Action = "Block"
+                    $appAssignment.TokenType = "Unmodified"
+
+                } elseif ($appAction -eq "Run Normally") {
+                    $appAssignment.Action = "Allow"
+                    $appAssignment.TokenType = "Unmodified"
+
+                }else {
+                    $appAssignment.Action = "Allow"
+                    $appAssignment.TokenType = "AddAdmin"
+                }
+
+                $appAssignment.Audit = "On"
+                $appAssignment.PrivilegeMonitoring = "On"
+                $appAssignment.ForwardBeyondInsight = $true
                 $appAssignment.ForwardBeyondInsightReports = $true
-                $appAssignment.ApplicationGroup      = $appGroup
+                $appAssignment.ApplicationGroup = $appGroup
 
                 # Add the application assignment to the "White List" policy
                 $whiteListPolicy.ApplicationAssignments.Add($appAssignment)
-                Write-Log "SUCCESS: Added '$appName' to the 'White List' policy." "INFO"
+                Write-Log "SUCCESS: Added '$appName' with action '$appAction' to the 'White List' policy." "INFO"
             }
             catch {
                 $FailedWhiteListAssignments++
@@ -238,7 +269,7 @@ try {
         }
 
         Write-Host "Processing line $line : $PolicyName"
-        Write-Log "INFO: Processing line $line => policy '$PolicyName'." "INFO"
+        Write-Log "Processing line $line => policy '$PolicyName'." "INFO"
 
         # ----------------------------
         # Attempt to Create New Policy
@@ -287,6 +318,10 @@ try {
                         $appAssignment.TokenType = "Unmodified"
                     }
                     "Run Normally" {
+                        $appAssignment.Action    = "Allow"
+                        $appAssignment.TokenType = "Unmodified"
+                    }
+                    "Elevate" {
                         $appAssignment.Action    = "Allow"
                         $appAssignment.TokenType = "AddAdmin"
                     }
@@ -355,6 +390,7 @@ try {
                 $contentAssignment.Action    = "Allow"
                 $contentAssignment.TokenType = "AddAdmin"
                 $contentAssignment.Audit     = "On"
+                $contentAssignment.PrivilegeMonitoring = "On"
 
                 $contentAssignment.ForwardBeyondInsight        = $true
                 $contentAssignment.ForwardBeyondInsightReports = $true
@@ -362,11 +398,11 @@ try {
                 # Add the content assignment to the policy
                 $newPolicy.ContentAssignments.Add($contentAssignment)
                 Write-Log "SUCCESS: Content Assignment added to '$PolicyName'." "INFO"
+                $ContentGroupFound = $true
             } 
             else {
                 Write-Log "No matching Content Group found for '$PolicyName'." "Warn"
                 Write-Log "DETAILS: Content Group '$PolicyName' not found in PGConfig.ContentGroups." "DEBUG"
-                #$FailedPolicyContentGroup++
                 $ContentGroupFound = $false
             }
         }
@@ -389,7 +425,7 @@ try {
             # DeviceFilter
             #----------
             if (-not $AllComputers) {
-                if ($SelectedComputers -and $SelectedComputers -ne "") {
+                if ($SelectedComputers -or $SelectedComputers -ne "") {
                     $deviceFilter = New-Object Avecto.Defendpoint.Settings.DeviceFilter
                     $deviceFilter.Devices       = New-Object Avecto.Defendpoint.Settings.Devices
                     $deviceFilter.InverseFilter = $false
@@ -582,7 +618,7 @@ if ($TotalAdvancedPolicies -gt 0) {
 Write-Log "===== ADDITIONAL METRICS FOR ADVANCED POLICIES =====" "INFO"
 
 # How many policies were actually attempted (not skipped)?
-$attemptedPolicies = $TotalAdvancedPolicies - $SkippedPolicies
+$attemptedPolicies = $TotalAdvancedPolicies# - $SkippedPolicies
 Write-Log "Policies actually attempted (excluding skipped): $attemptedPolicies" "INFO"
 
 if ($attemptedPolicies -gt 0) {
@@ -602,11 +638,6 @@ if ($attemptedPolicies -gt 0) {
     Write-Log "AppGroup Assignment Fail Rate:  $appGroupFailRate%           (Failures: $FailedPolicyAppGroup, Success: $appGroupSuccessCount)" "INFO"
     Write-Log "ContentGroup Assignment Fail Rate: $contentGroupFailRate%    (Failures: $FailedPolicyContentGroup, Success: $contentGroupSuccessCount)" "INFO"
     Write-Log "Filter Assignment Fail Rate:  $filterFailRate%               (Failures: $FailedPolicyFilters, Success: $filterSuccessCount)" "INFO"
-
-    # If you want to define "fully successful" vs. "partial success," you can do so here.
-    # For example, consider a policy fully successful only if it had no failures in creation/appGroup/contentGroup/filters, 
-    # but remember that the counters can overlap. One easy approach is using $failedAdvancedPolicies.
-    # If you want more granular logic, you’d need to track success/failure at the single-policy level above.
 }
 else {
     Write-Log "No advanced policies were attempted (all skipped). Nothing to calculate fail rates for." "INFO"

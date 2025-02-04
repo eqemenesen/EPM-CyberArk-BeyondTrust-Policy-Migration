@@ -22,7 +22,7 @@ Admin Tasks,Hyper-V Manager,ManagementConsoleSnapin,%ProgramFiles%\Hyper-V\virtm
 Admin Tasks,Indexing Service,Executable,%SystemRoot%\System32\rundll32.exe,Contains,,"C:\Windows\System32\shell32.dll,Control_RunDLL C:\Windows\System32\srchadmin.dll",No,Contains,,,,,,,,,,,,,
 Admin Tasks,Internet Authentication Service,Executable,%SystemRoot%\System32\iashost.exe,Contains,,,,,,,,,,,,,,,,,
 Admin Tasks,Performance Monitor,Executable,%SystemRoot%\System32\perfmon.exe,Contains,,,,,,,,,,,,,,,,,
-Admin Tasks,Remote Desktop,ManagementConsoleSnapin,%SystemRoot%\system32\tsmmc.msc,Contains,,,,,,,,,,,,,,,,,too many different ones
+Admin Tasks,Remote Desktop,ManagementConsoleSnapin,%SystemRoot%\system32\tsmmc.msc,Contains,,,,,,,,,,,,,,,,,
 Admin Tasks,Removable Storage Manager,ManagementConsoleSnapin,%SystemRoot%\system32\StorageMgmt.msc,Contains,,"C:\Windows\system32\mmc.exe ""C:\Windows\system32\StorageMgmt.msc""",No,Contains,Microsoft Windows,Contains,Yes,,,,,,,,,,
 Admin Tasks,Removable Storage Operator Requests,Service,SrmReports,Contains,,,,,,,,,,,File Server Storage Reports Manager,,,,,,
 Admin Tasks,Resultant Set of Policy,ManagementConsoleSnapin,%SystemRoot%\System32\rsop.msc,Contains,,,,,,,,,,,,,,,,,
@@ -41,7 +41,7 @@ Admin Tasks,Automatic Updates configuration,COMClass,,,{1138506A-B949-46A7-B6C0-
 Admin Tasks,Java Update,Executable,jucheck.exe,Contains,,,,,,,,,,,,,,,,,
 Admin Tasks,Regional and Language Options,ControlPanelApplet,%SystemRoot%\System32\intl.cpl,Contains,,,,,,,,,,,,,,,,,
 Admin Tasks,Power Options,COMClass,,,{BBD8C065-5E6C-4E88-BFD7-BE3E6D1C063B},,,,,,,,,,,,,,,,
-Admin Tasks,System Properties,ControlPanelApplet,%SystemRoot%\System32\sysdm.cpl,Contains,,,,,,,,,,,,,,,,,too many different ones
+Admin Tasks,System Properties,ControlPanelApplet,%SystemRoot%\System32\sysdm.cpl,Contains,,,,,,,,,,,,,,,,,
 Admin Tasks,Local Users and Groups,ManagementConsoleSnapin,%SystemRoot%\System32\lusrmgr.msc,Contains,,,,,,,,,,,,,,,,,
 Admin Tasks,"Accessibility, Keyboard, Mouse, Sound, Speech",,,,,,,,,,,,,,,,,,,,
 Admin Tasks,"Display, Colors, Fonts, Visual Effects",,,,,,,,,,,,,,,,,,,,
