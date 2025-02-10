@@ -6,8 +6,8 @@ $script3 = ".\script_Workstyle.ps1"
 # Define the base folder value
 #$baseFolder = ".\Areas\FinansalProd"
 #$baseFolder = ".\Areas\FinansalTest"
-$baseFolder = ".\Areas\GarantiProd"
-#$baseFolder = ".\Areas\GarantiTest"
+#$baseFolder = ".\Areas\GarantiProd"
+$baseFolder = ".\Areas\GarantiTest"
 
 # Run the scripts in order
 try {

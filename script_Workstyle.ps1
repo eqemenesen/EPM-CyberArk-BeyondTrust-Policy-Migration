@@ -221,6 +221,7 @@ try {
         $SelectedComputers  = $_."Selected Computers/Groups"
         $Users              = $_."Users"
         $EndUserUI          = $_."End-User UI"
+        $Access             = $_."Access"
 
         # Only process "Advanced Policy"
         if ($PolicyType -ne "Advanced Policy") {
@@ -299,14 +300,14 @@ try {
         # ----------------------------
         # Application Rule
         # ----------------------------
-        $AppGroupFound = $true
+        
         try {
             $appGroup = $PGConfig.ApplicationGroups | Where-Object { $_.Name -eq $PolicyName }
             if ($null -eq $appGroup) {
                 Write-Log "FAIL: No matching Application Group found for policy '$PolicyName'." "ERROR"
                 Write-Log "DETAILS: Application Group '$PolicyName' not found in PGConfig.ApplicationGroups." "DEBUG"
                 $FailedPolicyAppGroup++
-                $AppGroupFound = $false
+                
             }
             else {
                 $appAssignment = New-Object Avecto.Defendpoint.Settings.ApplicationAssignment($PGConfig)
@@ -374,23 +375,35 @@ try {
             Write-Log "EXCEPTION: Failed to add application assignment to '$PolicyName'. $_" "ERROR"
             Write-Log "DETAILS: $($_.Exception.Message)" "DEBUG"
             $FailedPolicyAppGroup++
-            $AppGroupFound = $false
         }
 
         # ----------------------------
         # Content Rules
         # ----------------------------
-        $ContentGroupFound = $true
+        
         try {
             $contentGroup = $PGConfig.ContentGroups | Where-Object { $_.Name -eq $PolicyName }
             if ($contentGroup -ne $null) {
                 $contentAssignment = New-Object Avecto.Defendpoint.Settings.ContentAssignment($PGConfig)
+                
                 $contentAssignment.ContentGroup = $contentGroup
 
-                $contentAssignment.Action    = "Allow"
-                $contentAssignment.TokenType = "AddAdmin"
+                # set FileAccess based on CSV Access field
+                if($Access -eq "Allow Full Control") {
+                    $contentAssignment.Action = "Allow"
+                    $contentAssignment.TokenType = "AddAdmin"
+                } elseif ($Access -eq "Allow Read") {
+                    $contentAssignment.Action = "Allow"
+                    $contentAssignment.TokenType = "Unmodified"
+                } else {
+                    $contentAssignment.Action = "Block"
+                    $contentAssignment.TokenType = "Unmodified"
+                }
+                
+                # Monitoring on error veriyor -- raise local event deyince audit on oluyor
                 $contentAssignment.Audit     = "On"
-                $contentAssignment.PrivilegeMonitoring = "On"
+                # $contentAssignment.PrivilegeMonitoring = "On"
+                
 
                 $contentAssignment.ForwardBeyondInsight        = $true
                 $contentAssignment.ForwardBeyondInsightReports = $true
@@ -398,19 +411,19 @@ try {
                 # Add the content assignment to the policy
                 $newPolicy.ContentAssignments.Add($contentAssignment)
                 Write-Log "SUCCESS: Content Assignment added to '$PolicyName'." "INFO"
-                $ContentGroupFound = $true
+                
             } 
             else {
                 Write-Log "No matching Content Group found for '$PolicyName'." "Warn"
                 Write-Log "DETAILS: Content Group '$PolicyName' not found in PGConfig.ContentGroups." "DEBUG"
-                $ContentGroupFound = $false
+                
             }
         }
         catch {
             Write-Log "EXCEPTION: Failed to add Content Assignment to '$PolicyName'. $_" "ERROR"
             Write-Log "DETAILS: $($_.Exception.Message)" "DEBUG"
             $FailedPolicyContentGroup++
-            $ContentGroupFound = $false
+            
         }
 
         # ----------------------------
